@@ -251,6 +251,39 @@ $no = '';
                     </div><!-- /.row -->
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+
+            <div class="box">
+            	<div class="box-header with-border">
+                  <h3 class="box-title">ฟอร์มโนติส</h3>
+                  <div class="box-tools pull-right">
+                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        <!-- <button type="button" class="btn btn-app" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                            <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
+                        </button> -->
+                        <table id="example1" class="table table-bordered table-hover table-fixed">
+                            <thead>
+                            <tr>
+                                <th>ชื่อเอกสาร</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="../report/form/lawyer_report.php" target="_blank"> ใบแต่งทนาย </a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="../report/form/statement_request_report.php" target="_blank"> คำแถลงขอส่งหมายและปิดหมาย </a></td>
+                                </tr>
+                            </tbody>
+          </table>
+                        </div>
+                    </div><!-- /.row -->
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
     </div>
 
 </section>
