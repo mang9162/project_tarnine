@@ -56,6 +56,27 @@
             height: 277mm;
             /* outline: 1cm #FFEAEA solid; */
         }
+        header,
+        footer {
+            /* position: relative; */
+            left: 0;
+            right: 0;
+            /* background-color: #ccc; */
+            /* padding-right: 1.5cm;
+            padding-left: 1.5cm; */
+        }
+        header {
+            top: 0;
+            font-family: myFont;
+            /* padding-top: 5mm;
+            padding-bottom: 3mm; */
+        }
+        footer {
+            bottom: 0;
+            color: #000;
+            padding-top: 3mm;
+            padding-bottom: 5mm;
+        }
         .form{
             position: absolute;
             z-index: -1;
@@ -73,6 +94,9 @@
         }
         .short-line{
             line-height: 0.3cm;
+        }
+        .text-center{
+            text-align: center;
         }
 
         /* Text Box Start*/
@@ -121,7 +145,7 @@
                 /* min-height: initial; */
                 box-shadow: initial;
                 background: initial;
-                page-break-after: auto;
+                page-break-before: always;
                 /* page-break-after:auto;
                 position:relative;
                 display:block; */
@@ -156,6 +180,15 @@
             .transparent{
                 border: 0;
             }
+            header,
+            footer {
+                /* position: relative; */
+                left: 0;
+                right: 0;
+                top :0;
+                /* padding-right: 1.5cm;
+                padding-left: 1.5cm; */
+            }
         }
     </style>
     
@@ -174,15 +207,15 @@
                         <td style="width:20%" align="top"><img src="../assets/logo.png"></td>
                         <td style="width:40%" align="right">
                             <br><br>
-                            <div>คดีหมายเลขดำที่_<a class="absolute"><input class="transparent" type="text" id="text1" name="text1" size="4"></a>_________/๒๕<a class="absolute"><input class="transparent" type="text" id="text2" name="text2" size="1"></a>___</div>
-                            คดีหมายเลขแดงที่_<a class="absolute"><input class="transparent" type="text" id="text3" name="text3" size="4"></a>_________/๒๕<a class="absolute"><input class="transparent" type="text" id="text4" name="text4" size="1"></a>___
+                            <div>คดีหมายเลขดำที่_<a class="absolute"><input class="transparent text-center" type="text" id="text1" name="text1" size="4"></a>_________/๒๕<a class="absolute"><input class="transparent" type="text" id="text2" name="text2" size="1"></a>___</div>
+                            คดีหมายเลขแดงที่_<a class="absolute"><input class="transparent text-center" type="text" id="text3" name="text3" size="4"></a>_________/๒๕<a class="absolute"><input class="transparent" type="text" id="text4" name="text4" size="1"></a>___
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" align="right">
-                            ศาล_<a class="absolute"><input class="transparent" type="text" id="text5" name="text5" size="28"></a>________________________________<br>
-                            วันที่<a class="absolute"><input class="transparent" type="text" id="text6" name="text6" size="1"></a>_____เดือน<a class="absolute"><input class="transparent" type="text" id="text8" name="text8" size="8"></a>_____________พุทธศัราช ๒๕<a class="absolute"><input class="transparent" type="text" id="text9" name="text9" size="1"></a>___<br>
-                            ความ_<a class="absolute"><input class="transparent" type="text" id="text10" name="text10" size="26"></a>_______________________________<br><br>
+                            ศาล_<a class="absolute"><input class="transparent text-center" type="text" id="text5" name="text5" size="28"></a>________________________________<br>
+                            วันที่<a class="absolute"><input class="transparent text-center" type="text" id="text6" name="text6" size="1"></a>_____เดือน<a class="absolute"><input class="transparent text-center" type="text" id="text8" name="text8" size="8"></a>_____________พุทธศัราช ๒๕<a class="absolute"><input class="transparent" type="text" id="text9" name="text9" size="1"></a>___<br>
+                            ความ_<a class="absolute"><input class="transparent text-center" type="text" id="text10" name="text10" size="26"></a>_______________________________<br><br>
                         </td>
                     </tr>
                 </table>
@@ -190,22 +223,23 @@
                 <p><img src="../assets/plan_def.png">
                 <a class="absolute"><textarea style="margin-left:-550px;margin-top:1px;line-height:1.2;font-size: 21px;font-family: myFont;" rows="2" cols="68" class="transparent" id="text11" name="text11"></textarea></a>
                 <a class="absolute"><textarea style="margin-left:-550px;margin-top:100px;line-height:1.2;font-size: 21px;font-family: myFont;" rows="2" cols="68" class="transparent" id="text12" name="text12"></textarea></a>
-                <p style="text-indent: 2.5em;">ข้าพเจ้า_<a class="absolute" style="margin-left:-55px"><input class="transparent" type="text" id="text18" name="text18" size="66"></a>_____________________________________________________________________<br>
+                <p style="text-indent: 2.5em;">ข้าพเจ้า_<a class="absolute" style="margin-left:-55px"><input class="transparent text-center" type="text" id="text18" name="text18" size="66"></a>_____________________________________________________________________<br>
                 เลขประจำตัวประชาชน <a class="absolute" style="margin-left:-55px;margin-top:-2px"><input class="transparent" type="text" id="text19" name="text19" size="29"></a>---- <br>
-                เชื้อชาติ__________________สัญชาติ__________________อาชีพ____________________________<br>
-                เกิดวันที่____เดือน__________________พ.ศ. __________อายุ_____ปี อยู่บ้านเลขที่______________<br>
-                หมู่ที่ __________ถนน____________________________ตรอก/ซอย___________________________<br>
-                ตำบล/แขวง______________________อำเภอ/เขต___________________จังหวัด________________<br>
-                รหัสไปรษณีย์_________________โทรศัพท์______________________โทรสาร___________________<br>
-                ไปรษณีย์อิเล็กทรอนิกส์ ______________________________________________________________<br>
+                เชื้อชาติ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text20" name="text20" size="13"></a>_________________สัญชาติ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text21" name="text21" size="13"></a>_________________อาชีพ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text22" name="text22" size="23"></a>___________________________<br>
+                เกิดวันที่<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text23" name="text23" size="1"></a>____เดือน_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text24" name="text24" size="13"></a>_________________พ.ศ. _<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text25" name="text25" size="5"></a>_________อายุ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text26" name="text26" size="1"></a>____ปี อยู่บ้านเลขที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text27" name="text27" size="9"></a>_____________<br>
+                หมู่ที่ _<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text28" name="text28" size="5"></a>_________ถนน_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text28" name="text28" size="23"></a>___________________________ตรอก/ซอย_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text29" name="text29" size="22"></a>__________________________<br>
+                ตำบล/แขวง_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text30" name="text30" size="17"></a>_____________________อำเภอ/เขต_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text31" name="text31" size="14"></a>__________________จังหวัด_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text32" name="text32" size="12"></a>_______________<br>
+                รหัสไปรษณีย์_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text33" name="text33" size="12"></a>________________โทรศัพท์_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text34" name="text34" size="17"></a>_____________________โทรสาร_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text35" name="text35" size="14"></a>__________________<br>
+                ไปรษณีย์อิเล็กทรอนิกส์ _<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text36" name="text36" size="56"></a>_____________________________________________________________<br>
                 ขอยื่นคำร้อง / คำแถลง / คำขอ มีข้อความตามที่จะกล่าวต่อไปนี้<br>
                 </p>
                 <p style="text-indent: 2.5em;">
+                <a class="absolute"><textarea style="margin-top:-2px;margin-left:-110px;;line-height:1.3;font-size: 22px;font-family: myFont;" rows="4" cols="80" class="transparent" id="textarea1" name="textarea1"></textarea></a>
                 ข้อ ๑. _______________________________________________________________________<br>
                 ____________________________________________________________________________________<br>
                 ____________________________________________________________________________________<br>
-                ____________________________________________________________________________________<br>
-                </p>
+                ____________________________________________________________________________________
+                
                 <p class="line" style="margin-top:-15px;width:90%"></p>
                 <p><u>หมายเหตุ </u> ข้าพเจ้ารอฟังคำสั่งอยู่ ถ้าไม่รอให้ถือว่าทราบแล้ว</p>
                 <p class="right">__________________________________________ผู้ร้อง&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
@@ -214,13 +248,46 @@
             <!-- </div> -->
         </div>    
     </div>
-
-    <div class="page">
-        <div class="subpage">
-
-        </div>
-    </div>
     
+    <?php
+        for($i=2;$i<32;$i++){
+            $mod = $i % 2;
+    ?>
+
+        <div class="page">
+            <div class="subpage">
+            <header>
+                <table style="width:100%;border: 0px solid black">
+                    <tr style="color:#85929E ">
+                        <td style="width:33%" align="left"><?php if($mod == 1){echo "(๔๐ ก.)";} ?></td>
+                        <td style="width:33%"><center>- <?php echo $i ?> -</center></td>
+                        <td style="width:33%"></td>
+                    </tr>
+                </table>
+            </header>
+                <p>_<a class="absolute"><textarea style="margin-top:-16px;margin-left:-5px;line-height:2.3;font-size: 22px;font-family: myFont;" rows="18" cols="84" class="transparent" id="textarea<?php echo $i ?>" name="textarea<?php echo $i ?>"></textarea></a>_______________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+                <p>________________________________________________________________________________________</p>
+            </div>
+        </div>
+    <?php
+        }
+    ?>
 </div>
 
 </body>

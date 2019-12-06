@@ -66,6 +66,9 @@
         .short-line{
             line-height: 0.3cm;
         }
+        .text-center{
+            text-align: center;
+        }
 
         /* Text Box Start*/
 
@@ -125,15 +128,15 @@
                         <td style="width:20%" align="top"><img src="../assets/logo.png"></td>
                         <td style="width:40%" align="right">
                             <br><br>
-                            <div>คดีหมายเลขดำที่_<a class="absolute"><input class="transparent" type="text" id="text1" name="text1" size="4"></a>_________/๒๕<a class="absolute"><input class="transparent" type="text" id="text2" name="text2" size="1"></a>___</div>
-                            คดีหมายเลขแดงที่_<a class="absolute"><input class="transparent" type="text" id="text3" name="text3" size="4"></a>_________/๒๕<a class="absolute"><input class="transparent" type="text" id="text4" name="text4" size="1"></a>___
+                            <div>คดีหมายเลขดำที่_<a class="absolute"><input class="transparent text-center" type="text" id="text1" name="text1" size="4"></a>_________/๒๕<a class="absolute"><input class="transparent" type="text" id="text2" name="text2" size="1"></a>___</div>
+                            คดีหมายเลขแดงที่_<a class="absolute"><input class="transparent text-center" type="text" id="text3" name="text3" size="4"></a>_________/๒๕<a class="absolute"><input class="transparent" type="text" id="text4" name="text4" size="1"></a>___
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" align="right">
-                            ศาล_<a class="absolute"><input class="transparent" type="text" id="text5" name="text5" size="28"></a>________________________________<br>
-                            วันที่<a class="absolute"><input class="transparent" type="text" id="text6" name="text6" size="1"></a>_____เดือน<a class="absolute"><input class="transparent" type="text" id="text8" name="text8" size="8"></a>_____________พุทธศัราช ๒๕<a class="absolute"><input class="transparent" type="text" id="text9" name="text9" size="1"></a>___<br>
-                            ความ_<a class="absolute"><input class="transparent" type="text" id="text10" name="text10" size="26"></a>_______________________________<br>
+                            ศาล_<a class="absolute"><input class="transparent text-center" type="text" id="text5" name="text5" size="28"></a>________________________________<br>
+                            วันที่<a class="absolute"><input class="transparent text-center" type="text" id="text6" name="text6" size="1"></a>_____เดือน<a class="absolute"><input class="transparent text-center" type="text" id="text8" name="text8" size="8"></a>_____________พุทธศัราช ๒๕<a class="absolute"><input class="transparent" type="text" id="text9" name="text9" size="1"></a>___<br>
+                            ความ_<a class="absolute"><input class="transparent text-center" type="text" id="text10" name="text10" size="26"></a>_______________________________<br>
                         </td>
                     </tr>
                 </table>
@@ -142,15 +145,15 @@
                 <a class="absolute"><textarea style="margin-left:-550px;margin-top:1px;line-height:1.2;font-size: 21px;font-family: myFont;" rows="2" cols="68" class="transparent" id="text11" name="text11"></textarea></a>
                 <a class="absolute"><textarea style="margin-left:-550px;margin-top:100px;line-height:1.2;font-size: 21px;font-family: myFont;" rows="2" cols="68" class="transparent" id="text12" name="text12"></textarea></a>
                 <div class="normal-line">
-                    <p style="text-indent: 2.5em;">ข้าพเจ้า_<a class="absolute" style="margin-left:-55px;margin-top:-5px"><input class="transparent" type="text" id="text13" name="text13" size="68"></a>______________________________________________________________________</p>
-                    <p>ขอแต่งตั้งให้_<a class="absolute"><input class="transparent" style="margin-top:-7px" type="text" id="text14" name="text14" size="68"></a>__________________________________________________________________________</p>
+                    <p style="text-indent: 2.5em;">ข้าพเจ้า_<a class="absolute" style="margin-left:-55px;margin-top:-5px"><input class="transparent text-center" type="text" id="text13" name="text13" size="68"></a>______________________________________________________________________</p>
+                    <p>ขอแต่งตั้งให้_<a class="absolute"><input class="transparent text-center" style="margin-top:-7px" type="text" id="text14" name="text14" size="68"></a>__________________________________________________________________________</p>
                     <p><a class="absolute"><textarea style="margin-top:-13px;line-height:2;font-size: 21px;font-family: myFont;" rows="3" cols="85" class="transparent" id="text15" name="text15"></textarea></a>เป็นทนายความของข้าพเจ้าในคดีนี้ และให้มีอำนาจ *__________________________________________</p>
                     <p>_____________________________________________________________________________________</p>
                     <p>_____________________________________________________________________________________</p>
-                    <p>ข้าพเจ้ายอมรับผิดชอบตามที่_<a class="absolute"><input class="transparent" style="margin-top:-7px" type="text" id="text16" name="text16" size="56"></a>____________________________________________________________</p>
+                    <p>ข้าพเจ้ายอมรับผิดชอบตามที่_<a class="absolute"><input class="transparent text-center" style="margin-top:-7px" type="text" id="text16" name="text16" size="56"></a>____________________________________________________________</p>
                     <p>ทนายความจะได้ดำเนินกระบวนพิจารณาต่อไปตามกฎหมาย</p>
                     <p>ขอรับรองว่าผู้แต่งทนายความได้ลงลายมือชื่อจริง_______________________________ผู้แต่งทนายความ</p>
-                    <p style="text-indent: 15em;">(_<a class="absolute" style="margin-left:-318px;margin-top:-6px"><input class="transparent" type="text" id="text17" name="text17" size="13"></a>_________________)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(พลิก)
+                    <p style="text-indent: 15em;">(_<a class="absolute" style="margin-left:-318px;margin-top:-6px"><input class="transparent text-center" type="text" id="text17" name="text17" size="13"></a>_________________)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(พลิก)
                 </div>
                 ลงชื่อ________________________________________________________________________________<br>
                 <u>หมายเหตุ</u> *ตามประมวลกฎหมายวิธีพิจารณาความแพ่งมาตรา ๖๒ ทนายความไม่มีอำนาจดำเนินกระบวน  
@@ -166,30 +169,30 @@
         <div class="subpage">
             <br><br><br>
             <p><center><u>คำรับเป็นทนายความ</u></center></p>
-            <p style="text-indent: 2.5em;">ข้าพเจ้า_<a class="absolute" style="margin-left:-55px"><input class="transparent" type="text" id="text18" name="text18" size="66"></a>_____________________________________________________________________<br>
+            <p style="text-indent: 2.5em;">ข้าพเจ้า_<a class="absolute" style="margin-left:-55px"><input class="transparent text-center" type="text" id="text18" name="text18" size="66"></a>_____________________________________________________________________<br>
             เลขประจำตัวประชาชน <a class="absolute" style="margin-left:-55px;margin-top:-2px"><input class="transparent" type="text" id="text19" name="text19" size="29"></a>---- <br>
-            ใบอนุญาตให้เป็นทนายความเลขที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text20" name="text20" size="14"></a>___________________ได้รับอนุญาตให้ว่าความ_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text21" name="text21" size="9"></a>______________<br>
+            ใบอนุญาตให้เป็นทนายความเลขที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text20" name="text20" size="14"></a>___________________ได้รับอนุญาตให้ว่าความ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text21" name="text21" size="9"></a>______________<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                ที่อยู่ปัจจุบันเลขที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text22" name="text22" size="12"></a>_________________หมู่ที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text23" name="text23" size="4"></a>_________ถนน_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text24" name="text24" size="22"></a>__________________________<br>
-            ตรอก/ซอย_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text25" name="text25" size="14"></a>__________________ตำบล/แขวง_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text26" name="text26" size="11"></a>________________อำเภอ/เขต_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text27" name="text27" size="14"></a>___________________<br>
-            จังหวัด_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text28" name="text28" size="14"></a>___________________รหัสไปรษณีย์_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text29" name="text29" size="11"></a>________________โทรศัพท์_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text30" name="text30" size="14"></a>_____________________<br>
-            โทรสาร_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text31" name="text31" size="14"></a>__________________ไปรษณีย์อิเล็กทรอนิกส์ _<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text32" name="text32" size="32"></a>_____________________________________<br>
+                ที่อยู่ปัจจุบันเลขที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text22" name="text22" size="12"></a>_________________หมู่ที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text23" name="text23" size="4"></a>_________ถนน_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text24" name="text24" size="22"></a>__________________________<br>
+            ตรอก/ซอย_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text25" name="text25" size="14"></a>__________________ตำบล/แขวง_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text26" name="text26" size="11"></a>________________อำเภอ/เขต_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text27" name="text27" size="14"></a>___________________<br>
+            จังหวัด_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text28" name="text28" size="14"></a>___________________รหัสไปรษณีย์_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text29" name="text29" size="11"></a>________________โทรศัพท์_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text30" name="text30" size="14"></a>_____________________<br>
+            โทรสาร_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text31" name="text31" size="14"></a>__________________ไปรษณีย์อิเล็กทรอนิกส์ _<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text32" name="text32" size="32"></a>_____________________________________<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                สำนักงานอยู่ที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text33" name="text33" size="11"></a>________________หมู่ที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text34" name="text34" size="4"></a>_________ถนน_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text35" name="text35" size="24"></a>_____________________________<br>
-            ตรอก/ซอย_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text36" name="text36" size="14"></a>__________________ตำบล/แขวง_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text37" name="text37" size="11"></a>________________อำเภอ/เขต_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text38" name="text38" size="14"></a>___________________<br>
-            จังหวัด_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text39" name="text39" size="14"></a>___________________รหัสไปรษณีย์_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text40" name="text40" size="11"></a>________________โทรศัพท์_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text41" name="text41" size="16"></a>_____________________<br>
-            โทรสาร_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text42" name="text42" size="14"></a>__________________ไปรษณีย์อิเล็กทรอนิกส์ _<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text43" name="text43" size="32"></a>_____________________________________<br>
-            ขอรับเป็นทนายของ_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text44" name="text44" size="62"></a>__________________________________________________________________<br>
+                สำนักงานอยู่ที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text33" name="text33" size="11"></a>________________หมู่ที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text34" name="text34" size="4"></a>_________ถนน_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text35" name="text35" size="24"></a>_____________________________<br>
+            ตรอก/ซอย_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text36" name="text36" size="14"></a>__________________ตำบล/แขวง_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text37" name="text37" size="11"></a>________________อำเภอ/เขต_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text38" name="text38" size="14"></a>___________________<br>
+            จังหวัด_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text39" name="text39" size="14"></a>___________________รหัสไปรษณีย์_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text40" name="text40" size="11"></a>________________โทรศัพท์_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text41" name="text41" size="16"></a>_____________________<br>
+            โทรสาร_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text42" name="text42" size="14"></a>__________________ไปรษณีย์อิเล็กทรอนิกส์ _<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text43" name="text43" size="32"></a>_____________________________________<br>
+            ขอรับเป็นทนายของ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text44" name="text44" size="62"></a>__________________________________________________________________<br>
             เพื่อดำเนินกระบวนพิจารณาต่อไปตามหน้าที่ในกฎหมาย<br>
                 <p class="right">____________________________ทนายความ<br>
-                    (_<a class="absolute"><input class="transparent" type="text" id="text45" name="text45" size="11"></a>________________)
+                    (_<a class="absolute"><input class="transparent text-center" type="text" id="text45" name="text45" size="11"></a>________________)
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </p>
             </p>
             <p><center><u>คำสั่ง</u></center></p>
             <p><a class="absolute"><textarea style="margin-top:-10px;line-height:2;font-size: 22px;font-family: myFont;" rows="2" cols="85" class="transparent" id="text15" name="text15"></textarea></a>_______________________________________________________________________________________</p>
             <p>_______________________________________________________________________________________</p>
-            <p class="right">_<a class="absolute"><input class="transparent" type="text" id="text46" name="text46" size="19"></a>________________________ผู้พิพากษา</p>
+            <p class="right">_<a class="absolute"><input class="transparent text-center" type="text" id="text46" name="text46" size="19"></a>________________________ผู้พิพากษา</p>
             
             
         </div>    
