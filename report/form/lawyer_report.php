@@ -116,7 +116,7 @@
 </head>
 <body>
 
-<div class="book">
+<div class="book" id="div_id">
     <div class="page">
         <div class="subpage">
             <!-- <div class="form"> -->
@@ -190,9 +190,9 @@
                 </p>
             </p>
             <p><center><u>คำสั่ง</u></center></p>
-            <p><a class="absolute"><textarea style="margin-top:-10px;line-height:2;font-size: 22px;font-family: myFont;" rows="2" cols="85" class="transparent" id="text15" name="text15"></textarea></a>_______________________________________________________________________________________</p>
+            <p><a class="absolute"><textarea style="margin-top:-10px;line-height:2;font-size: 22px;font-family: myFont;" rows="2" cols="85" class="transparent" id="text46" name="text46"></textarea></a>_______________________________________________________________________________________</p>
             <p>_______________________________________________________________________________________</p>
-            <p class="right">_<a class="absolute"><input class="transparent text-center" type="text" id="text46" name="text46" size="19"></a>________________________ผู้พิพากษา</p>
+            <p class="right">_<a class="absolute"><input class="transparent text-center" type="text" id="text47" name="text47" size="19"></a>________________________ผู้พิพากษา</p>
             
             
         </div>    
@@ -204,6 +204,23 @@
 <script>
 
 // window.print();
+
+var input = document.getElementById('div_id').getElementsByTagName('input');
+for(i=0;i<input.length;i++){
+    var text_id_html = input[i].getAttribute('id');
+    //console.log(text_id_html);
+    var text_id = document.getElementById(text_id_html);
+    text_id.value = i;
+}
+
+var input_textarea = document.getElementById('div_id').getElementsByTagName('textarea');
+// console.log(input_textarea[0]);
+for(i=0;i<input_textarea.length;i++){
+    var text_id_html = input_textarea[i].getAttribute('id');
+    //console.log(text_id_html);
+    var text_id = document.getElementById(text_id_html);
+    text_id.value = i;
+}
 
 </script>
 

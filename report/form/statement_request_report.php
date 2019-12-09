@@ -195,7 +195,7 @@
 </head>
 <body>
 
-<div class="book">
+<div class="book" id="div_id">
     <div class="page">
         <div class="subpage">
             <!-- <div class="form"> -->
@@ -227,7 +227,7 @@
                 เลขประจำตัวประชาชน <a class="absolute" style="margin-left:-55px;margin-top:-2px"><input class="transparent" type="text" id="text19" name="text19" size="29"></a>---- <br>
                 เชื้อชาติ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text20" name="text20" size="13"></a>_________________สัญชาติ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text21" name="text21" size="13"></a>_________________อาชีพ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text22" name="text22" size="23"></a>___________________________<br>
                 เกิดวันที่<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text23" name="text23" size="1"></a>____เดือน_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text24" name="text24" size="13"></a>_________________พ.ศ. _<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text25" name="text25" size="5"></a>_________อายุ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text26" name="text26" size="1"></a>____ปี อยู่บ้านเลขที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent" type="text" id="text27" name="text27" size="9"></a>_____________<br>
-                หมู่ที่ _<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text28" name="text28" size="5"></a>_________ถนน_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text28" name="text28" size="23"></a>___________________________ตรอก/ซอย_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text29" name="text29" size="22"></a>__________________________<br>
+                หมู่ที่ _<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text28" name="text28" size="5"></a>_________ถนน_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text28_2" name="text28_2" size="23"></a>___________________________ตรอก/ซอย_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text29" name="text29" size="22"></a>__________________________<br>
                 ตำบล/แขวง_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text30" name="text30" size="17"></a>_____________________อำเภอ/เขต_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text31" name="text31" size="14"></a>__________________จังหวัด_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text32" name="text32" size="12"></a>_______________<br>
                 รหัสไปรษณีย์_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text33" name="text33" size="12"></a>________________โทรศัพท์_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text34" name="text34" size="17"></a>_____________________โทรสาร_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text35" name="text35" size="14"></a>__________________<br>
                 ไปรษณีย์อิเล็กทรอนิกส์ _<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text36" name="text36" size="56"></a>_____________________________________________________________<br>
@@ -295,6 +295,36 @@
 <script>
 
 // window.print();
+
+
+var input = document.getElementById('div_id').getElementsByTagName('input');
+for(i=0;i<input.length;i++){
+    var text_id_html = input[i].getAttribute('id');
+    //console.log(text_id_html);
+    var text_id = document.getElementById(text_id_html);
+    text_id.value = i;
+}
+
+var input_textarea = document.getElementById('div_id').getElementsByTagName('textarea');
+// console.log(input_textarea[0]);
+for(i=0;i<input_textarea.length;i++){
+    var text_id_html = input_textarea[i].getAttribute('id');
+    console.log(text_id_html);
+    var text_id = document.getElementById(text_id_html);
+    text_id.value = i;
+}
+
+// for(i=0;i<100;i++){
+//     var text_html = "text"+i;
+//     //console.log(text_html);
+//     var text_id = document.getElementById(text_html);
+//     if(text_id){
+//         text_id.value = i;
+//         console.log(i);
+//     } else {
+//         i = 9999;
+//     }
+// }
 
 </script>
 
