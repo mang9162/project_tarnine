@@ -262,24 +262,41 @@ $no = '';
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
+                        <button type="button" class="btn btn-app" onClick="goHref('report_insert.php?doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                            <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
+                        </button>
                         <!-- <button type="button" class="btn btn-app" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
                             <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
                         </button> -->
                         <table id="example1" class="table table-bordered table-hover table-fixed">
                             <thead>
                             <tr>
-                                <th>ชื่อเอกสาร</th>
+                            <th width="20">No</th>
+                            <th>ชื่อรายงาน</th>
+                            <th>รายงาน</th>
+                            <th width="150">วันที่สร้าง</th>
+                            <th width="80">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><a href="../report/form/lawyer_report.php" target="_blank"> ใบแต่งทนาย </a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="../report/form/statement_request_report.php" target="_blank"> คำแถลงขอส่งหมายและปิดหมาย </a></td>
-                                </tr>
+                    <?php 	$index = 1;
+                    $strSQL_doc = "SELECT * FROM document_report LEFT JOIN report ON document_report.report_id = report.report_id WHERE document_report.doc_id = '$doc_id'";
+                    $objQuery_doc = $conDB->sqlQuery($strSQL_doc);
+                    while($objResult_doc = mysqli_fetch_assoc($objQuery_doc)) { ;?>
+                            <tr>
+                            <td><?php echo $index++; ?></td>
+                            <td><?php echo $objResult_doc['doc_report_name'] ?></td>
+                            <td><?php echo $objResult_doc['report_name'] ?></td>
+                            <td><?php echo $objResult_doc['doc_report_date'] ?></td>
+                            <td align="center" style="font-size:16px;">
+                            <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/filedoc_notis_edit.php?doc_id=<?php echo $doc_id; ?>&doc_file_id=<?php echo $objResult_doc['doc_file_id']; ?>')" title="edit"></i>
+                            <a href="../report/notis_document_report.php?doc_file_id=<?php echo $objResult_doc['doc_file_id'] ?>" target="_blank"><i class="fa fa-print" title="print"></i></a>
+                            <i class="fa fa-trash-o text-red" onClick="deleteData('document_filedoc','<?php echo $objResult_doc['doc_file_id'] ?>','doc_file_id','<?php echo $objResult_doc['doc_file_name'] ?>')" title="delete"></i>
+                            </td>
+                            </tr>
+                <?php }?>
                             </tbody>
-          </table>
+            </table>
                         </div>
                     </div><!-- /.row -->
                 </div><!-- /.box-body -->

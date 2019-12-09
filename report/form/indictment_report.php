@@ -304,17 +304,6 @@
 <script>
 
 // window.print();
-for(i=1;i<100;i++){
-    var text_html = "text"+i;
-    //console.log(text_html);
-    var text_id = document.getElementById(text_html);
-    if(text_id){
-        text_id.value = i;
-        console.log(i);
-    } else {
-        i = 9999;
-    }
-}
 
 </script>
 
