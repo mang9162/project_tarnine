@@ -289,9 +289,9 @@ $no = '';
                             <td><?php echo $objResult_doc['report_name'] ?></td>
                             <td><?php echo $objResult_doc['doc_report_date'] ?></td>
                             <td align="center" style="font-size:16px;">
-                            <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/filedoc_notis_edit.php?doc_id=<?php echo $doc_id; ?>&doc_file_id=<?php echo $objResult_doc['doc_file_id']; ?>')" title="edit"></i>
+                            <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/report_edit.php?doc_id=<?php echo $doc_id; ?>&doc_report_id=<?php echo $objResult_doc['doc_report_id']; ?>')" title="edit"></i>
                             <a href="../report/notis_document_report.php?doc_file_id=<?php echo $objResult_doc['doc_file_id'] ?>" target="_blank"><i class="fa fa-print" title="print"></i></a>
-                            <i class="fa fa-trash-o text-red" onClick="deleteData('document_filedoc','<?php echo $objResult_doc['doc_file_id'] ?>','doc_file_id','<?php echo $objResult_doc['doc_file_name'] ?>')" title="delete"></i>
+                            <i class="fa fa-trash-o text-red" onClick="deleteData('document_report','<?php echo $objResult_doc['doc_report_id'] ?>','doc_report_id','<?php echo $objResult_doc['doc_report_name'] ?>')" title="delete"></i>
                             </td>
                             </tr>
                 <?php }?>

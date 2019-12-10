@@ -124,3 +124,23 @@ function b64DecodeUnicode(str) {
 		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
 	}).join(''));
 }
+
+function get_all_input_text(){
+
+	var input = document.getElementById('div_id').getElementsByTagName('input');
+	for(i=0;i<input.length;i++){
+		var text_id_html = input[i].getAttribute('id');
+		//console.log(text_id_html);
+		var text_id = document.getElementById(text_id_html);
+		text_id.value = i;
+	}
+
+	var input_textarea = document.getElementById('div_id').getElementsByTagName('textarea');
+	// console.log(input_textarea[0]);
+	for(i=0;i<input_textarea.length;i++){
+		var text_id_html = input_textarea[i].getAttribute('id');
+		//console.log(text_id_html);
+		var text_id = document.getElementById(text_id_html);
+		text_id.value = i;
+	}
+}
