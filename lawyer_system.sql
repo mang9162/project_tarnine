@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2019 at 01:55 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Dec 11, 2019 at 03:31 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -98,7 +98,7 @@ CREATE TABLE `document_filedoc` (
   `doc_id` int(11) NOT NULL,
   `doc_file_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `doc_file_text` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `doc_file_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `doc_file_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -118,7 +118,7 @@ INSERT INTO `document_filedoc` (`doc_file_id`, `doc_id`, `doc_file_name`, `doc_f
 CREATE TABLE `document_notis` (
   `doc_id` int(11) NOT NULL,
   `doc_no` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `doc_create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `doc_create_date` datetime NOT NULL DEFAULT current_timestamp(),
   `doc_plaintiff_id` int(11) NOT NULL,
   `doc_plaintiff_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `doc_restructuring` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
@@ -155,9 +155,47 @@ DELETE FROM document_def WHERE document_def.doc_id = old.doc_id;
 
 DELETE FROM document_filedoc WHERE document_filedoc.doc_id = old.doc_id;
 
+DELETE FROM document_report WHERE document_report.doc_id = old.doc_id;
+
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `document_report`
+--
+
+CREATE TABLE `document_report` (
+  `doc_report_id` int(11) NOT NULL,
+  `doc_id` int(11) NOT NULL,
+  `doc_report_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `doc_report_text` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `report_id` int(11) NOT NULL,
+  `doc_report_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `doc_report_lastedit` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `document_report`
+--
+
+INSERT INTO `document_report` (`doc_report_id`, `doc_id`, `doc_report_name`, `doc_report_text`, `report_id`, `doc_report_date`, `doc_report_lastedit`) VALUES
+(3, 1, 'test', '', 2, '2019-12-09 21:53:54', NULL),
+(4, 1, 'tessss', '', 4, '2019-12-09 21:54:06', NULL),
+(5, 1, 'sadsadasd', '', 2, '2019-12-09 21:55:39', NULL),
+(6, 0, '', '', 0, '2019-12-09 22:00:30', NULL),
+(7, 0, '', '', 0, '2019-12-09 22:00:32', NULL),
+(8, 1, '123132131', '', 2, '2019-12-09 22:02:35', NULL),
+(9, 1, 'testing123', '', 4, '2019-12-09 22:03:23', NULL),
+(10, 0, '', '', 0, '2019-12-09 22:11:27', NULL),
+(11, 0, '', '', 0, '2019-12-09 22:12:01', NULL),
+(12, 1, 'asdsadasdas12311', '', 1, '2019-12-09 22:12:02', NULL),
+(13, 0, '', '', 0, '2019-12-09 22:12:34', NULL),
+(14, 1, '12323123123', '', 1, '2019-12-09 22:12:36', NULL),
+(15, 0, '', '', 0, '2019-12-09 22:21:47', NULL),
+(16, 6, 'assdasdsad', '', 1, '2019-12-09 22:21:47', NULL);
 
 -- --------------------------------------------------------
 
@@ -220,6 +258,30 @@ INSERT INTO `plaintiff` (`plaintiff_id`, `plaintiff_name`, `enable`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `report`
+--
+
+CREATE TABLE `report` (
+  `report_id` int(11) NOT NULL,
+  `report_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `report_info` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `report_file` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `permission` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `report`
+--
+
+INSERT INTO `report` (`report_id`, `report_name`, `report_info`, `report_file`, `permission`) VALUES
+(1, 'ใบแต่งทนาย', 'ใบแต่งตั้งทนาย', 'lawyer_report.php', NULL),
+(2, 'คำแถลงขอส่งหมายและปิดหมาย', 'คำแถลงขอส่งหมายและปิดหมาย', 'statement_request_report.php', NULL),
+(3, 'คำขอท้ายฟ้อง', 'คำขอท้ายฟ้อง', 'request_consumer_report.php', NULL),
+(4, 'คำฟ้อง', 'คำฟ้อง', 'indictment_report.php', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_account`
 --
 
@@ -234,7 +296,7 @@ CREATE TABLE `user_account` (
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `position` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `department` int(11) NOT NULL,
-  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
   `enable` tinyint(1) NOT NULL,
   `permission` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -281,6 +343,12 @@ ALTER TABLE `document_notis`
   ADD PRIMARY KEY (`doc_id`);
 
 --
+-- Indexes for table `document_report`
+--
+ALTER TABLE `document_report`
+  ADD PRIMARY KEY (`doc_report_id`);
+
+--
 -- Indexes for table `lawyer`
 --
 ALTER TABLE `lawyer`
@@ -297,6 +365,12 @@ ALTER TABLE `permission`
 --
 ALTER TABLE `plaintiff`
   ADD PRIMARY KEY (`plaintiff_id`);
+
+--
+-- Indexes for table `report`
+--
+ALTER TABLE `report`
+  ADD PRIMARY KEY (`report_id`);
 
 --
 -- Indexes for table `user_account`
@@ -339,6 +413,12 @@ ALTER TABLE `document_notis`
   MODIFY `doc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `document_report`
+--
+ALTER TABLE `document_report`
+  MODIFY `doc_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT for table `lawyer`
 --
 ALTER TABLE `lawyer`
@@ -355,6 +435,12 @@ ALTER TABLE `permission`
 --
 ALTER TABLE `plaintiff`
   MODIFY `plaintiff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `report`
+--
+ALTER TABLE `report`
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_account`
