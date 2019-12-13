@@ -132,7 +132,7 @@ function get_all_input_text(){
 		var text_id_html = input[i].getAttribute('id');
 		//console.log(text_id_html);
 		var text_id = document.getElementById(text_id_html);
-		text_id.value = i;
+		text_id.value = text_id_html;
 	}
 
 	var input_textarea = document.getElementById('div_id').getElementsByTagName('textarea');
@@ -141,6 +141,44 @@ function get_all_input_text(){
 		var text_id_html = input_textarea[i].getAttribute('id');
 		//console.log(text_id_html);
 		var text_id = document.getElementById(text_id_html);
-		text_id.value = i;
+		text_id.value = text_id_html;
+	}
+}
+
+function save_report(){
+	var input = document.getElementById('div_id').getElementsByTagName('input');
+	var jsonStr ='{"report":[],"doc_report_id":'+ document.getElementById("doc_report_id").value +'}';
+	var obj = JSON.parse(jsonStr);
+	for(i=0;i<input.length;i++){
+		var text_id_html = input[i].getAttribute('id');
+		var text_value = document.getElementById(text_id_html).value;  
+		obj['report'].push({"text_id":text_id_html,"value":text_value});
+	}
+
+	var input_textarea = document.getElementById('div_id').getElementsByTagName('textarea');
+	for(i=0;i<input_textarea.length;i++){
+		var text_id_html = input_textarea[i].getAttribute('id');
+		var text_value = document.getElementById(text_id_html).value;  
+		obj['report'].push({"text_id":text_id_html,"value":text_value});
+	}
+	// console.log(obj);
+	var text = JSON.stringify(obj);
+	// console.log(text);
+	console.log(obj.doc_report_id);
+	var n = obj.doc_report_id;
+	var t = "document_report";
+	var tf = "doc_report_id";
+	var v = text;
+	var f = "doc_report_text";
+	$.post("../../services/autosave.php", {n:n,t:t,tf:tf,v:v,f,f}, function(data){
+		console.log(data);
+		alert('บันทึกข้อมูลแล้ว!');
+	});
+
+}
+
+function get_form_report(text_report){
+	for(i=0;i<text_report.report.length;i++){
+		document.getElementById(text_report.report[i].text_id).value = text_report.report[i].value;
 	}
 }

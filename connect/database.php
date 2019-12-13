@@ -2,7 +2,7 @@
 date_default_timezone_set("Asia/Bangkok");
 define('DB_SERVER','localhost');
 define('DB_USER','administrator');
-define('DB_PASS' ,'12345678');
+define('DB_PASS' ,'ris,,skik=');
 define('DB_NAME', 'lawyer_system');
 class db_conn{
 	var $DB;

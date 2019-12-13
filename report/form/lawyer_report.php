@@ -1,3 +1,24 @@
+<?php
+session_start();
+ob_start();
+include("../../connect/database.php");
+$conDB = new db_conn();
+
+$doc_id = $conDB->sqlEscapestr($_GET['doc_id']);
+$doc_report_id = $conDB->sqlEscapestr($_GET['doc_report_id']);
+
+$_SESSION['PAGE'] = "../pages/report_edit.php?doc_id=".$doc_id."&doc_report_id=".$doc_report_id;
+
+$strSQL_notis = "SELECT * FROM `document_notis` LEFT JOIN `plaintiff` ON document_notis.doc_plaintiff_id = plaintiff.plaintiff_id LEFT JOIN `lawyer` ON document_notis.lawyer_id = lawyer.lawyer_id WHERE document_notis.doc_id = '$doc_id'";
+$objQuery_notis = $conDB->sqlQuery($strSQL_notis);
+$objResult_notis = mysqli_fetch_assoc($objQuery_notis);
+
+$strSQL = "SELECT * FROM `document_report` LEFT JOIN report ON document_report.report_id = report.report_id WHERE `doc_report_id` = '$doc_report_id'";
+$objQuery = $conDB->sqlQuery($strSQL);
+$objResult = mysqli_fetch_assoc($objQuery);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +44,11 @@
         * {
             box-sizing: border-box;
             -moz-box-sizing: border-box;
+        }
+        .navbar{
+            color: white;
+            background-color: #333;
+            position: fixed;
         }
         .page {
             width: 210mm;
@@ -98,6 +124,9 @@
                 width: 210mm;
                 height: 297mm;        
             }
+            .navbar{
+                display: none;
+            }
             .page {
                 margin: 0;
                 border: initial;
@@ -115,8 +144,19 @@
     </style>
 </head>
 <body>
+<div class="navbar">
+    <button type="button" class="btn btn-app flat"  onClick="save_report()">
+        <img src="../../dist/img/icon/save.svg" width="20"><br>
+        บันทึก
+    </button>
+    <button type="button" class="btn btn-app flat"  onClick="print_report()">
+        <img src="../../dist/img/icon/print.svg" width="20"><br>
+        พิมพ์
+    </button>
+</div>
 
 <div class="book" id="div_id">
+    <input type="hidden" id="doc_report_id" name="doc_report_id" value="<?php echo $doc_report_id ?>">
     <div class="page">
         <div class="subpage">
             <!-- <div class="form"> -->
@@ -171,7 +211,7 @@
             <p><center><u>คำรับเป็นทนายความ</u></center></p>
             <p style="text-indent: 2.5em;">ข้าพเจ้า_<a class="absolute" style="margin-left:-55px"><input class="transparent text-center" type="text" id="text18" name="text18" size="66"></a>_____________________________________________________________________<br>
             เลขประจำตัวประชาชน <a class="absolute" style="margin-left:-55px;margin-top:-2px"><input class="transparent" type="text" id="text19" name="text19" size="29"></a>---- <br>
-            ใบอนุญาตให้เป็นทนายความเลขที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text20" name="text20" size="14"></a>___________________ได้รับอนุญาตให้ว่าความ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text21" name="text21" size="9"></a>______________<br>
+            ใบอนุญาตให้เป็นทนายความเลขที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text20" name="text20" size="14"></a>___________________ได้รับอนุญาตให้ว่าความ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text21" name="text21" size="11"></a>______________<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 ที่อยู่ปัจจุบันเลขที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text22" name="text22" size="12"></a>_________________หมู่ที่_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text23" name="text23" size="4"></a>_________ถนน_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text24" name="text24" size="22"></a>__________________________<br>
             ตรอก/ซอย_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text25" name="text25" size="14"></a>__________________ตำบล/แขวง_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text26" name="text26" size="11"></a>________________อำเภอ/เขต_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text27" name="text27" size="14"></a>___________________<br>
@@ -200,27 +240,100 @@
 </div>
 
 </body>
-
+<script src="../../dist/js/jquery-3.3.1.js"></script>
+<script src="../../dist/js/app.js"></script>
 <script>
 
-// window.print();
-
-var input = document.getElementById('div_id').getElementsByTagName('input');
-for(i=0;i<input.length;i++){
-    var text_id_html = input[i].getAttribute('id');
-    //console.log(text_id_html);
-    var text_id = document.getElementById(text_id_html);
-    text_id.value = i;
+function print_report(){
+    window.print();
 }
 
-var input_textarea = document.getElementById('div_id').getElementsByTagName('textarea');
-// console.log(input_textarea[0]);
-for(i=0;i<input_textarea.length;i++){
-    var text_id_html = input_textarea[i].getAttribute('id');
-    //console.log(text_id_html);
-    var text_id = document.getElementById(text_id_html);
-    text_id.value = i;
+//get_all_input_text();
+
+<?php
+if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL){
+    //หา จำเลย
+    $defendant = "";
+    $strSQL_def = "SELECT * FROM `document_def` WHERE `doc_id` = '$doc_id'";
+    $objQuery_def = $conDB->sqlQuery($strSQL_def);
+    while($objResult_def = mysqli_fetch_assoc($objQuery_def)){
+        if($defendant == ""){
+            $defendant = $objResult_def['doc_def_name'];
+        }else{
+            $defendant = $defendant.','.$objResult_def['doc_def_name'];
+        }
+    }
+    //end หาจำเลย
+    //หาโจทย์
+    $plaintiff = $objResult_notis['doc_plaintiff_name'];
+    //end หาโจทย์
+
+    $lawyer_id = $objResult_notis['lawyer_id'];
+    $strSQL_law = "SELECT * FROM `lawyer` WHERE `lawyer_id` = '$lawyer_id'";
+    $objQuery_law = $conDB->sqlQuery($strSQL_law);
+    $objResult_law = mysqli_fetch_assoc($objQuery_law);
+
+    //จัดข้อความเลขบัตรประชาชน
+    $tex_nember = str_replace("-", "", $objResult_law['lawyer_tex_no']);
+    $tex_number_edit = "  ".$tex_nember[0]."   ".$tex_nember[1]."  ".$tex_nember[2]."  ".$tex_nember[3]."  ".$tex_nember[4]."   ".$tex_nember[5]."  ".$tex_nember[6]."   ".$tex_nember[7]."  ".$tex_nember[8]."  ".$tex_nember[9]."   ".$tex_nember[10]."  ".$tex_nember[11]."   ".$tex_nember[12];
+
+    ?>
+        document.getElementById('text5').value = '<?php echo $objResult_notis['doc_county'] ?>'; //ศาล
+        document.getElementById('text11').value = '<?php echo $plaintiff ?>'; //จำเลย
+        document.getElementById('text12').value = '<?php echo $defendant ?>'; //โจทย์
+        document.getElementById('text13').value = '<?php echo $defendant ?>'; //ข้าพเจ้า
+        document.getElementById('text14').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //ขอแต่งตั้งให้
+        document.getElementById('text15').value = '<?php echo "                                                                              " ?>'; //ขอแต่งตั้งให้
+        document.getElementById('text16').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //ข้าพเจ้ายอมรับผิดชอบ
+        document.getElementById('text17').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //ลายเซ็น
+
+        //ใบที่ 2
+
+        document.getElementById('text18').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //ข้าพเจ้า
+
+        document.getElementById('text19').value = '<?php echo $tex_number_edit ?>'; //เลขบัตรประชาชน
+
+        document.getElementById('text20').value = '<?php echo $objResult_law['submit_no'] ?>'; //เลขใบ
+        document.getElementById('text21').value = '<?php echo $objResult_law['submit_info'] ?>'; //ได้รับ
+
+        document.getElementById('text22').value = '<?php echo $objResult_law['current_unit'] ?>'; //ที่อยู่
+        document.getElementById('text23').value = '<?php echo $objResult_law['current_bloc'] ?>'; //หมู่
+        document.getElementById('text24').value = '<?php echo $objResult_law['current_road'] ?>'; //ถนน
+        document.getElementById('text25').value = '<?php echo $objResult_law['current_alley'] ?>'; //ซอย
+        document.getElementById('text26').value = '<?php echo $objResult_law['current_zone'] ?>'; //แขวง
+        document.getElementById('text27').value = '<?php echo $objResult_law['current_area'] ?>'; //เขต
+        document.getElementById('text28').value = '<?php echo $objResult_law['current_county'] ?>'; //จังหวัด
+        document.getElementById('text29').value = '<?php echo $objResult_law['current_post'] ?>'; //รหัสไป
+        document.getElementById('text30').value = '<?php echo $objResult_law['current_phone'] ?>'; //โทรศัพท์
+        document.getElementById('text31').value = '<?php echo $objResult_law['current_number'] ?>'; //โทรสาร
+        document.getElementById('text32').value = '<?php echo $objResult_law['current_email'] ?>'; //email
+
+        document.getElementById('text33').value = '<?php echo $objResult_law['work_unit'] ?>'; //ที่อยู่
+        document.getElementById('text34').value = '<?php echo $objResult_law['work_bloc'] ?>'; //หมู่
+        document.getElementById('text35').value = '<?php echo $objResult_law['work_road'] ?>'; //ถนน
+        document.getElementById('text36').value = '<?php echo $objResult_law['work_alley'] ?>'; //ซอย
+        document.getElementById('text37').value = '<?php echo $objResult_law['work_zone'] ?>'; //แขวง
+        document.getElementById('text38').value = '<?php echo $objResult_law['work_area'] ?>'; //เขต
+        document.getElementById('text39').value = '<?php echo $objResult_law['work_county'] ?>'; //จังหวัด
+        document.getElementById('text40').value = '<?php echo $objResult_law['work_post'] ?>'; //รหัสไป
+        document.getElementById('text41').value = '<?php echo $objResult_law['work_phone'] ?>'; //โทรศัพท์
+        document.getElementById('text42').value = '<?php echo $objResult_law['work_number'] ?>'; //โทรสาร
+        document.getElementById('text43').value = '<?php echo $objResult_law['work_email'] ?>'; //email
+
+        document.getElementById('text44').value = '<?php echo $defendant ?>'; //รับเป็นทนาย
+        document.getElementById('text45').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //รับเป็นทนายลายเซ็น
+
+
+    // document.getElementById(text_id_html);
+    // alert('<?php echo $defendant ?>'); 
+
+    <?php
+} else {
+    ?>
+    get_form_report(<?php echo $objResult['doc_report_text'] ?>);
+    <?php
 }
+?>
 
 </script>
 

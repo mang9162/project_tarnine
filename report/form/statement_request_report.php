@@ -1,3 +1,47 @@
+<?php
+session_start();
+ob_start();
+include("../../connect/database.php");
+$conDB = new db_conn();
+
+$doc_id = $conDB->sqlEscapestr($_GET['doc_id']);
+$doc_report_id = $conDB->sqlEscapestr($_GET['doc_report_id']);
+
+$_SESSION['PAGE'] = "../pages/report_edit.php?doc_id=".$doc_id."&doc_report_id=".$doc_report_id;
+
+$strSQL_notis = "SELECT * FROM `document_notis` LEFT JOIN `plaintiff` ON document_notis.doc_plaintiff_id = plaintiff.plaintiff_id LEFT JOIN `lawyer` ON document_notis.lawyer_id = lawyer.lawyer_id WHERE document_notis.doc_id = '$doc_id'";
+$objQuery_notis = $conDB->sqlQuery($strSQL_notis);
+$objResult_notis = mysqli_fetch_assoc($objQuery_notis);
+
+$strSQL = "SELECT * FROM `document_report` LEFT JOIN report ON document_report.report_id = report.report_id WHERE `doc_report_id` = '$doc_report_id'";
+$objQuery = $conDB->sqlQuery($strSQL);
+$objResult = mysqli_fetch_assoc($objQuery);
+
+function thai_date($time){
+    $thai_month_arr=array(
+        "",
+        "มกราคม",
+        "กุมภาพันธ์",
+        "มีนาคม",
+        "เมษายน",
+        "พฤษภาคม",
+        "มิถุนายน", 
+        "กรกฎาคม",
+        "สิงหาคม",
+        "กันยายน",
+        "ตุลาคม",
+        "พฤศจิกายน",
+        "ธันวาคม"                 
+    );
+    $pieces = explode("-", $time);
+    $thai_date = $pieces[2];
+    $thai_date .= "-".$thai_month_arr[2];
+    $thai_date .= "-".($pieces[0]+543);
+    return $thai_date;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +67,11 @@
         * {
             box-sizing: border-box;
             -moz-box-sizing: border-box;
+        }
+        .navbar{
+            color: white;
+            background-color: #333;
+            position: fixed;
         }
         .page {
             width: 210mm;
@@ -189,13 +238,27 @@
                 /* padding-right: 1.5cm;
                 padding-left: 1.5cm; */
             }
+            .navbar{
+                display: none;
+            }
         }
     </style>
     
 </head>
 <body>
+<div class="navbar">
+    <button type="button" class="btn btn-app flat"  onClick="save_report()">
+        <img src="../../dist/img/icon/save.svg" width="20"><br>
+        บันทึก
+    </button>
+    <button type="button" class="btn btn-app flat"  onClick="print_report()">
+        <img src="../../dist/img/icon/print.svg" width="20"><br>
+        พิมพ์
+    </button>
+</div>
 
 <div class="book" id="div_id">
+<input type="hidden" id="doc_report_id" name="doc_report_id" value="<?php echo $doc_report_id ?>">
     <div class="page">
         <div class="subpage">
             <!-- <div class="form"> -->
@@ -292,39 +355,85 @@
 
 </body>
 
+<script src="../../dist/js/jquery-3.3.1.js"></script>
+<script src="../../dist/js/app.js"></script>
 <script>
 
-// window.print();
-
-
-var input = document.getElementById('div_id').getElementsByTagName('input');
-for(i=0;i<input.length;i++){
-    var text_id_html = input[i].getAttribute('id');
-    //console.log(text_id_html);
-    var text_id = document.getElementById(text_id_html);
-    text_id.value = i;
+function print_report(){
+    window.print();
 }
 
-var input_textarea = document.getElementById('div_id').getElementsByTagName('textarea');
-// console.log(input_textarea[0]);
-for(i=0;i<input_textarea.length;i++){
-    var text_id_html = input_textarea[i].getAttribute('id');
-    console.log(text_id_html);
-    var text_id = document.getElementById(text_id_html);
-    text_id.value = i;
-}
+//get_all_input_text();
 
-// for(i=0;i<100;i++){
-//     var text_html = "text"+i;
-//     //console.log(text_html);
-//     var text_id = document.getElementById(text_html);
-//     if(text_id){
-//         text_id.value = i;
-//         console.log(i);
-//     } else {
-//         i = 9999;
-//     }
-// }
+<?php
+if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL){
+    //หา จำเลย
+    $defendant = "";
+    $strSQL_def = "SELECT * FROM `document_def` WHERE `doc_id` = '$doc_id'";
+    $objQuery_def = $conDB->sqlQuery($strSQL_def);
+    while($objResult_def = mysqli_fetch_assoc($objQuery_def)){
+        if($defendant == ""){
+            $defendant = $objResult_def['doc_def_name'];
+        }else{
+            $defendant = $defendant.','.$objResult_def['doc_def_name'];
+        }
+    }
+    //end หาจำเลย
+    //หาโจทย์
+    $plaintiff = $objResult_notis['doc_plaintiff_name'];
+    //end หาโจทย์
+
+    $lawyer_id = $objResult_notis['lawyer_id'];
+    $strSQL_law = "SELECT * FROM `lawyer` WHERE `lawyer_id` = '$lawyer_id'";
+    $objQuery_law = $conDB->sqlQuery($strSQL_law);
+    $objResult_law = mysqli_fetch_assoc($objQuery_law);
+
+    //จัดข้อความเลขบัตรประชาชน
+    $tex_nember = str_replace("-", "", $objResult_law['lawyer_tex_no']);
+    $tex_number_edit = "  ".$tex_nember[0]."   ".$tex_nember[1]."  ".$tex_nember[2]."  ".$tex_nember[3]."  ".$tex_nember[4]."   ".$tex_nember[5]."  ".$tex_nember[6]."   ".$tex_nember[7]."  ".$tex_nember[8]."  ".$tex_nember[9]."   ".$tex_nember[10]."  ".$tex_nember[11]."   ".$tex_nember[12];
+
+    // $birthday = thai_date($objResult_law['birthday']);
+    $birthday = thai_date($objResult_law['birthday']);
+    $arr_birthday = explode("-", $birthday);
+    ?>
+        document.getElementById('text5').value = '<?php echo $objResult_notis['doc_county'] ?>'; //ศาล
+        document.getElementById('text11').value = '<?php echo $plaintiff ?>'; //จำเลย
+        document.getElementById('text12').value = '<?php echo $defendant ?>'; //โจทย์
+        
+        document.getElementById('text18').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //ข้าพเจ้า
+        document.getElementById('text19').value = '<?php echo $tex_number_edit ?>'; //เลขบัตร
+        document.getElementById('text20').value = '<?php echo $objResult_notis['race'] ?>'; //เชื้อชาติ
+        document.getElementById('text21').value = '<?php echo $objResult_notis['nationality'] ?>'; //สัญชาติ
+        document.getElementById('text22').value = '<?php echo $objResult_notis['job'] ?>'; //อาชีพ
+
+        document.getElementById('text23').value = '<?php echo $arr_birthday[0] ?>'; //เกิดวัน
+        document.getElementById('text24').value = '<?php echo $arr_birthday[1] ?>'; //เดือน
+        document.getElementById('text25').value = '<?php echo $arr_birthday[2] ?>'; //ปี
+
+        document.getElementById('text26').value = '<?php echo $objResult_notis['age'] ?>'; //อายุ
+
+        document.getElementById('text27').value = '<?php echo $objResult_law['current_unit'] ?>'; //ที่อยู่
+        document.getElementById('text28').value = '<?php echo $objResult_law['current_bloc'] ?>'; //หมู่
+        document.getElementById('text28_2').value = '<?php echo $objResult_law['current_road'] ?>'; //ถนน
+        document.getElementById('text29').value = '<?php echo $objResult_law['current_alley'] ?>'; //ซอย
+        document.getElementById('text30').value = '<?php echo $objResult_law['current_zone'] ?>'; //แขวง
+        document.getElementById('text31').value = '<?php echo $objResult_law['current_area'] ?>'; //เขต
+        document.getElementById('text32').value = '<?php echo $objResult_law['current_county'] ?>'; //จังหวัด
+        document.getElementById('text33').value = '<?php echo $objResult_law['current_post'] ?>'; //รหัสไป
+        document.getElementById('text34').value = '<?php echo $objResult_law['current_phone'] ?>'; //โทรศัพท์
+        document.getElementById('text35').value = '<?php echo $objResult_law['current_number'] ?>'; //โทรสาร
+        document.getElementById('text36').value = '<?php echo $objResult_law['current_email'] ?>'; //email
+
+        document.getElementById('textarea1').value = '<?php echo "                       " ?>'; //email
+
+    <?php
+} else {
+    ?>
+    get_form_report(<?php echo $objResult['doc_report_text'] ?>);
+    <?php
+}
+?>
+
 
 </script>
 

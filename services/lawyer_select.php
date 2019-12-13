@@ -10,7 +10,7 @@ $strSQL = "SELECT * FROM `lawyer` WHERE `lawyer_id` = '$lawyer_id' LIMIT 1";
 $objQuery = $conDB->sqlQuery($strSQL);
 while($objResult = mysqli_fetch_assoc($objQuery)) {
 	$id = $objResult['lawyer_id'];
-	$name = $objResult['plaintiff_name'];
+	$name = $objResult['lawyer_name'];
 	
 	$strSQL2 = "UPDATE `document_notis` SET `lawyer_id` = '$id', `lawyer_name` = '$name' WHERE `document_notis`.`doc_id` = '$doc_id';";
 	$conDB->sqlQuery($strSQL2);

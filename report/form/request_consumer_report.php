@@ -1,3 +1,23 @@
+<?php
+session_start();
+ob_start();
+include("../../connect/database.php");
+$conDB = new db_conn();
+
+$doc_id = $conDB->sqlEscapestr($_GET['doc_id']);
+$doc_report_id = $conDB->sqlEscapestr($_GET['doc_report_id']);
+
+$_SESSION['PAGE'] = "../pages/report_edit.php?doc_id=".$doc_id."&doc_report_id=".$doc_report_id;
+
+$strSQL_notis = "SELECT * FROM `document_notis` LEFT JOIN `plaintiff` ON document_notis.doc_plaintiff_id = plaintiff.plaintiff_id LEFT JOIN `lawyer` ON document_notis.lawyer_id = lawyer.lawyer_id WHERE document_notis.doc_id = '$doc_id'";
+$objQuery_notis = $conDB->sqlQuery($strSQL_notis);
+$objResult_notis = mysqli_fetch_assoc($objQuery_notis);
+
+$strSQL = "SELECT * FROM `document_report` LEFT JOIN report ON document_report.report_id = report.report_id WHERE `doc_report_id` = '$doc_report_id'";
+$objQuery = $conDB->sqlQuery($strSQL);
+$objResult = mysqli_fetch_assoc($objQuery);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +43,11 @@
         * {
             box-sizing: border-box;
             -moz-box-sizing: border-box;
+        }
+        .navbar{
+            color: white;
+            background-color: #333;
+            position: fixed;
         }
         .page {
             width: 210mm;
@@ -195,13 +220,27 @@
                 /* padding-right: 1.5cm;
                 padding-left: 1.5cm; */
             }
+            .navbar{
+                display: none;
+            }
         }
     </style>
     
 </head>
 <body>
+<div class="navbar">
+    <button type="button" class="btn btn-app flat"  onClick="save_report()">
+        <img src="../../dist/img/icon/save.svg" width="20"><br>
+        บันทึก
+    </button>
+    <button type="button" class="btn btn-app flat"  onClick="print_report()">
+        <img src="../../dist/img/icon/print.svg" width="20"><br>
+        พิมพ์
+    </button>
+</div>
 
-<div class="book">
+<div class="book" class="book" id="div_id">
+<input type="hidden" id="doc_report_id" name="doc_report_id" value="<?php echo $doc_report_id ?>">
     <div class="page">
         <div class="subpage">
             <p class="short-line">คำขอท้ายฟ้องคดีผู้บริโภค</p>
@@ -251,9 +290,57 @@
 
 </body>
 
+<script src="../../dist/js/jquery-3.3.1.js"></script>
+<script src="../../dist/js/app.js"></script>
 <script>
 
-// window.print();
+function print_report(){
+    window.print();
+}
+
+// get_all_input_text();
+
+<?php
+if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL){
+    //หา จำเลย
+    $defendant = "";
+    $strSQL_def = "SELECT * FROM `document_def` WHERE `doc_id` = '$doc_id'";
+    $objQuery_def = $conDB->sqlQuery($strSQL_def);
+    while($objResult_def = mysqli_fetch_assoc($objQuery_def)){
+        if($defendant == ""){
+            $defendant = $objResult_def['doc_def_name'];
+        }else{
+            $defendant = $defendant.','.$objResult_def['doc_def_name'];
+        }
+    }
+    //end หาจำเลย
+    //หาโจทย์
+    $plaintiff = $objResult_notis['doc_plaintiff_name'];
+    //end หาโจทย์
+
+    $lawyer_id = $objResult_notis['lawyer_id'];
+    $strSQL_law = "SELECT * FROM `lawyer` WHERE `lawyer_id` = '$lawyer_id'";
+    $objQuery_law = $conDB->sqlQuery($strSQL_law);
+    $objResult_law = mysqli_fetch_assoc($objQuery_law);
+
+    ?>
+        document.getElementById('text1').value = '<?php echo "                                             " ?>'; //ศาล
+        document.getElementById('text2').value = '<?php echo "                                             " ?>'; //ศาล
+        document.getElementById('text3').value = '<?php echo "                                                     " ?>'; //ศาล
+        document.getElementById('text4').value = '<?php echo "                         " ?>'; //ศาล
+
+        document.getElementById('text7').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //ศาล
+        document.getElementById('text10').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //จำเลย
+        document.getElementById('text11').value = '<?php echo $objResult_law['submit_no'] ?>'; //โจทย์
+
+    <?php
+} else {
+    ?>
+    get_form_report(<?php echo $objResult['doc_report_text'] ?>);
+    <?php
+}
+?>
+
 
 </script>
 
