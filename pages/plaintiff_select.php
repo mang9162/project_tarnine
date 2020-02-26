@@ -2,7 +2,15 @@
 session_start();
 ob_start();
 include("../connect/database.php");
-$doc_id = $_GET['doc_id'];
+
+if(!isset($_GET['view_list'])){
+  $doc_id = "&doc_id=".$_GET['doc_id'];
+  $id = $_GET['doc_id'];
+} else {
+  $doc_id = "";
+  $id = "";
+  $_SESSION['PAGE'] = "../pages/plaintiff_select.php?view_list=view_list";
+}
 $conDB = new db_conn();
 $strSQL = "SELECT * FROM `plaintiff` WHERE `enable` = '1'";
 $objQuery = $conDB->sqlQuery($strSQL);
@@ -12,22 +20,45 @@ $index = 0;
 <html>
 <head>
 <?php include("head.php");?>
+<?php
+  if(isset($_GET['view_list'])){
+    ?>
+      <style>
+        .list{
+          display:none;
+        }
+      </style>
+    <?php
+  } else {
+    ?>
+      <style>
+        .list{
+          display:block;
+        }
+      </style>
+    <?php
+  }
+?>
+
 </head>
 <body class="skin-black">
 <section class="content-header">
   <h1>
     รายชื่อโจทก์
-    <small><a href="customer_create.php">+ New</a></small>
   </h1>
   <ol class="breadcrumb">
-        <li class="active">Select Plaintiff</li>
+        <li class="active">Plaintiff</li>
   </ol>
 </section>
 <!-- Main content -->
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
-    <button type="button" class="btn btn-app flat"  onClick="goBack()">
+    <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_plaintiff<?php echo $doc_id ?>')" title="new">
+        <img src="../dist/img/icon/add.svg" width="20"><br>
+        New
+    </button>
+    <button type="button" class="btn btn-app flat list"  onClick="goHref('notis_edit.php?act=edit&id=<?php echo $id ?>')">
             <img src="../dist/img/icon/multiply.svg" width="20"><br>
 			Discard
         </button>
@@ -46,6 +77,7 @@ $index = 0;
               <th width="15">No</th>
               <th width="25">#</th>
               <th>ชื่อโจทก์</th>
+              <th width="80">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -55,8 +87,12 @@ $index = 0;
         ?>
             <tr>        
               <td><?php echo $index ?></td>
-              <td style="padding:0px;"><a href="../services/plaintiff_select.php?doc_id=<?php echo $doc_id; ?>&plaintiff_id=<?php echo $objResult['plaintiff_id']; ?>"><button type="button" class="btn btn-success btn-flat btn-block">เลือก</button></a></td>
+              <td style="padding:0px;"><a class="list" href="../services/plaintiff_select.php?doc_id=<?php echo $doc_id; ?>&plaintiff_id=<?php echo $objResult['plaintiff_id']; ?>"><button type="button" class="btn btn-success btn-flat btn-block">เลือก</button></a></td>
               <td><?php echo $objResult['plaintiff_name'] ?></td>
+              <td align="center" style="font-size:16px;">
+                <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/plaintiff_edit.php?plaintiff_id=<?php echo $objResult['plaintiff_id']; ?><?php echo $doc_id ?>')" title="edit"></i>
+                <!-- <i class="fa fa-trash-o text-red" onClick="deleteData('document_report','<?php echo $objResult_doc['doc_report_id'] ?>','doc_report_id','<?php echo $objResult_doc['doc_report_name'] ?>')" title="delete"></i> -->
+              </td>
             </tr>
 <?php }?>
             </tbody>

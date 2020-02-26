@@ -1,3 +1,24 @@
+<?php
+session_start();
+ob_start();
+include("../../connect/database.php");
+$conDB = new db_conn();
+
+$doc_id = $conDB->sqlEscapestr($_GET['doc_id']);
+$doc_report_id = $conDB->sqlEscapestr($_GET['doc_report_id']);
+
+// $_SESSION['PAGE'] = "../pages/report_edit.php?doc_id=".$doc_id."&doc_report_id=".$doc_report_id;
+
+$strSQL_notis = "SELECT * FROM `document_notis` LEFT JOIN `plaintiff` ON document_notis.doc_plaintiff_id = plaintiff.plaintiff_id LEFT JOIN `lawyer` ON document_notis.lawyer_id = lawyer.lawyer_id WHERE document_notis.doc_id = '$doc_id'";
+$objQuery_notis = $conDB->sqlQuery($strSQL_notis);
+$objResult_notis = mysqli_fetch_assoc($objQuery_notis);
+
+$strSQL = "SELECT * FROM `document_report` LEFT JOIN report ON document_report.report_id = report.report_id WHERE `doc_report_id` = '$doc_report_id'";
+$objQuery = $conDB->sqlQuery($strSQL);
+$objResult = mysqli_fetch_assoc($objQuery);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +44,11 @@
         * {
             box-sizing: border-box;
             -moz-box-sizing: border-box;
+        }
+        .navbar{
+            color: white;
+            background-color: #333;
+            position: fixed;
         }
         .page {
             width: 210mm;
@@ -192,13 +218,28 @@
                 /* padding-right: 1.5cm;
                 padding-left: 1.5cm; */
             }
+            .navbar{
+                display: none;
+            }
         }
     </style>
     
 </head>
 <body>
 
-<div class="book">
+<div class="navbar">
+    <button type="button" class="btn btn-app flat"  onClick="save_report()">
+        <img src="../../dist/img/icon/save.svg" width="20"><br>
+        บันทึก
+    </button>
+    <button type="button" class="btn btn-app flat"  onClick="print_report()">
+        <img src="../../dist/img/icon/print.svg" width="20"><br>
+        พิมพ์
+    </button>
+</div>
+
+<div class="book" class="book" id="div_id">
+<input type="hidden" id="doc_report_id" name="doc_report_id" value="<?php echo $doc_report_id ?>">
     <div class="page">
         <div class="subpage">
             <!-- <div class="form"> -->
@@ -230,21 +271,36 @@
                     เรื่อง…<a class="absolute"><input class="transparent text-center" type="text" id="text11" name="text11" size="75"></a>…………………………………………………………………………………………………………<br>
                     จำนวนทุนทรัพย์<a class="absolute"><input class="transparent text-center" type="text" id="text12" name="text12" size="34"></a>…………………………………………………บาท<a class="absolute"><input class="transparent text-center" type="text" id="text13" name="text13" size="19"></a>……………………………..สตางค์<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            ข้าพเจ้า………………………………………………………………………………โจทก์<br>
-                    เชื้อชาติ…………………...สัญชาติ…………………อาชีพ……………………………..อายุ…………..ปี<br>
-                    เลขประจำตัวประชาชน       อยู่บ้านเลขที่…………………………<br>
-                    หมู่ที่………… ถนน…………………….ตรอก/ซอย……………………..ใกล้เคียง………………………<br>
-                    ตำบล/แขวง……………………….. อำเภอ/เขต……………………. จังหวัด…………………………….<br>
-                    โทรศัพท์………………โทรสาร………………จดหมายอิเล็กทรอนิกส์……………………………………<br>
-                    สถานที่ติดต่อ………………………………………………………………………………………………….<br>
-                    โทรศัพท์…………………โทรสาร………………จดหมายอิเล็กทรอนิกส์……………………………………<br>
+                            ข้าพเจ้า…<a class="absolute"><input class="transparent text-center" type="text" id="text14" name="text14" size="53"></a>……………………………………………………………………………โจทก์<br>
+                    เชื้อชาติ<a class="absolute"><input class="transparent text-center" type="text" id="text15" name="text15" size="12"></a>…………………...สัญชาติ<a class="absolute"><input class="transparent text-center" type="text" id="text16" name="text16" size="10"></a>…………………อาชีพ<a class="absolute"><input class="transparent text-center" type="text" id="text17" name="text17" size="19"></a>……………………………..อายุ<a class="absolute"><input class="transparent text-center" type="text" id="text18" name="text18" size="5"></a>…………..ปี<br>
+                    เลขประจำตัวประชาชน <a class="absolute" style="margin-top:-2px"><input class="transparent" type="text" id="text19" name="text19" size="29"></a>      
+                    อยู่บ้านเลขที่<a class="absolute" style="margin-top:-2px"><input class="transparent text-center" type="text" id="text19_2" name="text19_2" size="17"></a>…………………………<br>
+                    หมู่ที่<a class="absolute"><input class="transparent text-center" type="text" id="text20" name="text20" size="5"></a>………… ถนน<a class="absolute"><input class="transparent text-center" type="text" id="text21" name="text21" size="12"></a>…………………….ตรอก/ซอย<a class="absolute"><input class="transparent text-center" type="text" id="text22" name="text22" size="13"></a>……………………..ใกล้เคียง<a class="absolute"><input class="transparent text-center" type="text" id="text23" name="text23" size="14"></a>………………………<br>
+                    ตำบล/แขวง<a class="absolute"><input class="transparent text-center" type="text" id="text24" name="text24" size="15"></a>……………………….. 
+                    อำเภอ/เขต<a class="absolute"><input class="transparent text-center" type="text" id="text25" name="text25" size="13"></a>……………………. 
+                    จังหวัด<a class="absolute"><input class="transparent text-center" type="text" id="text26" name="text26" size="18"></a>…………………………….<br>
+                    โทรศัพท์<a class="absolute"><input class="transparent text-center" type="text" id="text27" name="text27" size="8"></a>………………
+                    โทรสาร<a class="absolute"><input class="transparent text-center" type="text" id="text28" name="text28" size="8"></a>………………
+                    จดหมายอิเล็กทรอนิกส์<a class="absolute"><input class="transparent text-center" type="text" id="text29" name="text29" size="24"></a>……………………………………<br>
+                    สถานที่ติดต่อ<a class="absolute"><input class="transparent text-center" type="text" id="text30" name="text30" size="70"></a>………………………………………………………………………………………………….<br>
+                    โทรศัพท์<a class="absolute"><input class="transparent text-center" type="text" id="text31" name="text31" size="10"></a>…………………
+                    โทรสาร<a class="absolute"><input class="transparent text-center" type="text" id="text32" name="text32" size="8"></a>………………
+                    จดหมายอิเล็กทรอนิกส์<a class="absolute"><input class="transparent text-center" type="text" id="text33" name="text33" size="24"></a>……………………………………<br>
+                    <a class="absolute"><textarea style="margin-top:-4px;line-height:1.3;font-size: 22px;font-family: myFont;" rows="2" cols="81" class="transparent" id="text34" name="text34"></textarea></a>
                     ขอยื่นฟ้อง………………………………………………………………………………………….…………<br>
                     ………………………………………………………………..........................................................จำเลย<br>
-                    เชื้อชาติ…………………….….สัญชาติ……………………………อาชีพ……………………………..……<br>
-                    อยู่บ้านเลขที่………….…………….…….…หมู่……………………………...…ซอย………………………<br>
-                    ตำบล/แขวง……….…….…….…………….………………อำเภอ……….…….…….……………………<br>
-                    จังหวัด………………………………………โทรศัพท์……………………โทรสาร…………………………<br>
-                    จดหมายอิเล็กทรอนิกส์……………………………………………มีข้อความตามที่จะกล่าวต่อไปนี้
+                    เชื้อชาติ<a class="absolute"><input class="transparent text-center" type="text" id="text35" name="text35" size="15"></a>…………………….….
+                    สัญชาติ<a class="absolute"><input class="transparent text-center" type="text" id="text36" name="text36" size="17"></a>……………………………
+                    อาชีพ<a class="absolute"><input class="transparent text-center" type="text" id="text37" name="text37" size="24"></a>……………………………..……<br>
+                    อยู่บ้านเลขที่<a class="absolute"><input class="transparent text-center" type="text" id="text38" name="text38" size="22"></a>………….…………….…….…
+                    หมู่<a class="absolute"><input class="transparent text-center" type="text" id="text39" name="text39" size="21"></a>……………………………...…
+                    ซอย<a class="absolute"><input class="transparent text-center" type="text" id="text40" name="text40" size="14"></a>………………………<br>
+                    ตำบล/แขวง<a class="absolute"><input class="transparent text-center" type="text" id="text41" name="text41" size="34"></a>……….…….…….…………….………………
+                    อำเภอ<a class="absolute"><input class="transparent text-center" type="text" id="text42" name="text42" size="28"></a>……….…….…….……………………<br>
+                    จังหวัด<a class="absolute"><input class="transparent text-center" type="text" id="text43" name="text43" size="26"></a>………………………………………
+                    โทรศัพท์<a class="absolute"><input class="transparent text-center" type="text" id="text44" name="text44" size="13"></a>……………………
+                    โทรสาร<a class="absolute"><input class="transparent text-center" type="text" id="text45" name="text45" size="16"></a>…………………………<br>
+                    จดหมายอิเล็กทรอนิกส์<a class="absolute"><input class="transparent text-center" type="text" id="text46" name="text46" size="29"></a>……………………………………………มีข้อความตามที่จะกล่าวต่อไปนี้
                 </p>
 
 
@@ -300,10 +356,79 @@
 </div>
 
 </body>
-
+<script src="../../dist/js/jquery-3.3.1.js"></script>
+<script src="../../dist/js/app.js"></script>
 <script>
 
-// window.print();
+function print_report(){
+    window.print();
+}
+
+//get_all_input_text();
+
+<?php
+if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL){
+    //หา จำเลย
+    $defendant = "";
+    $strSQL_def = "SELECT * FROM `document_def` WHERE `doc_id` = '$doc_id'";
+    $objQuery_def = $conDB->sqlQuery($strSQL_def);
+    while($objResult_def = mysqli_fetch_assoc($objQuery_def)){
+        if($defendant == ""){
+            $defendant = $objResult_def['doc_def_name'];
+        }else{
+            $defendant = $defendant.','.$objResult_def['doc_def_name'];
+        }
+    }
+    //end หาจำเลย
+    //หาโจทย์
+    $plaintiff = $objResult_notis['doc_plaintiff_name'];
+    //end หาโจทย์
+
+    $plaintiff_id = $objResult_notis['doc_plaintiff_id'];
+    $strSQL_plain = "SELECT * FROM `plaintiff` WHERE `plaintiff_id` = '$plaintiff_id'";
+    $objQuery_plain = $conDB->sqlQuery($strSQL_plain);
+    $objResult_plain = mysqli_fetch_assoc($objQuery_plain);
+
+    //จัดข้อความเลขบัตรประชาชน
+    $tex_nember = str_replace("-", "", $objResult_plain['plaintiff_tex_no']);
+    if(strlen($tex_nember) == 13){
+        $tex_number_edit = " ".$tex_nember[0]."   ".$tex_nember[1]."  ".$tex_nember[2]."  ".$tex_nember[3]."  ".$tex_nember[4]."   ".$tex_nember[5]."  ".$tex_nember[6]."   ".$tex_nember[7]."  ".$tex_nember[8]."  ".$tex_nember[9]."   ".$tex_nember[10]."  ".$tex_nember[11]."   ".$tex_nember[12];
+    } else {
+        $tex_number_edit = "";
+    }
+    ?>
+        document.getElementById('text5').value = '<?php echo $objResult_notis['doc_county'] ?>'; //ศาล
+        document.getElementById('text9').value = '<?php echo $plaintiff ?>'; //โจทย์
+        document.getElementById('text10').value = '<?php echo $defendant ?>'; //จำเลย
+
+        document.getElementById('text14').value = '<?php echo $plaintiff ?>'; //ข้าพเจ้า
+        document.getElementById('text15').value = '<?php echo $objResult_plain['race'] ?>'; //เชื้อชาติ
+        document.getElementById('text16').value = '<?php echo $objResult_plain['nationality'] ?>'; //สัญชาติ
+        document.getElementById('text17').value = '<?php echo $objResult_plain['job'] ?>'; //อาชีพ
+        document.getElementById('text18').value = '<?php echo $objResult_plain['age'] ?>'; //อายุ
+        document.getElementById('text19').value = '<?php echo $tex_number_edit ?>'; //เลขบัตรประชาชน
+        document.getElementById('text19_2').value = '<?php echo $objResult_plain['current_unit'] ?>'; //ที่อยู่
+        document.getElementById('text20').value = '<?php echo $objResult_plain['current_bloc'] ?>'; //หมู่
+        document.getElementById('text21').value = '<?php echo $objResult_plain['current_road'] ?>'; //ถนน
+        document.getElementById('text22').value = '<?php echo $objResult_plain['current_alley'] ?>'; //ซอย
+        document.getElementById('text24').value = '<?php echo $objResult_plain['current_zone'] ?>'; //แขวง
+        document.getElementById('text25').value = '<?php echo $objResult_plain['current_area'] ?>'; //เขต
+        document.getElementById('text26').value = '<?php echo $objResult_plain['current_county'] ?>'; //จังหวัด
+        document.getElementById('text27').value = '<?php echo $objResult_plain['current_phone'] ?>'; //โทรศัพท์
+        document.getElementById('text28').value = '<?php echo $objResult_plain['current_number'] ?>'; //โทรสาร
+        document.getElementById('text29').value = '<?php echo $objResult_plain['current_email'] ?>'; //email
+
+        document.getElementById('text34').value = '<?php echo "               ".$defendant ?>'; //ขอยื่นฟ้อง
+
+        document.getElementById('textarea2').value = '<?php echo "                        " ?>'; //ขอยื่นฟ้อง
+
+    <?php
+} else {
+    ?>
+    get_form_report(<?php echo $objResult['doc_report_text'] ?>);
+    <?php
+}
+?>
 
 </script>
 

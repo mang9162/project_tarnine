@@ -154,6 +154,9 @@ $name = $objResult['name'];
           </a>
           <ul class="treeview-menu">
             <li><a href="#" onClick="goPage('pages/notis_list.php');">Notis</a></li>
+            <li><a href="#" onClick="goPage('pages/defendant_select.php?view_list=view_list');">รายชื่อจำเลย</a></li>
+            <li><a href="#" onClick="goPage('pages/plaintiff_select.php?view_list=view_list');">รายชื่อโจทก์</a></li>
+            <li><a href="#" onClick="goPage('pages/lawyer_select.php?view_list=view_list');">รายชื่อทนาย</a></li>
             <!-- <li><a href="#" onClick="goPage('pages/vendor.php');">Notis</a></li> -->
           </ul>
         </li>

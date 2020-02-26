@@ -7,7 +7,7 @@ $conDB = new db_conn();
 $doc_id = $conDB->sqlEscapestr($_GET['doc_id']);
 $doc_report_id = $conDB->sqlEscapestr($_GET['doc_report_id']);
 
-$_SESSION['PAGE'] = "../pages/report_edit.php?doc_id=".$doc_id."&doc_report_id=".$doc_report_id;
+// $_SESSION['PAGE'] = "../pages/report_edit.php?doc_id=".$doc_id."&doc_report_id=".$doc_report_id;
 
 $strSQL_notis = "SELECT * FROM `document_notis` LEFT JOIN `plaintiff` ON document_notis.doc_plaintiff_id = plaintiff.plaintiff_id LEFT JOIN `lawyer` ON document_notis.lawyer_id = lawyer.lawyer_id WHERE document_notis.doc_id = '$doc_id'";
 $objQuery_notis = $conDB->sqlQuery($strSQL_notis);

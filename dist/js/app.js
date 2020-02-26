@@ -108,6 +108,14 @@ function form_autosave(n,t,tf,f){
 	xmlhttp2.send(parValue);
 }
 
+function btn_reset(n,t,tf,fv,fn){
+	$.post("../services/autosave.php", {n:n,t:t,tf:tf,v:fv,f:fn}, function(data){
+		// console.log(data);
+		alert('รีเซตการปรับแต่งแล้ว!');
+		location.reload();
+	});
+}
+
 function b64EncodeUnicode(str) {
     // first we use encodeURIComponent to get percent-encoded UTF-8,
     // then we convert the percent encodings into raw bytes which
@@ -164,14 +172,14 @@ function save_report(){
 	// console.log(obj);
 	var text = JSON.stringify(obj);
 	// console.log(text);
-	console.log(obj.doc_report_id);
+	// console.log(obj.doc_report_id);
 	var n = obj.doc_report_id;
 	var t = "document_report";
 	var tf = "doc_report_id";
 	var v = text;
 	var f = "doc_report_text";
-	$.post("../../services/autosave.php", {n:n,t:t,tf:tf,v:v,f,f}, function(data){
-		console.log(data);
+	$.post("../../services/autosave.php", {n:n,t:t,tf:tf,v:v,f:f}, function(data){
+		// console.log(data);
 		alert('บันทึกข้อมูลแล้ว!');
 	});
 

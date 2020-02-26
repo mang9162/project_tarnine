@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2019 at 09:54 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Feb 26, 2020 at 03:48 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -125,7 +125,7 @@ CREATE TABLE `document_filedoc` (
   `doc_id` int(11) NOT NULL,
   `doc_file_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `doc_file_text` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `doc_file_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `doc_file_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -146,7 +146,7 @@ INSERT INTO `document_filedoc` (`doc_file_id`, `doc_id`, `doc_file_name`, `doc_f
 CREATE TABLE `document_notis` (
   `doc_id` int(11) NOT NULL,
   `doc_no` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `doc_create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `doc_create_date` datetime NOT NULL DEFAULT current_timestamp(),
   `doc_plaintiff_id` int(11) NOT NULL,
   `doc_plaintiff_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `doc_restructuring` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
@@ -203,7 +203,7 @@ CREATE TABLE `document_report` (
   `doc_report_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `doc_report_text` longtext COLLATE utf8_unicode_ci NOT NULL,
   `report_id` int(11) NOT NULL,
-  `doc_report_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `doc_report_date` datetime NOT NULL DEFAULT current_timestamp(),
   `doc_report_lastedit` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -230,7 +230,11 @@ INSERT INTO `document_report` (`doc_report_id`, `doc_id`, `doc_report_name`, `do
 (30, 0, '', '', 0, '2019-12-13 15:21:20', NULL),
 (31, 1, 'asdsadasdas12311', '{\"report\":[{\"text_id\":\"doc_report_id\",\"value\":\"31\"},{\"text_id\":\"text5\",\"value\":\"\"},{\"text_id\":\"text6\",\"value\":\"\"},{\"text_id\":\"text7\",\"value\":\"test ทนาย\"},{\"text_id\":\"text8\",\"value\":\"\"},{\"text_id\":\"text9\",\"value\":\"\"},{\"text_id\":\"text10\",\"value\":\"test ทนาย\"},{\"text_id\":\"text11\",\"value\":\"2479/2546\"},{\"text_id\":\"text12\",\"value\":\"\"},{\"text_id\":\"text1\",\"value\":\"                                             sadasdasd\"},{\"text_id\":\"text2\",\"value\":\"                                             asd\"},{\"text_id\":\"text3\",\"value\":\"                                                     sadasdasd45354\"},{\"text_id\":\"text4\",\"value\":\"                         45345354354354\"}],\"doc_report_id\":31}', 3, '2019-12-13 15:21:20', NULL),
 (32, 0, '', '', 0, '2019-12-13 15:35:48', NULL),
-(33, 1, 'tessss', '', 4, '2019-12-13 15:35:48', NULL);
+(33, 1, 'tessss', '', 4, '2019-12-13 15:35:48', NULL),
+(34, 20, 'test', '', 9, '2020-02-26 21:45:55', NULL),
+(35, 0, '', '', 0, '2020-02-26 21:45:55', NULL),
+(36, 0, '', '', 0, '2020-02-26 21:46:09', NULL),
+(37, 20, 'asdsad', '', 5, '2020-02-26 21:46:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -370,7 +374,11 @@ INSERT INTO `report` (`report_id`, `report_name`, `report_info`, `report_file`, 
 (1, 'ใบแต่งทนาย', 'ใบแต่งตั้งทนาย', 'lawyer_report.php', NULL),
 (2, 'คำแถลงขอส่งหมายและปิดหมาย', 'คำแถลงขอส่งหมายและปิดหมาย', 'statement_request_report.php', NULL),
 (3, 'คำขอท้ายฟ้อง', 'คำขอท้ายฟ้อง', 'request_consumer_report.php', NULL),
-(4, 'คำฟ้อง', 'คำฟ้อง', 'indictment_report.php', NULL);
+(4, 'คำฟ้อง', 'คำฟ้อง', 'indictment_report.php', NULL),
+(5, 'บัญชีพยาน', 'บัญชีพยาน', 'acc_witness_report.php', NULL),
+(7, 'คำแถลงขอส่งสำเนาเอกสาร', 'คำแถลงขอส่งสำเนาเอกสาร', 'request_copy_report.php', NULL),
+(8, 'คำร้องกำหนดวันนัดพิจารณาเกินกว่า 30 วัน', 'คำร้องกำหนดวันนัดพิจารณาเกินกว่า 30 วัน', 'request_last30days_repost.php', NULL),
+(9, 'หมายเรียกจำเลย', 'หมายเรียกจำเลย', 'call_defendant_report.php', NULL);
 
 -- --------------------------------------------------------
 
@@ -389,7 +397,7 @@ CREATE TABLE `user_account` (
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `position` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `department` int(11) NOT NULL,
-  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
   `enable` tinyint(1) NOT NULL,
   `permission` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -509,7 +517,7 @@ ALTER TABLE `document_notis`
 -- AUTO_INCREMENT for table `document_report`
 --
 ALTER TABLE `document_report`
-  MODIFY `doc_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `doc_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `lawyer`
@@ -533,7 +541,7 @@ ALTER TABLE `plaintiff`
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user_account`

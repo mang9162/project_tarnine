@@ -274,6 +274,7 @@ $no = '';
                             <th width="20">No</th>
                             <th>ชื่อรายงาน</th>
                             <th>รายงาน</th>
+                            <th width="100">การปรับแต่ง</th>
                             <th width="150">วันที่สร้าง</th>
                             <th width="80">Action</th>
                             </tr>
@@ -287,10 +288,20 @@ $no = '';
                             <td><?php echo $index++; ?></td>
                             <td><?php echo $objResult_doc['doc_report_name'] ?></td>
                             <td><?php echo $objResult_doc['report_name'] ?></td>
+                            <td>
+                            <?php
+                                if($objResult_doc['doc_report_text']==''){
+                                    ?> <center><img src="../dist/img/icon/error.svg" width="20"></center> <?php
+                                } else{
+                                    ?> <center><img src="../dist/img/icon/success.svg" width="20"></center> <?php
+                                }
+                            ?>
+                            </td>
                             <td><?php echo $objResult_doc['doc_report_date'] ?></td>
                             <td align="center" style="font-size:16px;">
                             <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/report_edit.php?doc_id=<?php echo $doc_id; ?>&doc_report_id=<?php echo $objResult_doc['doc_report_id']; ?>')" title="edit"></i>
-                            <a href="../report/notis_document_report.php?doc_file_id=<?php echo $objResult_doc['doc_file_id'] ?>" target="_blank"><i class="fa fa-print" title="print"></i></a>
+                            <i class="fa fa-refresh text-green" onClick="btn_reset(<?php echo $objResult_doc['doc_report_id'] ?>,'document_report','doc_report_id','','doc_report_text')" title="reset"></i>
+                            <!-- <a href="../report/notis_document_report.php?doc_file_id=<?php echo $objResult_doc['doc_file_id'] ?>" target="_blank"><i class="fa fa-print" title="print"></i></a> -->
                             <i class="fa fa-trash-o text-red" onClick="deleteData('document_report','<?php echo $objResult_doc['doc_report_id'] ?>','doc_report_id','<?php echo $objResult_doc['doc_report_name'] ?>')" title="delete"></i>
                             </td>
                             </tr>

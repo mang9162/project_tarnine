@@ -59,6 +59,39 @@ if($type == 'insert_report'){
         $redirect = "<script>window.location.href = '../pages/report_edit.php?doc_id=".$doc_id."&doc_report_id=".$objResult['doc_report_id']."'</script>";
     }
 }
+if($type == 'add_plaintiff'){
+    $doc_id = $conDB->sqlEscapestr($_GET['doc_id']);
+    $strSQL = "INSERT INTO `plaintiff` (`plaintiff_id`,`enable`) VALUES (NULL,1)";
+    $objQuery = $conDB->sqlQuery($strSQL);
+
+    $strSQL = "SELECT * FROM `plaintiff` ORDER BY `plaintiff`.`plaintiff_id` DESC LIMIT 1";
+    $objQuery = $conDB->sqlQuery($strSQL);
+    while($objResult = mysqli_fetch_assoc($objQuery)) {
+        $redirect = "<script>window.location.href = '../pages/plaintiff_edit.php?plaintiff_id=".$objResult['plaintiff_id']."&doc_id=".$doc_id."'</script>";
+    }
+}
+if($type == 'add_lawyer'){
+    $doc_id = $conDB->sqlEscapestr($_GET['doc_id']);
+    $strSQL = "INSERT INTO `lawyer` (`lawyer_id`,`enable`) VALUES (NULL,1)";
+    $objQuery = $conDB->sqlQuery($strSQL);
+
+    $strSQL = "SELECT * FROM `lawyer` ORDER BY `lawyer`.`lawyer_id` DESC LIMIT 1";
+    $objQuery = $conDB->sqlQuery($strSQL);
+    while($objResult = mysqli_fetch_assoc($objQuery)) {
+        $redirect = "<script>window.location.href = '../pages/lawyer_edit.php?lawyer_id=".$objResult['lawyer_id']."&doc_id=".$doc_id."'</script>";
+    }
+}
+if($type == 'add_defendant'){
+    $doc_id = $conDB->sqlEscapestr($_GET['doc_id']);
+    $strSQL = "INSERT INTO `defendant` (`defendant_id`,`enable`) VALUES (NULL,1)";
+    $objQuery = $conDB->sqlQuery($strSQL);
+
+    $strSQL = "SELECT * FROM `defendant` ORDER BY `defendant`.`defendant_id` DESC LIMIT 1";
+    $objQuery = $conDB->sqlQuery($strSQL);
+    while($objResult = mysqli_fetch_assoc($objQuery)) {
+        $redirect = "<script>window.location.href = '../pages/defendant_edit.php?defendant_id=".$objResult['defendant_id']."&doc_id=".$doc_id."'</script>";
+    }
+}
 
 
 include("loading.php");

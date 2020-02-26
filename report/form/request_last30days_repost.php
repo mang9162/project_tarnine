@@ -265,7 +265,7 @@ function thai_date($time){
                 <table style="width:100%;border: 0px solid black" align="left">
                     <tr>
                         <td class="left-top" align="left" style="width:40%">
-                            <br><img src="../assets/circle.png">&nbsp;&nbsp;(๗)<br>คำแถลงขอส่งหมายและปิดหมาย
+                            <br><img src="../assets/circle.png">&nbsp;&nbsp;(๗)<br>คำร้องกำหนดวันนัดพิจารณาเกินกว่า 30 วัน
                         </td>
                         <td style="width:20%" align="top"><img src="../assets/logo.png"></td>
                         <td style="width:40%" align="right">
@@ -390,11 +390,8 @@ if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL)
 
     //จัดข้อความเลขบัตรประชาชน
     $tex_nember = str_replace("-", "", $objResult_law['lawyer_tex_no']);
-    if(strlen($tex_nember) == 13){
-        $tex_number_edit = "  ".$tex_nember[0]."   ".$tex_nember[1]."  ".$tex_nember[2]."  ".$tex_nember[3]."  ".$tex_nember[4]."   ".$tex_nember[5]."  ".$tex_nember[6]."   ".$tex_nember[7]."  ".$tex_nember[8]."  ".$tex_nember[9]."   ".$tex_nember[10]."  ".$tex_nember[11]."   ".$tex_nember[12];
-    } else {
-        $tex_number_edit = "";
-    }
+    $tex_number_edit = "  ".$tex_nember[0]."   ".$tex_nember[1]."  ".$tex_nember[2]."  ".$tex_nember[3]."  ".$tex_nember[4]."   ".$tex_nember[5]."  ".$tex_nember[6]."   ".$tex_nember[7]."  ".$tex_nember[8]."  ".$tex_nember[9]."   ".$tex_nember[10]."  ".$tex_nember[11]."   ".$tex_nember[12];
+
     // $birthday = thai_date($objResult_law['birthday']);
     $birthday = thai_date($objResult_law['birthday']);
     $arr_birthday = explode("-", $birthday);

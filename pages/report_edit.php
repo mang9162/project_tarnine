@@ -41,6 +41,9 @@ $objResult = mysqli_fetch_assoc($objQuery);
                 <img src="../dist/img/icon/files.svg" width="20"><br> เปิดรายงานในหน้าแยก
             </button>
         </a>
+        <button type="button" class="btn btn-app" title="reset" onClick="btn_reset(<?php echo $objResult['doc_report_id'] ?>,'document_report','doc_report_id','','doc_report_text')">
+            <img src="../dist/img/icon/repeat.svg" width="20"><br> รีเซตข้อมูลการปรับแต่ง
+        </button>
         <button type="button" class="btn btn-app flat"  onClick="goHref('../pages/notis_edit.php?act=edit&id=<?php echo $objResult['doc_id']?>')">
             <img src="../dist/img/icon/multiply.svg" width="20"><br>
 			กลับ

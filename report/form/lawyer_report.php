@@ -7,7 +7,7 @@ $conDB = new db_conn();
 $doc_id = $conDB->sqlEscapestr($_GET['doc_id']);
 $doc_report_id = $conDB->sqlEscapestr($_GET['doc_report_id']);
 
-$_SESSION['PAGE'] = "../pages/report_edit.php?doc_id=".$doc_id."&doc_report_id=".$doc_report_id;
+// $_SESSION['PAGE'] = "../pages/report_edit.php?doc_id=".$doc_id."&doc_report_id=".$doc_report_id;
 
 $strSQL_notis = "SELECT * FROM `document_notis` LEFT JOIN `plaintiff` ON document_notis.doc_plaintiff_id = plaintiff.plaintiff_id LEFT JOIN `lawyer` ON document_notis.lawyer_id = lawyer.lawyer_id WHERE document_notis.doc_id = '$doc_id'";
 $objQuery_notis = $conDB->sqlQuery($strSQL_notis);
@@ -224,8 +224,8 @@ $objResult = mysqli_fetch_assoc($objQuery);
             โทรสาร_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text42" name="text42" size="14"></a>__________________ไปรษณีย์อิเล็กทรอนิกส์ _<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text43" name="text43" size="32"></a>_____________________________________<br>
             ขอรับเป็นทนายของ_<a class="absolute" style="margin-left:-55px;"><input class="transparent text-center" type="text" id="text44" name="text44" size="62"></a>__________________________________________________________________<br>
             เพื่อดำเนินกระบวนพิจารณาต่อไปตามหน้าที่ในกฎหมาย<br>
-                <p class="right">____________________________ทนายความ<br>
-                    (_<a class="absolute"><input class="transparent text-center" type="text" id="text45" name="text45" size="11"></a>________________)
+                <p class="right">_____________________________________ทนายความ<br>
+                    (_<a class="absolute"><input class="transparent text-center" type="text" id="text45" name="text45" size="20"></a>_________________________)
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </p>
             </p>
@@ -275,17 +275,20 @@ if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL)
 
     //จัดข้อความเลขบัตรประชาชน
     $tex_nember = str_replace("-", "", $objResult_law['lawyer_tex_no']);
-    $tex_number_edit = "  ".$tex_nember[0]."   ".$tex_nember[1]."  ".$tex_nember[2]."  ".$tex_nember[3]."  ".$tex_nember[4]."   ".$tex_nember[5]."  ".$tex_nember[6]."   ".$tex_nember[7]."  ".$tex_nember[8]."  ".$tex_nember[9]."   ".$tex_nember[10]."  ".$tex_nember[11]."   ".$tex_nember[12];
-
+    if(strlen($tex_nember) == 13){
+        $tex_number_edit = "  ".$tex_nember[0]."   ".$tex_nember[1]."  ".$tex_nember[2]."  ".$tex_nember[3]."  ".$tex_nember[4]."   ".$tex_nember[5]."  ".$tex_nember[6]."   ".$tex_nember[7]."  ".$tex_nember[8]."  ".$tex_nember[9]."   ".$tex_nember[10]."  ".$tex_nember[11]."   ".$tex_nember[12];
+    } else {
+        $tex_number_edit = "";
+    }
     ?>
         document.getElementById('text5').value = '<?php echo $objResult_notis['doc_county'] ?>'; //ศาล
-        document.getElementById('text11').value = '<?php echo $plaintiff ?>'; //จำเลย
-        document.getElementById('text12').value = '<?php echo $defendant ?>'; //โจทย์
-        document.getElementById('text13').value = '<?php echo $defendant ?>'; //ข้าพเจ้า
+        document.getElementById('text11').value = '<?php echo $plaintiff ?>'; //โจทก์
+        document.getElementById('text12').value = '<?php echo $defendant ?>'; //จำเลย
+        document.getElementById('text13').value = '<?php echo $plaintiff ?>'; //ข้าพเจ้า
         document.getElementById('text14').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //ขอแต่งตั้งให้
         document.getElementById('text15').value = '<?php echo "                                                                              " ?>'; //ขอแต่งตั้งให้
         document.getElementById('text16').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //ข้าพเจ้ายอมรับผิดชอบ
-        document.getElementById('text17').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //ลายเซ็น
+        document.getElementById('text17').value = '<?php echo $plaintiff ?>'; //ลายเซ็น
 
         //ใบที่ 2
 
@@ -320,7 +323,7 @@ if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL)
         document.getElementById('text42').value = '<?php echo $objResult_law['work_number'] ?>'; //โทรสาร
         document.getElementById('text43').value = '<?php echo $objResult_law['work_email'] ?>'; //email
 
-        document.getElementById('text44').value = '<?php echo $defendant ?>'; //รับเป็นทนาย
+        document.getElementById('text44').value = '<?php echo $plaintiff ?>'; //รับเป็นทนาย
         document.getElementById('text45').value = '<?php echo $objResult_notis['lawyer_name'] ?>'; //รับเป็นทนายลายเซ็น
 
 
