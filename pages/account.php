@@ -2,17 +2,9 @@
 session_start();
 ob_start();
 include("../connect/database.php");
-
-if(!isset($_GET['view_list'])){
-  $doc_id = "&doc_id=".$_GET['doc_id'];
-  $id = $_GET['doc_id'];
-} else {
-  $doc_id = "";
-  $id = "";
-  $_SESSION['PAGE'] = "../pages/plaintiff_select.php?view_list=view_list";
-}
+$_SESSION['PAGE'] = "../pages/account.php";
 $conDB = new db_conn();
-$strSQL = "SELECT * FROM `plaintiff` WHERE `enable` = '1'";
+$strSQL = "SELECT * FROM `user_account`";
 $objQuery = $conDB->sqlQuery($strSQL);
 $index = 0;
 ?>
@@ -20,34 +12,14 @@ $index = 0;
 <html>
 <head>
 <?php include("head.php");?>
-<?php
-  if(isset($_GET['view_list'])){
-    ?>
-      <style>
-        .list{
-          display:none;
-        }
-      </style>
-    <?php
-  } else {
-    ?>
-      <style>
-        .list{
-          display:block;
-        }
-      </style>
-    <?php
-  }
-?>
-
 </head>
 <body class="skin-black">
 <section class="content-header">
   <h1>
-    รายชื่อโจทก์
+    บัญชีผู้ใช้
   </h1>
   <ol class="breadcrumb">
-        <li class="active">Plaintiff</li>
+        <li class="active">บัญชีผู้ใช้</li>
   </ol>
 </section>
 <!-- Main content -->
@@ -74,10 +46,12 @@ $index = 0;
           <table id="example1" class="table table-bordered table-hover">
             <thead>
             <tr>
-              <th width="15">No</th>
-              <th width="25">#</th>
-              <th>ชื่อโจทก์</th>
-              <th width="80">Action</th>
+              <th width="15">ลำดับ</th>
+              <th width="100">รหัส</th>
+              <th width="200">บัญชี</th>
+              <th>ชื่อ-สกุล</th>
+              <th width="100">สถานะ</th>
+              <th width="80"></th>
             </tr>
             </thead>
             <tbody>
@@ -87,11 +61,13 @@ $index = 0;
         ?>
             <tr>        
               <td><?php echo $index ?></td>
-              <td style="padding:0px;"><a class="list" href="../services/plaintiff_select.php?doc_id=<?php echo $doc_id; ?>&plaintiff_id=<?php echo $objResult['plaintiff_id']; ?>"><button type="button" class="btn btn-success btn-flat btn-block">เลือก</button></a></td>
-              <td><?php echo $objResult['plaintiff_name'] ?></td>
+              <td><?php echo $objResult['code'] ?></td>
+              <td><?php echo $objResult['username'] ?></td>
+              <td><?php echo $objResult['name'] ?></td>
+              <td><?php echo $objResult['enable'] ?></td>
               <td align="center" style="font-size:16px;">
                 <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/plaintiff_edit.php?plaintiff_id=<?php echo $objResult['plaintiff_id']; ?><?php echo $doc_id ?>')" title="edit"></i>
-                <!-- <i class="fa fa-trash-o text-red" onClick="deleteData('document_report','<?php echo $objResult_doc['doc_report_id'] ?>','doc_report_id','<?php echo $objResult_doc['doc_report_name'] ?>')" title="delete"></i> -->
+                <i class="fa fa-trash-o text-red" onClick="deleteData('document_report','<?php echo $objResult_doc['doc_report_id'] ?>','doc_report_id','<?php echo $objResult_doc['doc_report_name'] ?>')" title="delete"></i>
               </td>
             </tr>
 <?php }?>
@@ -112,15 +88,15 @@ $index = 0;
   $(function () {
     $('#example1').DataTable({
 	  'responsive'  : true,
-      'paging'      : false,
-      'lengthChange': false,
+      'paging'      : true,
+      'lengthChange': true,
       'searching'   : true,
       'ordering'    : false,
       'info'        : false,
       'autoWidth'   : false,
 	  "bStateSave"  : true,
 	 "fnStateLoaded": function (oSettings, oData) {
-	 //alert( 'Saved filter was: '+oData.oSearch.sSearch );
+
 	 }
     })
   })

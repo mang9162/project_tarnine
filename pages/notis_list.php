@@ -15,11 +15,11 @@ $conDB = new db_conn();
 <div id="alert-background"></div>
 <section class="content-header">
   <h1>
-    Notis
+    งานฟ้องคดี
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><span class="active">Document</span></a></li>
-    <li class="active">Notis</li>
+    <li><a href="#"><span class="active">งานฟ้องคดี</span></a></li>
+    <li class="active">รายการ</li>
   </ol>
 </section>
 <!-- Main content -->

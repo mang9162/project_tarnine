@@ -80,6 +80,26 @@ function deleteData(tb,id,tf,code){
 		getDelete(tb,id,tf);
 	}
 }
+function deleteDataFile(tb,id,tf,ff,code){
+	if (confirm("Do you want to delete '"+ code +"'?") == true) {
+		getDeleteFile(tb,id,tf,ff);
+	}
+}
+function getDeleteFile(t,v,tf,ff){
+	var parValue = "t="+t+"&v="+v+"&tf="+tf+"&ff="+ff;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+		//document.getElementById(parEle).innerHTML = this.responseText;
+		window.location.reload();
+		console.log(this.responseText);
+	  }
+	};
+	xmlhttp.open("POST", "../services/delete_file.php", true);
+	xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+	xmlhttp.send(parValue);
+
+}
 function deleteAttech(n,t){
 	if (confirm("Do you want to delete attach file Yes or No?") == true) {
 		document.getElementById('temp_attach').value = '';
@@ -108,12 +128,14 @@ function form_autosave(n,t,tf,f){
 	xmlhttp2.send(parValue);
 }
 
-function btn_reset(n,t,tf,fv,fn){
-	$.post("../services/autosave.php", {n:n,t:t,tf:tf,v:fv,f:fn}, function(data){
-		// console.log(data);
-		alert('รีเซตการปรับแต่งแล้ว!');
-		location.reload();
-	});
+function btn_reset(n,t,tf,fv,fn,code){
+	if (confirm("Do you want to Reset '"+ code +"'?") == true) {
+		$.post("../services/autosave.php", {n:n,t:t,tf:tf,v:fv,f:fn}, function(data){
+			// console.log(data);
+			// alert('รีเซตการปรับแต่งแล้ว!');
+			location.reload();
+		});
+	}
 }
 
 function b64EncodeUnicode(str) {

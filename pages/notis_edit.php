@@ -56,12 +56,12 @@ $no = '';
 <div id="alert-background"></div>
 <section class="content-header">
   <h1>
-    Notis <?php echo $header ?>
+    งานฟ้องคดี
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><span class="active">Document</span></a></li>
-    <li><a href="notis_list.php"><span class="active">Notis</span></a></li>
-    <li class="active">Edit</li>
+    <li><a href="#"><span class="active">ฟ้องคดี</span></a></li>
+    <li><a href="notis_list.php"><span class="active">งานฟ้องคดี</span></a></li>
+    <li class="active">แก้ไข</li>
   </ol>
 </section>
 <!-- Main content -->
@@ -94,7 +94,7 @@ $no = '';
         
             <div class="box">
             	<div class="box-header with-border">
-                  <h3 class="box-title">Notis Info</h3>
+                  <h3 class="box-title">งานฟ้องคดี</h3>
                   <div class="box-tools pull-right">
                      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                   </div>
@@ -300,7 +300,7 @@ $no = '';
                             <td><?php echo $objResult_doc['doc_report_date'] ?></td>
                             <td align="center" style="font-size:16px;">
                             <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/report_edit.php?doc_id=<?php echo $doc_id; ?>&doc_report_id=<?php echo $objResult_doc['doc_report_id']; ?>')" title="edit"></i>
-                            <i class="fa fa-refresh text-green" onClick="btn_reset(<?php echo $objResult_doc['doc_report_id'] ?>,'document_report','doc_report_id','','doc_report_text')" title="reset"></i>
+                            <i class="fa fa-refresh text-green" onClick="btn_reset(<?php echo $objResult_doc['doc_report_id'] ?>,'document_report','doc_report_id','','doc_report_text','<?php echo $objResult_doc['doc_report_name'] ?>')" title="reset"></i>
                             <!-- <a href="../report/notis_document_report.php?doc_file_id=<?php echo $objResult_doc['doc_file_id'] ?>" target="_blank"><i class="fa fa-print" title="print"></i></a> -->
                             <i class="fa fa-trash-o text-red" onClick="deleteData('document_report','<?php echo $objResult_doc['doc_report_id'] ?>','doc_report_id','<?php echo $objResult_doc['doc_report_name'] ?>')" title="delete"></i>
                             </td>
@@ -312,6 +312,104 @@ $no = '';
                     </div><!-- /.row -->
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+            
+            <div class="box">
+            	<div class="box-header with-border">
+                  <h3 class="box-title">แนบไฟล์</h3>
+                  <div class="box-tools pull-right">
+                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        <button type="button" class="btn btn-app" onClick="goHref('attc_insert.php?doc_id=<?php echo $doc_id ?>&attc_type=1')" title="new" <?php echo $disSelect ?>>
+                            <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
+                        </button>
+                        <!-- <button type="button" class="btn btn-app" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                            <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
+                        </button> -->
+                        <table id="example1" class="table table-bordered table-hover table-fixed">
+                            <thead>
+                            <tr>
+                            <th width="20">No</th>
+                            <th>ชื่อแนบไฟล์</th>
+                            <th>ไฟล์แนบ</th>
+                            <th width="150">วันที่สร้าง</th>
+                            <th width="80">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                    <?php 	$index = 1;
+                    $strSQL_attc_1 = "SELECT * FROM `document_attc` WHERE `doc_id` = '$doc_id' AND `attc_type` = '1'";
+                    $objQuery_attc_1 = $conDB->sqlQuery($strSQL_attc_1);
+                    while($objResult_attc_1 = mysqli_fetch_assoc($objQuery_attc_1)) { ;?>
+                            <tr>
+                            <td><?php echo $index++; ?></td>
+                            <td><?php echo $objResult_attc_1['attc_name'] ?></td>
+                            <td><?php echo $objResult_attc_1['attc_file'] ?></td>
+                            <td><?php echo $objResult_attc_1['attc_date'] ?></td>
+                            <td align="center" style="font-size:16px;">
+                            <a href="../src/attc/<?php echo $objResult_attc_1['attc_file'] ?>" target="_blank"><i class="fa fa-eye text-blue" title="view"></i></a>
+                            <i class="fa fa-trash-o text-red" onClick="deleteDataFile('document_attc','<?php echo $objResult_attc_1['attc_id'] ?>','attc_id','attc_file','<?php echo $objResult_attc_1['attc_name'] ?>')" title="delete"></i>
+                            </td>
+                            </tr>
+                <?php }?>
+                            </tbody>
+            </table>
+                        </div>
+                    </div><!-- /.row -->
+                </div><!-- /.box-body -->
+            </div>
+            
+            <div class="box">
+            	<div class="box-header with-border">
+                  <h3 class="box-title">แนบไฟล์คำพิพากษา</h3>
+                  <div class="box-tools pull-right">
+                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        <button type="button" class="btn btn-app" onClick="goHref('attc_insert.php?doc_id=<?php echo $doc_id ?>&attc_type=2')" title="new" <?php echo $disSelect ?>>
+                            <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
+                        </button>
+                        <!-- <button type="button" class="btn btn-app" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                            <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
+                        </button> -->
+                        <table id="example1" class="table table-bordered table-hover table-fixed">
+                            <thead>
+                            <tr>
+                            <th width="20">No</th>
+                            <th>ชื่อแนบไฟล์</th>
+                            <th>ไฟล์แนบ</th>
+                            <th width="150">วันที่สร้าง</th>
+                            <th width="80">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                    <?php 	$index = 1;
+                    $strSQL_attc_2 = "SELECT * FROM `document_attc` WHERE `doc_id` = '$doc_id' AND `attc_type` = '2'";
+                    $objQuery_attc_2 = $conDB->sqlQuery($strSQL_attc_2);
+                    while($objResult_attc_2 = mysqli_fetch_assoc($objQuery_attc_2)) { ;?>
+                            <tr>
+                            <td><?php echo $index++; ?></td>
+                            <td><?php echo $objResult_attc_2['attc_name'] ?></td>
+                            <td><?php echo $objResult_attc_2['attc_file'] ?></td>
+                            <td><?php echo $objResult_attc_2['attc_date'] ?></td>
+                            <td align="center" style="font-size:16px;">
+                            <a href="../src/attc/<?php echo $objResult_attc_2['attc_file'] ?>" target="_blank"><i class="fa fa-eye text-blue" title="view"></i></a>
+                            <i class="fa fa-trash-o text-red" onClick="deleteDataFile('document_attc','<?php echo $objResult_attc_2['attc_id'] ?>','attc_id','attc_file','<?php echo $objResult_attc_2['attc_name'] ?>')" title="delete"></i>
+                            </td>
+                            </tr>
+                <?php }?>
+                            </tbody>
+            </table>
+                        </div>
+                    </div><!-- /.row -->
+                </div><!-- /.box-body -->
+            </div>
     </div>
 
 </section>

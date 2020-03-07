@@ -36,7 +36,7 @@ $name = $objResult['name'];
 <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
 <link rel="stylesheet" href="dist/css/style.css">
-<title>Lawyer System.</title>
+<title>บริษัทธุรกิจเนติอินเตอร์ลอว์ จํากัด</title>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -44,18 +44,10 @@ $name = $objResult['name'];
 <div class="wrapper">
   <!-- Main Header -->
   <header class="main-header">
-
-    <!-- Logo -->
-    <a href="" class="logo">
-      <span class="logo-mini" id="companycode">T9</span>
-      <span class="logo-lg" id="company">Tanine</span>
-    </a>
-    <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
+	<h3 class="logo-lg" data-toggle="push-menu" style="color:#FFFFFF; position:absolute; margin-top:12px; left:10px; z-index:inherit;"><img src="dist/img/profile/12795380_443460995864771_2927513966717694732_n.png" width="29" style="margin-right:15px;">บริษัทธุรกิจเนติอินเตอร์ลอว์ จํากัด</h3>
+    <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
+      
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -143,26 +135,73 @@ $name = $objResult['name'];
   <aside class="main-sidebar">
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HOME</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#" onClick="goPage('pages/dashboard.php');" style="padding-left:11px;"><img src="dist/img/icon/presentation.svg" width="24" style="margin-right:10px;"><span>Dashboard</span></a></li>
+        <li class="active"><a href="#" onClick="goPage('pages/dashboard.php');" style="padding-left:11px;"><img src="dist/img/icon/presentation.svg" width="24" style="margin-right:10px;"><span>ภาพรวม</span></a></li>
         <li class="treeview">
-          <a href="#" style="padding-left:11px;"><img src="dist/img/icon/invoice.svg" width="24" style="margin-right:10px;"><span>Document</span>
+          <a href="#" style="padding-left:11px;"><img src="dist/img/icon/case.svg" width="24" style="margin-right:10px;"><span>ฟ้องคดี</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
-              </span>
+			</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#" onClick="goPage('pages/notis_list.php');">Notis</a></li>
+            <li><a href="#" onClick="goPage('pages/notis_list.php');">รายการงานฟ้องคดี</a></li>
             <li><a href="#" onClick="goPage('pages/defendant_select.php?view_list=view_list');">รายชื่อจำเลย</a></li>
             <li><a href="#" onClick="goPage('pages/plaintiff_select.php?view_list=view_list');">รายชื่อโจทก์</a></li>
             <li><a href="#" onClick="goPage('pages/lawyer_select.php?view_list=view_list');">รายชื่อทนาย</a></li>
             <!-- <li><a href="#" onClick="goPage('pages/vendor.php');">Notis</a></li> -->
           </ul>
         </li>
-        <li><a href="#" onClick="goPage('pages/blank.php');" style="padding-left:11px;"><img src="dist/img/icon/files.svg" width="24" style="margin-right:10px;"><span>Blank</span></a></li>
-        <li><a href="#" style="padding-left:11px;"><img src="dist/img/icon/files.svg" width="24" style="margin-right:10px;"><span>Report</span></a></li>
-        <li><a href="#" style="padding-left:11px;"><img src="dist/img/icon/it.svg" width="24" style="margin-right:10px;"><span>Administrator</span></a></li>
+        <li class="treeview">
+        	<a href="#" style="padding-left:11px;"><img src="dist/img/icon/search2.svg" width="24" style="margin-right:10px;"><span>สืบทรัพย์</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+			</a>
+            <ul class="treeview-menu">
+            <li><a href="#" onClick="goPage('pages/notis_list.php');">รายการงานสืบทรัพย์</a></li>
+            <li><a href="#" onClick="goPage('pages/defendant_select.php?view_list=view_list');">รายชื่อจำเลย</a></li>
+            <li><a href="#" onClick="goPage('pages/plaintiff_select.php?view_list=view_list');">รายชื่อโจทก์</a></li>
+            <li><a href="#" onClick="goPage('pages/lawyer_select.php?view_list=view_list');">รายชื่อทนาย</a></li>
+            <!-- <li><a href="#" onClick="goPage('pages/vendor.php');">Notis</a></li> -->
+          </ul>
+        </li>
+        <li class="treeview">
+       	  <a href="#" style="padding-left:11px;"><img src="dist/img/icon/court.svg" width="24" style="margin-right:10px;"><span>ยึดทรัพย์และอายัด</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+			</a>
+            <ul class="treeview-menu">
+            <li><a href="#" onClick="goPage('pages/notis_list.php');">รายการงานยึดทรัพย์และอายัด</a></li>
+            <li><a href="#" onClick="goPage('pages/defendant_select.php?view_list=view_list');">รายชื่อจำเลย</a></li>
+            <li><a href="#" onClick="goPage('pages/plaintiff_select.php?view_list=view_list');">รายชื่อโจทก์</a></li>
+            <li><a href="#" onClick="goPage('pages/lawyer_select.php?view_list=view_list');">รายชื่อทนาย</a></li>
+            <!-- <li><a href="#" onClick="goPage('pages/vendor.php');">Notis</a></li> -->
+          </ul>
+        </li>
+        <li class="treeview">
+       	  <a href="#" style="padding-left:11px;"><img src="dist/img/icon/money.svg" width="24" style="margin-right:10px;"><span>เบิกเงิน</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+			</a>
+            <ul class="treeview-menu">
+            <li><a href="#" onClick="goPage('pages/notis_list.php');">รายการเบิกเงิน</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+       	  <a href="#" style="padding-left:11px;"><img src="dist/img/icon/gear.svg" width="24" style="margin-right:10px;"><span>ตั้งค่าระบบ</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+			</a>
+            <ul class="treeview-menu">
+            <li><a href="#" onClick="goPage('pages/account.php');">ตั้งค่าบัญชีผู้ใช้</a></li>
+            <li><a href="#">ตั้งค่าผู้ดูแลระบบ</a></li>
+            <li><a href="#">ตั้งค่าสิทธิการใช้งาน</a></li>
+          </ul>
+        </li>
+        <li><a href="#" style="padding-left:11px;"><img src="dist/img/icon/exit.svg" width="24" style="margin-right:10px;"><span>ออกจากระบบ</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

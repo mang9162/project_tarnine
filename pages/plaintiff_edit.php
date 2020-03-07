@@ -39,9 +39,8 @@ $where_f = 'plaintiff_id';
     แก้ไขโจทก์
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><span class="active">Document</span></a></li>
-    <li><a href="notis_list.php"><span class="active">Plaintiff</span></a></li>
-    <li class="active">Edit</li>
+    <li><a href="notis_list.php"><span class="active">รายชื่อโจทก์</span></a></li>
+    <li class="active">แก้ไข</li>
   </ol>
 </section>
 <!-- Main content -->
