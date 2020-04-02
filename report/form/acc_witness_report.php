@@ -49,7 +49,8 @@ function thai_date($time){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
+    <link rel="stylesheet" type="text/css" href="form_css.css">
+    <!-- <style>
         @font-face {
             font-family: myFont;
             src: url(../font/cordia.ttf);
@@ -242,7 +243,7 @@ function thai_date($time){
                 display: none;
             }
         }
-    </style>
+    </style> -->
     
 </head>
 <body>
@@ -507,6 +508,17 @@ function thai_date($time){
     <?php
         }
     ?>
+
+    <?php
+        $strSQL_def = "SELECT * FROM `document_def` WHERE `doc_id` = '$doc_id'";
+        $objQuery_def = $conDB->sqlQuery($strSQL_def);
+        $num_def = $conDB->sqlNumrows($strSQL_def);
+        if($num_def >= 4){
+    ?>
+            <?php include './plugin/attr_def_last.php';?>
+    <?php
+        }
+    ?>
 </div>
 
 </body>
@@ -527,12 +539,22 @@ if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL)
     $defendant = "";
     $strSQL_def = "SELECT * FROM `document_def` WHERE `doc_id` = '$doc_id'";
     $objQuery_def = $conDB->sqlQuery($strSQL_def);
-    while($objResult_def = mysqli_fetch_assoc($objQuery_def)){
-        if($defendant == ""){
-            $defendant = $objResult_def['doc_def_name'];
-        }else{
-            $defendant = $defendant.','.$objResult_def['doc_def_name'];
+    $num_def = $conDB->sqlNumrows($strSQL_def);
+    
+    if($num_def >= 4){
+        $objResult_def = mysqli_fetch_assoc($objQuery_def);
+        $defendant = $objResult_def['doc_def_name'].' ที่1 กับพวกรวม '.$num_def.' คน';
+        $create_attr = true;
+        //thicket attr
+    }else{
+        while($objResult_def = mysqli_fetch_assoc($objQuery_def)){
+            if($defendant == ""){
+                $defendant = $objResult_def['doc_def_name'];
+            }else{
+                $defendant = $defendant.','.$objResult_def['doc_def_name'];
+            }
         }
+        $create_attr = false;
     }
     //end หาจำเลย
     //หาโจทย์

@@ -25,7 +25,8 @@ $objResult = mysqli_fetch_assoc($objQuery);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
+    <link rel="stylesheet" type="text/css" href="form_css.css">
+    <!-- <style>
         @font-face {
             font-family: myFont;
             src: url(../font/cordia.ttf);
@@ -224,7 +225,7 @@ $objResult = mysqli_fetch_assoc($objQuery);
                 display: none;
             }
         }
-    </style>
+    </style> -->
     
 </head>
 <body>

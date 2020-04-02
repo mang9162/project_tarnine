@@ -191,7 +191,7 @@ function save_report(){
 		var text_value = document.getElementById(text_id_html).value;  
 		obj['report'].push({"text_id":text_id_html,"value":text_value});
 	}
-	// console.log(obj);
+	console.log(obj);
 	var text = JSON.stringify(obj);
 	// console.log(text);
 	// console.log(obj.doc_report_id);
