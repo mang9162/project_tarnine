@@ -26,14 +26,14 @@ $index = 0;
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
-    <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_plaintiff<?php echo $doc_id ?>')" title="new">
+    <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_account')" title="new">
         <img src="../dist/img/icon/add.svg" width="20"><br>
         New
     </button>
-    <button type="button" class="btn btn-app flat"  onClick="goHref('notis_edit.php?act=edit&id=<?php echo $id ?>')">
+    <!-- <button type="button" class="btn btn-app flat"  onClick="goHref('notis_edit.php?act=edit&id=<?php echo $id ?>')">
             <img src="../dist/img/icon/multiply.svg" width="20"><br>
 			Discard
-        </button>
+        </button> -->
       <div class="box">
       <div class="box-header with-border">
           <h3 class="box-title">List</h3>
@@ -51,6 +51,7 @@ $index = 0;
               <th width="200">บัญชี</th>
               <th>ชื่อ-สกุล</th>
               <th width="100">สถานะ</th>
+              <th width="100">เปลี่ยนพาสเวิร์ด</th>
               <th width="80"></th>
             </tr>
             </thead>
@@ -65,9 +66,19 @@ $index = 0;
               <td><?php echo $objResult['username'] ?></td>
               <td><?php echo $objResult['name'] ?></td>
               <td><?php echo $objResult['enable'] ?></td>
+              <td>
+                <?php
+                    if($objResult['password']=='827ccb0eea8a706c4c34a16891f84e7b'){
+                        ?> <center><img src="../dist/img/icon/error.svg" width="20"></center> <?php
+                    } else{
+                        ?> <center><img src="../dist/img/icon/success.svg" width="20"></center> <?php
+                    }
+                ?>
+              </td>
               <td align="center" style="font-size:16px;">
-                <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/plaintiff_edit.php?plaintiff_id=<?php echo $objResult['plaintiff_id']; ?><?php echo $doc_id ?>')" title="edit"></i>
-                <i class="fa fa-trash-o text-red" onClick="deleteData('document_report','<?php echo $objResult_doc['doc_report_id'] ?>','doc_report_id','<?php echo $objResult_doc['doc_report_name'] ?>')" title="delete"></i>
+                <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/account_edit.php?account_id=<?php echo $objResult['id']; ?>')" title="edit"></i>
+                <i class="fa fa-refresh text-green" onClick="btn_reset(<?php echo $objResult['id'] ?>,'user_account','id','827ccb0eea8a706c4c34a16891f84e7b','password','<?php echo $objResult['name'] ?>')" title="reset password"></i>
+                <i class="fa fa-trash-o text-red" onClick="deleteData('user_account','<?php echo $objResult['id'] ?>','id','<?php echo $objResult['name'] ?>')" title="delete"></i>
               </td>
             </tr>
 <?php }?>

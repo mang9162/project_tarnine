@@ -93,6 +93,17 @@ if($type == 'add_defendant'){
     }
 }
 
+if($type == 'add_account'){
+    $strSQL = "INSERT INTO `user_account` (`id`,`password`,`enable`) VALUES (NULL,'827ccb0eea8a706c4c34a16891f84e7b',1)";
+    $objQuery = $conDB->sqlQuery($strSQL);
+
+    $strSQL = "SELECT * FROM `user_account` ORDER BY `user_account`.`id` DESC LIMIT 1";
+    $objQuery = $conDB->sqlQuery($strSQL);
+    while($objResult = mysqli_fetch_assoc($objQuery)) {
+        $redirect = "<script>window.location.href = '../pages/account_edit.php?account_id=".$objResult['id']."'</script>";
+    }
+}
+
 
 include("loading.php");
 echo $redirect;

@@ -75,7 +75,7 @@ function goPage(page) {
 function goBack() {
 	window.history.back();
 }
-function deleteData(tb,id,tf,code){
+function deleteData(tb,id,tf,code,go){
 	if (confirm("Do you want to delete '"+ code +"'?") == true) {
 		getDelete(tb,id,tf);
 	}
@@ -112,6 +112,16 @@ function deleteAttech(n,t){
 			xmlhttp.open("GET", "../services/deletefile.php?n="+n+"&t="+t, true);
 			xmlhttp.send();
 	}
+}
+
+function duplicate_data(id,table,where_f,input){
+	$.post("../services/duplicate_data.php", {table:table,f:input.name,value:input.value}, function(data){
+		if(data == "success"){
+			form_autosave(id,table,where_f,input);
+		} else {
+			alert("ไม่สามารถมี " + input.name + " ซ้ำกันได้ หรือเกิดข้อผิดพลาดกรุณาลองใหม่");
+		}
+	});
 }
 
 function form_autosave(n,t,tf,f){
