@@ -2,9 +2,9 @@
 session_start();
 ob_start();
 include("../connect/database.php");
-$_SESSION['PAGE'] = "../pages/account.php";
+$_SESSION['PAGE'] = "../pages/department.php";
 $conDB = new db_conn();
-$strSQL = "SELECT * FROM `user_account`";
+$strSQL = "SELECT * FROM `department`";
 $objQuery = $conDB->sqlQuery($strSQL);
 $index = 0;
 ?>
@@ -16,17 +16,17 @@ $index = 0;
 <body class="skin-black">
 <section class="content-header">
   <h1>
-    บัญชีผู้ใช้
+    จัดการแผนก
   </h1>
   <ol class="breadcrumb">
-        <li class="active">บัญชีผู้ใช้</li>
+        <li class="active">จัดการแผนก</li>
   </ol>
 </section>
 <!-- Main content -->
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
-    <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_account')" title="new">
+    <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_department')" title="new">
         <img src="../dist/img/icon/add.svg" width="20"><br>
         New
     </button>
@@ -47,11 +47,8 @@ $index = 0;
             <thead>
             <tr>
               <th width="15">ลำดับ</th>
-              <th width="100">รหัส</th>
-              <th width="200">บัญชี</th>
-              <th>ชื่อ-สกุล</th>
+              <th width="200">ชื่อแผนก</th>
               <th width="100">สถานะ</th>
-              <th width="100">เปลี่ยนพาสเวิร์ด</th>
               <th width="80"></th>
             </tr>
             </thead>
@@ -59,26 +56,24 @@ $index = 0;
 <?php 
 	while($objResult = mysqli_fetch_assoc($objQuery)) {
         $index++;
+        $id = $objResult['department_id'];
+        $table = 'department';
+        $where_f = 'department_id';
         ?>
             <tr>        
               <td><?php echo $index ?></td>
-              <td><?php echo $objResult['code'] ?></td>
-              <td><?php echo $objResult['username'] ?></td>
-              <td><?php echo $objResult['name'] ?></td>
-              <td><center><?php if($objResult['enable'] == 1){echo "<p style=\"color:green\">เปิดใช้งาน</p>";} else if($objResult['enable'] == 0){echo "<p style=\"color:red\">ปิดใช้งาน</p>";} ?></center></td>
               <td>
-                <?php
-                    if($objResult['password']=='827ccb0eea8a706c4c34a16891f84e7b'){
-                        ?> <center><img src="../dist/img/icon/error.svg" width="20"></center> <?php
-                    } else{
-                        ?> <center><img src="../dist/img/icon/success.svg" width="20"></center> <?php
-                    }
-                ?>
+              <input type="text" id="department_name<?php echo $index ?>" name="department_name" class="form-control" placeholder="Name" value="<?php echo $objResult['department_name'] ?>" maxlength="100" onChange="form_autosave('<?php echo $id;?>','<?php echo $table ?>','<?php echo $where_f ?>',this)" required />
               </td>
+              <td>
+                <select id="enable" name="enable" class="form-control" onchange="form_autosave('<?php echo $id;?>','<?php echo $table ?>','<?php echo $where_f ?>',this)">
+                    <option value="1" <?php if($objResult['enable'] == 1){echo 'selected';} ?>>เปิด</option>
+                    <option value="0" <?php if($objResult['enable'] == 0){echo 'selected';} ?>>ปิด</option>
+                </select>
+              </td>
+
               <td align="center" style="font-size:16px;">
-                <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/account_edit.php?account_id=<?php echo $objResult['id']; ?>')" title="edit"></i>
-                <i class="fa fa-refresh text-green" onClick="btn_reset(<?php echo $objResult['id'] ?>,'user_account','id','827ccb0eea8a706c4c34a16891f84e7b','password','<?php echo $objResult['name'] ?>')" title="reset password"></i>
-                <i class="fa fa-trash-o text-red" onClick="deleteData('user_account','<?php echo $objResult['id'] ?>','id','<?php echo $objResult['name'] ?>')" title="delete"></i>
+                <i class="fa fa-trash-o text-red" onClick="deleteData('department','<?php echo $objResult['department_id'] ?>','department_id','<?php echo $objResult['department_name'] ?>')" title="delete"></i>
               </td>
             </tr>
 <?php }?>

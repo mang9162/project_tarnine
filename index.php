@@ -197,8 +197,9 @@ $name = $objResult['name'];
 			</a>
             <ul class="treeview-menu">
             <li><a href="#" onClick="goPage('pages/account.php');">ตั้งค่าบัญชีผู้ใช้</a></li>
+            <li><a href="#" onClick="goPage('pages/department.php');">ตั้งค่าแผนก</a></li>
             <li><a href="#">ตั้งค่าผู้ดูแลระบบ</a></li>
-            <li><a href="#">ตั้งค่าสิทธิการใช้งาน</a></li>
+            <li><a href="#" onClick="goPage('pages/permission.php');">ตั้งค่าสิทธิการใช้งาน</a></li>
           </ul>
         </li>
         <li><a href="#" style="padding-left:11px;"><img src="dist/img/icon/exit.svg" width="24" style="margin-right:10px;"><span>ออกจากระบบ</span></a></li>

@@ -104,6 +104,28 @@ if($type == 'add_account'){
     }
 }
 
+if($type == 'add_department'){
+    $strSQL = "INSERT INTO `department` (`department_id`,`enable`) VALUES (NULL,1)";
+    $objQuery = $conDB->sqlQuery($strSQL);
+
+    $strSQL = "SELECT * FROM `department` ORDER BY `department`.`department_id` DESC LIMIT 1";
+    $objQuery = $conDB->sqlQuery($strSQL);
+    while($objResult = mysqli_fetch_assoc($objQuery)) {
+        $redirect = "<script>window.location.href = '../pages/department.php'</script>";
+    }
+}
+
+if($type == 'add_permission'){
+    $strSQL = "INSERT INTO `permission` (`permission_id`,`enable`) VALUES (NULL,1)";
+    $objQuery = $conDB->sqlQuery($strSQL);
+
+    $strSQL = "SELECT * FROM `permission` ORDER BY `permission`.`permission_id` DESC LIMIT 1";
+    $objQuery = $conDB->sqlQuery($strSQL);
+    while($objResult = mysqli_fetch_assoc($objQuery)) {
+        $redirect = "<script>window.location.href = '../pages/permission.php'</script>";
+    }
+}
+
 
 include("loading.php");
 echo $redirect;
