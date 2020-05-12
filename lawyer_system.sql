@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2020 at 06:19 PM
+-- Generation Time: May 12, 2020 at 12:51 PM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `lawyer_system`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `company`
+--
+
+CREATE TABLE `company` (
+  `no` int(11) NOT NULL,
+  `img` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `address` text COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `fax` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `taxid` varchar(30) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `company`
+--
+
+INSERT INTO `company` (`no`, `img`, `name`, `address`, `phone`, `fax`, `taxid`) VALUES
+(1, '12795380_443460995864771_2927513966717694732_n.png', 'บริษัท ธุรกิจเนติอินเตอร์ลอว์ จำกัด', '16/9 ถ.เพชรเกษม ต.หัวหิน อ. หัวหิน จ.ประจวบคีรีขันธ์ 77110', '089-744-1721', '032-511-305', '0-7755-59000-57-8');
 
 -- --------------------------------------------------------
 
@@ -67,9 +90,15 @@ CREATE TABLE `defendant` (
 --
 
 INSERT INTO `defendant` (`defendant_id`, `defendant_name`, `defendant_no`, `enable`, `race`, `nationality`, `job`, `birthday`, `age`, `current_unit`, `current_bloc`, `current_road`, `current_alley`, `current_zone`, `current_area`, `current_county`, `current_post`, `current_phone`, `current_number`, `current_email`, `work_unit`, `work_bloc`, `work_road`, `work_alley`, `work_zone`, `work_area`, `work_county`, `work_post`, `work_phone`, `work_number`, `work_email`) VALUES
-(1, 'test def 1', '1111111111111', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(2, 'test def 2', '2222222222222', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(3, 'test def 3', '3333333333333', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+(1, 'นางสาวรัชดา โอ้อากาศ', '3760100070165', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(2, 'นายนันทพงศ์ สีตลาภินันท์', '3120300001383', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(3, 'นางสาวอนุธิดา สิมมา', '3770500227461', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(4, 'นางสาวกมลวิภา พุมมา ', '3860300270540', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(5, 'นางถาวอน นพคุณ', '2770500016313', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(6, 'นายสุชาติ วงษ์สวัสดิ์', '3770300338722', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(7, 'นายจรัญ ถึงเสียบญวน', '3770500225654', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(8, 'นายสงกรานต์ พรหมด้วง', '3770300442899', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(9, '', '', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -105,6 +134,13 @@ CREATE TABLE `document_attc` (
   `attc_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `document_attc`
+--
+
+INSERT INTO `document_attc` (`attc_id`, `doc_id`, `attc_name`, `attc_file`, `attc_type`, `attc_date`) VALUES
+(20, 26, '', '20200511025804pmVPRT_CourseOutline.pdf', '1', '2020-05-11 14:58:04');
+
 -- --------------------------------------------------------
 
 --
@@ -124,10 +160,11 @@ CREATE TABLE `document_def` (
 --
 
 INSERT INTO `document_def` (`doc_def_id`, `doc_id`, `defendant_id`, `doc_def_name`, `doc_def_no`) VALUES
-(4, 3, 1, 'aaaaa', '11111'),
-(5, 1, 1, 'test def 1', '1111111111111'),
-(10, 1, 2, 'test def 2', '2222222222222'),
-(11, 20, 1, 'test def 1', '1111111111111');
+(23, 26, 1, 'นางสาวรัชดา โอ้อากาศ', '3760100070165'),
+(24, 26, 2, 'นายนันทพงศ์ สีตลาภินันท์', '3120300001383'),
+(25, 26, 3, 'นางสาวอนุธิดา สิมมา', '3770500227461'),
+(26, 26, 4, 'นางสาวกมลวิภา พุมมา ', '3860300270540'),
+(27, 40, 1, 'นางสาวรัชดา โอ้อากาศ', '3760100070165');
 
 -- --------------------------------------------------------
 
@@ -148,10 +185,36 @@ CREATE TABLE `document_filedoc` (
 --
 
 INSERT INTO `document_filedoc` (`doc_file_id`, `doc_id`, `doc_file_name`, `doc_file_text`, `doc_file_date`) VALUES
-(19, 1, 'asdasdasd', '<h4 style=\"text-align:justify;text-justify:inter-cluster\"><div style=\"text-align: right;\"><span lang=\"TH\" style=\"color: inherit; font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">วันที่ พฤศจิกายน\nพ.ศ. </span><span style=\"color: inherit; font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">2562</span></div><span style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\"><div style=\"text-align: right;\"><span style=\"font-size: 16pt; color: inherit;\">เรื่อง&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; บอกกล่าวให้ชำระหนี้และบอกกล่าวบังคับจำนอง</span></div><o:p><div style=\"text-align: right;\"><span style=\"font-size: 16pt; color: inherit;\">เรียน&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;นายธนะรัชต์\nไหมใหม่&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ในฐานะ ผู้กู้</span></div></o:p></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\"><div style=\"text-align: right;\"><span lang=\"TH\" style=\"color: inherit; font-size: 16pt;\">อ้างถึง&nbsp;&nbsp;&nbsp; สัญญากู้เงินและสัญญาจำนอง\nสินเชื่อ</span><span lang=\"TH\" style=\"color: inherit; font-size: 16pt;\">เพื่อธุรกิจ,\nสินเชื่อเบิกเงินเกินบัญชี OD</span></div></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\"><div style=\"text-align: right;\"><span style=\"font-size: 16pt; color: inherit;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; จำนวน 3 ฉบับ</span></div></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\"><div style=\"text-align: right;\"><span style=\"font-size: 16pt; color: inherit;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ฉบับลงวันที่ 17\nกันยายน 2561</span></div> </span>&nbsp;&nbsp;&nbsp;&nbsp;<span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">ตามที่ </span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">นายธนะรัชต์ ไหมใหม่ ได้ทำสัญญากู้เงินประเภทสินเชื่อธุรกิจทั่วไป<span style=\"color:red\"> </span>ไปจากธนาคารออมสิน สาขาค่ายธนะรัชต์\nเมื่อวันที่ </span><span style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">17 <span lang=\"TH\">กันยายน </span>2561 <span lang=\"TH\">&nbsp;เป็นจำนวนเงิน 8</span>00,000 <span lang=\"TH\">บาท\n(แปดแสนบาทถ้วน) ผู้กู้ยอมเสียดอกเบี้ยในอัตราดอกเบี้ยร้อยละ MLR</span>+1.00 <span lang=\"TH\">ต่อปี &nbsp;โดยตกลงจะชำระหนี้ต้นเงินและดอกเบี้ย\nเป็นงวดรายเดือน ภายในวันสุดท้ายของทุกเดือน โดยชำระในงวดแรกในเดือนสิงหาคม </span>25<span lang=\"TH\">61 และผู้กู้ตกลงจะชำระหนี้ให้หมดสิ้นภายในวันที่ 31 กรกฎาคม 2568<br> </span><o:p></o:p></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">ในวันดังกล่าว (<a name=\"_Hlk19090514\">วันที่</a>17 กันยายน 2561) </span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">นายธนะรัชต์\nไหมใหม่ &nbsp;ได้ทำสัญญากู้เงินประเภทสินเชื่อเบิกเงินเกินบัญชี\n</span><span style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">OD<span lang=\"TH\"> ไปจากธนาคารออมสิน สาขาค่ายธนะรัชต์ &nbsp;เป็นจำนวนเงิน 500</span>,<span lang=\"TH\">000 บาท\n(ห้าแสนบาทถ้วน) ผู้กู้ยอมเสียดอกเบี้ยในอัตราดอกเบี้ยร้อยละ </span>M<span lang=\"TH\">O</span>R+<span lang=\"TH\">1.00 ต่อปี&nbsp;\nโดยคำนวณเป็นรายวันของหนี้เบิกเงินเกินบัญญชีที่ค้างชำระและกำหนดส่งดอกเบี้ย\nเป็นงวดรายเดือน ทุกๆเดือน ภายในวันสุดท้ายของทุกเดือน&nbsp; ทั้งนี้ถือว่า1ปี มี 365 วัน<br> </span><o:p></o:p></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">และในวันเดียวกัน &nbsp;นายธนะรัชต์\nไหมใหม่ &nbsp;ได้ทำสัญญาจำนองและจดทะเบียนจำนอง&nbsp; โดยมอบหลักทรัพย์ ไว้เป็นประกัน ดังนี้<br> </span><span style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">1.<span style=\"font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n</span></span><!--[endif]--><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">โฉนดที่ดินเลขที่ 35445</span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif; color: red;\"> </span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">&nbsp;เลขที่ดิน 42&nbsp;\nหน้าสำรวจ 6161 &nbsp;&nbsp;ตำบลปรารบุรี &nbsp;<br></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">อำเภอปราณบุรี &nbsp;จังหวัดประจวบคีรีขันธ์<br>\n</span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">จำนองไว้ประกันการชำระหนี้เงินกู้ดังกล่าวของท่านไว้ให้กับทางธนาคารฯตามสัญญาจำนอง\nฉบับลงวันที่ วันที่ </span><span style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">17 <span lang=\"TH\">กันยายน </span>2561<br><o:p></o:p></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ขณะนี้ ท่านผู้กู้ได้ผิดนัด\nมิได้ชำระหนี้ให้กับทางธนาคารตามสัญญา และธนาคารไม่ประสงค์จะให้ผู้กู้ยืมเงินจำนวนดังกล่าวอีกต่อไป\n&nbsp;&nbsp;คิดภาระหนี้ที่ท่านค้างชำระเพียงวันที่ลงในหนังสือ</span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">ฉบับนี้\nมียอดหนี้ค้างชำระกับธนาคารเป็นต้นเงินรวมทั้งดอกเบี้ยและดอกเบี้ยพักชำระ รวมเป็นเงินจำนวนทั้งสิ้น <span style=\"color:red\">1,214,956.98 บาท<br><o:p></o:p></span></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">โดยหนังสือฉบับนี้ ข้าพเจ้าในฐานะทนายความผู้รับมอบอำนาจจากทางธนาคารออมสิน\nขอบอกกล่าวทวงถามและแจ้งการบังคับจำนองมายังท่านให้นำเงินจำนวนดังกล่าวไปชำระหนี้และไถ่ถอนจำนองให้แก่ธนาคารออมสิน\nสาขาค่ายธนะรัชต์ ภายในกำหนด </span><span style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">60<span lang=\"TH\"> วัน นับแต่วันที่ท่านได้รับหนังสือฉบับนี้\nหากท่านมีเหตุขัดข้องประการใดขอให้รีบติดต่อธนาคารออมสิน\nภายในกำหนดระยะเวลาดังกล่าว&nbsp;\nเพราะหากท่านเพิกเฉย ข้าพเจ้ามีความจำเป็นต้องดำเนินคดีกับท่านและผู้จำนองตามกฎหมายต่อไป&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br></span><o:p></o:p></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ขอแสดงความนับถือ<br></span><span style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\"><o:p>&nbsp;<br></o:p></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">ลงชื่อ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ทนายความผู้รับมอบอำนาจ<br></span><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(นายดรินทร์ ตติยะลาภะ)<br></span><u style=\"\"><span lang=\"TH\" style=\"font-size: 16pt; font-family: &quot;Angsana New&quot;, serif;\">หมายเหตุ\n</span></u><span lang=\"TH\" style=\"font-size: 14pt; font-family: &quot;Angsana New&quot;, serif;\">โปรดติดต่อธนาคารออมสิน (\nศูนย์ควบคุมและบริหารหนี้เขตประจวบคีรีขันธ์ โทรศัพท์ 032-646535ต่อ 4 )</span></h4><p>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</p>', '2019-11-20 18:04:38'),
-(20, 9, '', '', '2019-11-29 11:17:12'),
-(22, 20, '', '', '2019-12-11 16:45:05'),
-(23, 1, '', '', '2020-03-07 18:35:17');
+(29, 26, 'บอกกล่าวให้ชำระหนี้และบอกกล่าวบังคับจำนอง', '<div style=\"text-align: center; \"><font face=\"Arial Black\"><span style=\"font-family: Arial;\">วันที่ พฤศจิกายน พ.ศ. 2562</span></font></div><div><font face=\"Arial Black\"><span style=\"font-family: Arial;\">เรื่อง&nbsp; &nbsp; &nbsp;บอกกล่าวให้ชำระหนี้และบอกกล่าวบังคับจำนอง&nbsp;</span></font></div><div><span style=\"font-family: Arial; text-align: right;\">เรียน&nbsp; &nbsp; &nbsp;นายธีระชัย ใจเย็น&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ในฐานะ ผู้กู้และผู้ค้ำประกัน</span></div><div><font face=\"Arial Black\"><span style=\"font-family: Arial;\">อ้างถึง</span><span style=\"white-space: pre; font-family: Arial;\">	</span><span style=\"font-family: Arial;\">สัญญากู้เงินและสัญญาจำนอง สินเชื่อเพื่อธุรกิจทั่วไป จำนวน 2 ฉบับ</span></font></div><div><font face=\"Arial Black\"><span style=\"white-space: pre; font-family: Arial;\">	</span><span style=\"font-family: Arial;\">ฉบับลงวันที่ 27 พฤศจิกายน 2557&nbsp;</span></font></div><div style=\"\"><font face=\"Arial Black\"><span style=\"font-family: Arial;\">&nbsp; &nbsp; &nbsp; &nbsp; ตามที่ นายธีระชัย ใจเย็น ได้ทำสัญญากู้เงินประเภทสินเชื่อธุรกิจทั่วไป ไปจากธนาคารออมสิสาขากุยบุรี เมื่อวันที่ 27 พฤศจิกายน 2557 เป็นจำนวนเงิน 12,000,000 บาท (สิบสองล้านบาทถ้วน) ผู้กู้ยอมเสียดอกเบี้ยในอัตราดอกเบี้ยร้อยละ MLR+1.00 ต่อปี&nbsp; โดยตกลงจะชำระหนี้ต้นเงินและดอกเบี้ย เป็นงวดรายเดือน ภายในวันที่ 27 ของทุกเดือน โดยชำระในงวดแรกในเดือนธันวาคม 2557 และผู้กู้ตกลงจะชำระหนี้ให้หมดสิ้นภายในวันที่ 27 พฤศจิกายน 2564&nbsp;</span></font></div><div><font face=\"Arial Black\"><span style=\"font-family: Arial;\">และในวันเดียวกัน&nbsp; นายธีระชัย ใจเย็น ได้ทำสัญญาจำนองและจดทะเบียนจำนอง&nbsp; โดยมอบหลักทรัพย์ ไว้เป็นประกัน ดังนี้&nbsp;</span></font></div><div><font face=\"Arial Black\"><span style=\"font-family: Arial;\">1.</span><span style=\"white-space: pre; font-family: Arial;\">	</span><span style=\"font-family: Arial;\">โฉนดที่ดินเลขที่ 30610&nbsp; เลขที่ดิน 24&nbsp; หน้าสำรวจ 18568&nbsp; &nbsp;ตำบลหัวหิน&nbsp;&nbsp;</span></font></div><div><font face=\"Arial Black\"><span style=\"font-family: Arial;\">อำเภอหัวหิน&nbsp; จังหวัดประจวบคีรีขันธ์&nbsp;</span></font></div><div><font face=\"Arial Black\"><span style=\"font-family: Arial;\">จำนองไว้ประกันการชำระหนี้เงินกู้ดังกล่าวของท่านไว้ให้กับทางธนาคารฯตามสัญญาจำนอง ฉบับลงวันที่ วันที่ 27 พฤศจิกายน 2557</span></font></div><div><font face=\"Arial Black\"><span style=\"white-space: pre; font-family: Arial;\">	</span><span style=\"font-family: Arial;\">ขณะนี้ ท่านผู้กู้ได้ผิดนัด มิได้ชำระหนี้ให้กับทางธนาคารตามสัญญา และธนาคารไม่ประสงค์จะให้ผู้กู้ยืมเงินจำนวนดังกล่าวอีกต่อไป&nbsp; &nbsp;คิดภาระหนี้ที่ท่านค้างชำระเพียงวันที่ลงในหนังสือฉบับนี้ มียอดหนี้ค้างชำระกับธนาคารเป็นต้นเงินรวมทั้งดอกเบี้ยและดอกเบี้ยพักชำระ รวมเป็นเงินจำนวนทั้งสิ้น 12,849,261.69&nbsp; บาท&nbsp; &nbsp; &nbsp;&nbsp;</span></font></div><div><font face=\"Arial Black\"><span style=\"font-family: Arial;\">โดยหนังสือฉบับนี้ ข้าพเจ้าในฐานะทนายความผู้รับมอบอำนาจจากทางธนาคารออมสิน ขอบอกกล่าวทวงถามและแจ้งการบังคับจำนองมายังท่านให้นำเงินจำนวนดังกล่าวไปชำระหนี้และไถ่ถอนจำนองให้แก่ธนาคารออมสิน สาขาบ้านแหลม ภายในกำหนด 60 วัน นับแต่วันที่ท่านได้รับหนังสือฉบับนี้ หากท่านมีเหตุขัดข้องประการใดขอให้รีบติดต่อธนาคารออมสิน ภายในกำหนดระยะเวลาดังกล่าว&nbsp; เพราะหากท่านเพิกเฉย ข้าพเจ้ามีความจำเป็นต้องดำเนินคดีกับท่านและผู้จำนองตามกฎหมายต่อไป&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></font></div><div><font face=\"Arial Black\"><span style=\"font-family: Arial;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ขอแสดงความนับถือ</span></font></div><div><font face=\"Arial Black\"><span style=\"font-family: Arial;\">&nbsp;</span></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face=\"Arial Black\"><span style=\"font-family: Arial;\"> </span></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face=\"Arial Black\"><span style=\"font-family: Arial;\">ลงชื่อ</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style=\"font-family: Arial;\">ทนายความผู้รับมอบอำนาจ</span></font></div><div><font face=\"Arial Black\"><span style=\"white-space: pre; font-family: Arial;\">		</span>&nbsp; &nbsp;&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face=\"Arial Black\"><span style=\"font-family: Arial;\">(นายดรินทร์ ตติยะลาภะ)</span></font></div><div><font face=\"Arial Black\"><span style=\"font-family: Arial;\">หมายเหตุ โปรดติดต่อธนาคารออมสิน ( ศูนย์ควบคุมและบริหารหนี้เขตประจวบคีรีขันธ์ โทรศัพท์ 032-646535ต่อ 4 )</span></font></div><div><br></div>', '2020-04-28 10:25:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `document_findasset`
+--
+
+CREATE TABLE `document_findasset` (
+  `doc_id` int(11) NOT NULL,
+  `doc_no` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `doc_create_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `doc_plaintiff_id` int(11) NOT NULL,
+  `doc_plaintiff_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `lawyer_id` int(11) NOT NULL,
+  `lawyer_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `doc_status` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `create_by_user` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `document_investigate`
+--
+
+CREATE TABLE `document_investigate` (
+  `doc_id` int(11) NOT NULL,
+  `doc_no` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -162,34 +225,40 @@ INSERT INTO `document_filedoc` (`doc_file_id`, `doc_id`, `doc_file_name`, `doc_f
 CREATE TABLE `document_notis` (
   `doc_id` int(11) NOT NULL,
   `doc_no` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `doc_type` int(11) NOT NULL,
   `doc_create_date` datetime NOT NULL DEFAULT current_timestamp(),
   `doc_plaintiff_id` int(11) NOT NULL,
   `doc_plaintiff_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `doc_restructuring` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `doc_credit_type` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `doc_county` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `doc_notis_date` date DEFAULT NULL,
+  `doc_notis_date` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `doc_recive_notis_date` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `doc_sue_date` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lawyer_id` int(11) NOT NULL,
   `lawyer_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `doc_status` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `create_by_user` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+  `create_by_user` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `doc_cleardate` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `doc_duedate` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `doc_duedate2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `doc_duedate3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `doc_blackid` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `doc_redid` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `doc_capital` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `document_notis`
 --
 
-INSERT INTO `document_notis` (`doc_id`, `doc_no`, `doc_create_date`, `doc_plaintiff_id`, `doc_plaintiff_name`, `doc_restructuring`, `doc_credit_type`, `doc_county`, `doc_notis_date`, `lawyer_id`, `lawyer_name`, `doc_status`, `create_by_user`) VALUES
-(1, '123445', '2019-11-19 10:16:28', 2, 'โจท์ที่ 2', 'test1', 'bank33', 'หัวหินนนน', '2019-11-27', 1, '0', 'รอ', ''),
-(6, '91629111', '2019-11-19 14:47:36', 1, 'test โจทก์', 'asdsad', 'sdddd', 'sdsdsaa', '0000-00-00', 0, '', 'รอ', 'admin'),
-(9, '11112313211', '2019-11-19 14:56:38', 2, 'โจท์ที่ 2', 'dasdasdasd', 'asdasdsa', 'asdasdasd', '1900-11-30', 0, '', 'รอ', 'admin'),
-(14, '', '2019-11-19 15:47:46', 0, '', '', '', '', '2019-11-19', 0, '', 'รอ', 'admin'),
-(15, '', '2019-11-19 16:14:43', 0, '', '', '', '', NULL, 0, '', 'รอ', 'admin'),
-(16, '', '2019-11-19 16:14:50', 0, '', '', '', '', NULL, 0, '', 'รอ', 'admin'),
-(17, '', '2019-12-11 16:34:54', 0, '', '', '', '', NULL, 0, '', 'รอ', 'admin'),
-(18, 'tttt555', '2019-12-11 16:35:01', 0, '', '', '', '', NULL, 0, '', 'รอ', 'admin'),
-(19, '', '2019-12-11 16:35:34', 0, '', '', '', '', NULL, 0, '', 'รอ', 'admin'),
-(20, '12s31das', '2019-12-11 16:44:41', 1, 'test โจทก์', '23131', '', 'asd', '2019-12-17', 1, 'test ทนาย', 'รอ', 'admin');
+INSERT INTO `document_notis` (`doc_id`, `doc_no`, `doc_type`, `doc_create_date`, `doc_plaintiff_id`, `doc_plaintiff_name`, `doc_restructuring`, `doc_credit_type`, `doc_county`, `doc_notis_date`, `doc_recive_notis_date`, `doc_sue_date`, `lawyer_id`, `lawyer_name`, `doc_status`, `create_by_user`, `doc_cleardate`, `doc_duedate`, `doc_duedate2`, `doc_duedate3`, `doc_blackid`, `doc_redid`, `doc_capital`) VALUES
+(26, '200427165801', 1, '2020-04-27 16:57:12', 1, 'ธนาคารออมสิน สาขาปราณบุรี', '', '', 'หัวหิน', '', NULL, NULL, 1, 'นายดรินทร์ ตติยะลาภะ', 'รอ', 'admin', '', NULL, NULL, NULL, 'ผบ1150/2563', 'ผบ0000/2564', '107689.17'),
+(35, '', 1, '2020-05-11 14:28:13', 0, '', '', '', '', NULL, NULL, NULL, 0, '', 'รอ', 'admin', '', NULL, NULL, NULL, NULL, '', '0.00'),
+(40, '91623232', 2, '2020-05-12 17:10:14', 0, '', '', '', '', NULL, NULL, NULL, 1, 'นายดรินทร์ ตติยะลาภะ', 'รอ', 'admin', '', NULL, NULL, NULL, NULL, '', '0.00'),
+(41, '', 2, '2020-05-12 17:40:44', 0, '', '', '', '', NULL, NULL, NULL, 0, '', 'รอ', 'admin', '', NULL, NULL, NULL, NULL, '', '0.00'),
+(42, 'asdasd', 1, '2020-05-12 17:40:48', 0, '', '', '', '', NULL, NULL, NULL, 0, '', 'รอ', 'admin', '', NULL, NULL, NULL, NULL, '', '0.00'),
+(46, '32132131321', 3, '2020-05-12 17:45:46', 0, '', '', '', '', NULL, NULL, NULL, 0, '', 'รอ', 'admin', '', NULL, NULL, NULL, NULL, '', '0.00');
 
 --
 -- Triggers `document_notis`
@@ -228,29 +297,62 @@ CREATE TABLE `document_report` (
 --
 
 INSERT INTO `document_report` (`doc_report_id`, `doc_id`, `doc_report_name`, `doc_report_text`, `report_id`, `doc_report_date`, `doc_report_lastedit`) VALUES
-(3, 1, 'test324', '', 2, '2019-12-09 21:53:54', NULL),
-(6, 0, '', '', 0, '2019-12-09 22:00:30', NULL),
-(7, 0, '', '', 0, '2019-12-09 22:00:32', NULL),
-(10, 0, '', '', 0, '2019-12-09 22:11:27', NULL),
-(11, 0, '', '', 0, '2019-12-09 22:12:01', NULL),
-(13, 0, '', '', 0, '2019-12-09 22:12:34', NULL),
-(15, 0, '', '', 0, '2019-12-09 22:21:47', NULL),
-(16, 6, 'assdasdsad', '', 1, '2019-12-09 22:21:47', NULL),
-(17, 0, '', '', 0, '2019-12-11 09:40:01', NULL),
-(21, 0, '', '', 0, '2019-12-11 16:02:49', NULL),
-(24, 0, '', '', 0, '2019-12-11 16:45:23', NULL),
-(25, 20, 'test', '{\"report\":[{\"text_id\":\"doc_report_id\",\"value\":\"25\"},{\"text_id\":\"text1\",\"value\":\"\"},{\"text_id\":\"text2\",\"value\":\"\"},{\"text_id\":\"text3\",\"value\":\"\"},{\"text_id\":\"text4\",\"value\":\"\"},{\"text_id\":\"text5\",\"value\":\"asd\"},{\"text_id\":\"text6\",\"value\":\"\"},{\"text_id\":\"text8\",\"value\":\"\"},{\"text_id\":\"text9\",\"value\":\"\"},{\"text_id\":\"text10\",\"value\":\"\"},{\"text_id\":\"text13\",\"value\":\"test def 1\"},{\"text_id\":\"text14\",\"value\":\"test ทนาย\"},{\"text_id\":\"text16\",\"value\":\"test ทนาย\"},{\"text_id\":\"text17\",\"value\":\"test ทนาย\"},{\"text_id\":\"text18\",\"value\":\"test ทนาย\"},{\"text_id\":\"text19\",\"value\":\"  1   1  0  0  4   0  0   8  7  9   1  0   4\"},{\"text_id\":\"text20\",\"value\":\"2479/2546\"},{\"text_id\":\"text21\",\"value\":\"ใบอนุญาติ\"},{\"text_id\":\"text22\",\"value\":\"29/66\"},{\"text_id\":\"text23\",\"value\":\"หมู่ 11\"},{\"text_id\":\"text24\",\"value\":\"บางกระดี่\"},{\"text_id\":\"text25\",\"value\":\"35/1\"},{\"text_id\":\"text26\",\"value\":\"แสมดำ\"},{\"text_id\":\"text27\",\"value\":\"บางขุนเทียน\"},{\"text_id\":\"text28\",\"value\":\"กรุงเทพ\"},{\"text_id\":\"text29\",\"value\":\"10150\"},{\"text_id\":\"text30\",\"value\":\"097-1326510\"},{\"text_id\":\"text31\",\"value\":\"012-325456\"},{\"text_id\":\"text32\",\"value\":\"mang9162@gmail.com\"},{\"text_id\":\"text33\",\"value\":\"499\"},{\"text_id\":\"text34\",\"value\":\"12223\"},{\"text_id\":\"text35\",\"value\":\"1\"},{\"text_id\":\"text36\",\"value\":\"231313\"},{\"text_id\":\"text37\",\"value\":\"11311\"},{\"text_id\":\"text38\",\"value\":\"21121\"},{\"text_id\":\"text39\",\"value\":\"2121212\"},{\"text_id\":\"text40\",\"value\":\"21221\"},{\"text_id\":\"text41\",\"value\":\"21212\"},{\"text_id\":\"text42\",\"value\":\"2121\"},{\"text_id\":\"text43\",\"value\":\"mmmm@hotmail.com\"},{\"text_id\":\"text44\",\"value\":\"test def 1\"},{\"text_id\":\"text45\",\"value\":\"test ทนาย\"},{\"text_id\":\"text47\",\"value\":\"\"},{\"text_id\":\"text11\",\"value\":\"test โจทก์\"},{\"text_id\":\"text12\",\"value\":\"test def 1\"},{\"text_id\":\"text15\",\"value\":\"                                                                              asdasdasdasdasd\"},{\"text_id\":\"text46\",\"value\":\"\"}],\"doc_report_id\":25}', 1, '2019-12-11 16:45:23', NULL),
-(26, 0, '', '', 0, '2019-12-11 16:46:09', NULL),
-(27, 20, 'asdasdasds', '{\"report\":[{\"text_id\":\"doc_report_id\",\"value\":\"27\"},{\"text_id\":\"text1\",\"value\":\"\"},{\"text_id\":\"text2\",\"value\":\"\"},{\"text_id\":\"text3\",\"value\":\"\"},{\"text_id\":\"text4\",\"value\":\"\"},{\"text_id\":\"text5\",\"value\":\"asd\"},{\"text_id\":\"text6\",\"value\":\"\"},{\"text_id\":\"text8\",\"value\":\"\"},{\"text_id\":\"text9\",\"value\":\"\"},{\"text_id\":\"text10\",\"value\":\"\"},{\"text_id\":\"text18\",\"value\":\"test ทนาย\"},{\"text_id\":\"text19\",\"value\":\"  1   1  0  0  4   0  0   8  7  9   1  0   4\"},{\"text_id\":\"text20\",\"value\":\"จีน\"},{\"text_id\":\"text21\",\"value\":\"ไทย\"},{\"text_id\":\"text22\",\"value\":\"ทนายความ\"},{\"text_id\":\"text23\",\"value\":\"10\"},{\"text_id\":\"text24\",\"value\":\"กุมภาพันธ์\"},{\"text_id\":\"text25\",\"value\":\"2540\"},{\"text_id\":\"text26\",\"value\":\"21\"},{\"text_id\":\"text27\",\"value\":\"29/66\"},{\"text_id\":\"text28\",\"value\":\"หมู่ 11\"},{\"text_id\":\"text28_2\",\"value\":\"บางกระดี่\"},{\"text_id\":\"text29\",\"value\":\"35/1\"},{\"text_id\":\"text30\",\"value\":\"แสมดำ\"},{\"text_id\":\"text31\",\"value\":\"บางขุนเทียน\"},{\"text_id\":\"text32\",\"value\":\"กรุงเทพ\"},{\"text_id\":\"text33\",\"value\":\"10150\"},{\"text_id\":\"text34\",\"value\":\"097-1326510\"},{\"text_id\":\"text35\",\"value\":\"012-325456\"},{\"text_id\":\"text36\",\"value\":\"mang9162@gmail.com\"},{\"text_id\":\"text11\",\"value\":\"test โจทก์\"},{\"text_id\":\"text12\",\"value\":\"test def 1\"},{\"text_id\":\"textarea1\",\"value\":\"                       asdasdasdasdsdd55555\"},{\"text_id\":\"textarea2\",\"value\":\"ddd12331\"},{\"text_id\":\"textarea3\",\"value\":\"\"},{\"text_id\":\"textarea4\",\"value\":\"\"},{\"text_id\":\"textarea5\",\"value\":\"\"},{\"text_id\":\"textarea6\",\"value\":\"\"},{\"text_id\":\"textarea7\",\"value\":\"\"},{\"text_id\":\"textarea8\",\"value\":\"\"},{\"text_id\":\"textarea9\",\"value\":\"\"},{\"text_id\":\"textarea10\",\"value\":\"\"},{\"text_id\":\"textarea11\",\"value\":\"\"},{\"text_id\":\"textarea12\",\"value\":\"\"},{\"text_id\":\"textarea13\",\"value\":\"\"},{\"text_id\":\"textarea14\",\"value\":\"\"},{\"text_id\":\"textarea15\",\"value\":\"\"},{\"text_id\":\"textarea16\",\"value\":\"\"},{\"text_id\":\"textarea17\",\"value\":\"\"},{\"text_id\":\"textarea18\",\"value\":\"\"},{\"text_id\":\"textarea19\",\"value\":\"\"},{\"text_id\":\"textarea20\",\"value\":\"\"},{\"text_id\":\"textarea21\",\"value\":\"\"},{\"text_id\":\"textarea22\",\"value\":\"\"},{\"text_id\":\"textarea23\",\"value\":\"\"},{\"text_id\":\"textarea24\",\"value\":\"\"},{\"text_id\":\"textarea25\",\"value\":\"\"},{\"text_id\":\"textarea26\",\"value\":\"\"},{\"text_id\":\"textarea27\",\"value\":\"\"},{\"text_id\":\"textarea28\",\"value\":\"\"},{\"text_id\":\"textarea29\",\"value\":\"\"},{\"text_id\":\"textarea30\",\"value\":\"\"},{\"text_id\":\"textarea31\",\"value\":\"\"}],\"doc_report_id\":27}', 2, '2019-12-11 16:46:09', NULL),
-(28, 0, '', '', 0, '2019-12-12 11:36:00', NULL),
-(30, 0, '', '', 0, '2019-12-13 15:21:20', NULL),
-(31, 1, 'asdsadasdas12311', '{\"report\":[{\"text_id\":\"doc_report_id\",\"value\":\"31\"},{\"text_id\":\"text5\",\"value\":\"\"},{\"text_id\":\"text6\",\"value\":\"\"},{\"text_id\":\"text7\",\"value\":\"test ทนาย\"},{\"text_id\":\"text8\",\"value\":\"\"},{\"text_id\":\"text9\",\"value\":\"\"},{\"text_id\":\"text10\",\"value\":\"test ทนาย\"},{\"text_id\":\"text11\",\"value\":\"2479/2546\"},{\"text_id\":\"text12\",\"value\":\"\"},{\"text_id\":\"text1\",\"value\":\"                                             sadasdasd\"},{\"text_id\":\"text2\",\"value\":\"                                             asd\"},{\"text_id\":\"text3\",\"value\":\"                                                     sadasdasd45354\"},{\"text_id\":\"text4\",\"value\":\"                         45345354354354\"}],\"doc_report_id\":31}', 3, '2019-12-13 15:21:20', NULL),
-(32, 0, '', '', 0, '2019-12-13 15:35:48', NULL),
-(33, 1, 'tessss', '', 4, '2019-12-13 15:35:48', NULL),
-(34, 20, 'test', '', 9, '2020-02-26 21:45:55', NULL),
-(35, 0, '', '', 0, '2020-02-26 21:45:55', NULL),
-(36, 0, '', '', 0, '2020-02-26 21:46:09', NULL),
-(37, 20, 'asdsad', '', 5, '2020-02-26 21:46:09', NULL);
+(14, 26, '', '{\"report\":[{\"text_id\":\"doc_report_id\",\"value\":\"14\"},{\"text_id\":\"text1\",\"value\":\"ผบ1150\"},{\"text_id\":\"text2\",\"value\":\"63\"},{\"text_id\":\"text3\",\"value\":\"\"},{\"text_id\":\"text4\",\"value\":\"\"},{\"text_id\":\"text5\",\"value\":\"หัวหิน\"},{\"text_id\":\"text6\",\"value\":\"\"},{\"text_id\":\"text8\",\"value\":\"\"},{\"text_id\":\"text9\",\"value\":\"\"},{\"text_id\":\"text10\",\"value\":\"\"},{\"text_id\":\"text13\",\"value\":\"ธนาคารออมสิน สาขาปราณบุรี\"},{\"text_id\":\"text14\",\"value\":\"นายดรินทร์ ตติยะลาภะ\"},{\"text_id\":\"text16\",\"value\":\"นายดรินทร์ ตติยะลาภะ\"},{\"text_id\":\"text17\",\"value\":\"ธนาคารออมสิน สาขาปราณบุรี\"},{\"text_id\":\"text18\",\"value\":\"นายดรินทร์ ตติยะลาภะ\"},{\"text_id\":\"text19\",\"value\":\"  1   1  0  0  4   0  0   8  7  9   1  0   4\"},{\"text_id\":\"text20\",\"value\":\"2479/2546\"},{\"text_id\":\"text21\",\"value\":\"ใบอนุญาติ\"},{\"text_id\":\"text22\",\"value\":\"29/66\"},{\"text_id\":\"text23\",\"value\":\"หมู่ 11\"},{\"text_id\":\"text24\",\"value\":\"บางกระดี่\"},{\"text_id\":\"text25\",\"value\":\"35/1\"},{\"text_id\":\"text26\",\"value\":\"แสมดำ\"},{\"text_id\":\"text27\",\"value\":\"บางขุนเทียน\"},{\"text_id\":\"text28\",\"value\":\"กรุงเทพ\"},{\"text_id\":\"text29\",\"value\":\"10150\"},{\"text_id\":\"text30\",\"value\":\"097-1326510\"},{\"text_id\":\"text31\",\"value\":\"012-325456\"},{\"text_id\":\"text32\",\"value\":\"mang9162@gmail.com\"},{\"text_id\":\"text33\",\"value\":\"499\"},{\"text_id\":\"text34\",\"value\":\"12223\"},{\"text_id\":\"text35\",\"value\":\"1\"},{\"text_id\":\"text36\",\"value\":\"231313\"},{\"text_id\":\"text37\",\"value\":\"11311\"},{\"text_id\":\"text38\",\"value\":\"21121\"},{\"text_id\":\"text39\",\"value\":\"2121212\"},{\"text_id\":\"text40\",\"value\":\"21221\"},{\"text_id\":\"text41\",\"value\":\"21212\"},{\"text_id\":\"text42\",\"value\":\"2121\"},{\"text_id\":\"text43\",\"value\":\"mmmm@hotmail.com\"},{\"text_id\":\"text44\",\"value\":\"ธนาคารออมสิน สาขาปราณบุรี\"},{\"text_id\":\"text45\",\"value\":\"นายดรินทร์ ตติยะลาภะ\"},{\"text_id\":\"text47\",\"value\":\"\"},{\"text_id\":\"unit_1\",\"value\":\"\"},{\"text_id\":\"bloc_1\",\"value\":\"\"},{\"text_id\":\"zone_1\",\"value\":\"\"},{\"text_id\":\"area_1\",\"value\":\"\"},{\"text_id\":\"county_1\",\"value\":\"\"},{\"text_id\":\"unit_2\",\"value\":\"\"},{\"text_id\":\"bloc_2\",\"value\":\"\"},{\"text_id\":\"zone_2\",\"value\":\"\"},{\"text_id\":\"area_2\",\"value\":\"\"},{\"text_id\":\"county_2\",\"value\":\"\"},{\"text_id\":\"unit_3\",\"value\":\"\"},{\"text_id\":\"bloc_3\",\"value\":\"\"},{\"text_id\":\"zone_3\",\"value\":\"\"},{\"text_id\":\"area_3\",\"value\":\"\"},{\"text_id\":\"county_3\",\"value\":\"\"},{\"text_id\":\"unit_4\",\"value\":\"\"},{\"text_id\":\"bloc_4\",\"value\":\"\"},{\"text_id\":\"zone_4\",\"value\":\"\"},{\"text_id\":\"area_4\",\"value\":\"\"},{\"text_id\":\"county_4\",\"value\":\"\"},{\"text_id\":\"text11\",\"value\":\"ธนาคารออมสิน สาขาปราณบุรี\"},{\"text_id\":\"text12\",\"value\":\"นางสาวรัชดา โอ้อากาศ ที่1 กับพวกรวม 4 คน\"},{\"text_id\":\"text15\",\"value\":\"                                                                              \"},{\"text_id\":\"text46\",\"value\":\"\"}],\"doc_report_id\":14}', 1, '2020-04-28 14:56:23', NULL),
+(15, 26, '', '', 2, '2020-04-28 14:56:23', NULL),
+(16, 26, '', '', 3, '2020-04-28 14:56:23', NULL),
+(17, 26, '', '', 4, '2020-04-28 14:56:23', NULL),
+(18, 26, '', '', 5, '2020-04-28 14:56:23', NULL),
+(19, 26, '', '', 6, '2020-04-28 14:56:23', NULL),
+(20, 26, '', '', 7, '2020-04-28 14:56:23', NULL),
+(21, 26, '', '', 8, '2020-04-28 14:56:23', NULL),
+(22, 26, '', '', 1, '2020-05-12 15:26:03', NULL),
+(23, 26, '', '', 2, '2020-05-12 15:26:03', NULL),
+(24, 26, '', '', 3, '2020-05-12 15:26:03', NULL),
+(25, 26, '', '', 4, '2020-05-12 15:26:03', NULL),
+(26, 26, '', '', 5, '2020-05-12 15:26:03', NULL),
+(27, 26, '', '', 6, '2020-05-12 15:26:03', NULL),
+(28, 26, '', '', 7, '2020-05-12 15:26:03', NULL),
+(29, 26, '', '', 8, '2020-05-12 15:26:03', NULL),
+(30, 26, '', '', 1, '2020-05-12 15:26:19', NULL),
+(31, 26, '', '', 2, '2020-05-12 15:26:19', NULL),
+(32, 26, '', '', 3, '2020-05-12 15:26:19', NULL),
+(33, 26, '', '', 4, '2020-05-12 15:26:19', NULL),
+(34, 26, '', '', 5, '2020-05-12 15:26:19', NULL),
+(35, 26, '', '', 6, '2020-05-12 15:26:19', NULL),
+(36, 26, '', '', 7, '2020-05-12 15:26:19', NULL),
+(37, 26, '', '', 8, '2020-05-12 15:26:19', NULL),
+(38, 26, '', '', 1, '2020-05-12 15:26:36', NULL),
+(39, 26, '', '', 2, '2020-05-12 15:26:36', NULL),
+(40, 26, '', '', 3, '2020-05-12 15:26:36', NULL),
+(41, 26, '', '', 4, '2020-05-12 15:26:36', NULL),
+(42, 26, '', '', 5, '2020-05-12 15:26:36', NULL),
+(43, 26, '', '', 6, '2020-05-12 15:26:36', NULL),
+(44, 26, '', '', 7, '2020-05-12 15:26:36', NULL),
+(45, 26, '', '', 8, '2020-05-12 15:26:36', NULL),
+(46, 0, '', '', 0, '2020-05-12 17:13:01', NULL),
+(47, 40, '', '', 1, '2020-05-12 17:13:01', NULL),
+(48, 46, '', '', 1, '2020-05-12 17:46:26', NULL),
+(49, 46, '', '', 2, '2020-05-12 17:46:26', NULL),
+(50, 46, '', '', 3, '2020-05-12 17:46:26', NULL),
+(51, 46, '', '', 4, '2020-05-12 17:46:26', NULL),
+(52, 46, '', '', 5, '2020-05-12 17:46:26', NULL),
+(53, 46, '', '', 6, '2020-05-12 17:46:26', NULL),
+(54, 46, '', '', 7, '2020-05-12 17:46:26', NULL),
+(55, 46, '', '', 8, '2020-05-12 17:46:26', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice`
+--
+
+CREATE TABLE `invoice` (
+  `id` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `doc_id` int(11) NOT NULL,
+  `createat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `amount` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -299,7 +401,8 @@ CREATE TABLE `lawyer` (
 --
 
 INSERT INTO `lawyer` (`lawyer_id`, `lawyer_name`, `lawyer_tex_no`, `race`, `nationality`, `job`, `birthday`, `age`, `submit_no`, `submit_info`, `current_unit`, `current_bloc`, `current_road`, `current_alley`, `current_zone`, `current_area`, `current_county`, `current_post`, `current_phone`, `current_number`, `current_email`, `work_unit`, `work_bloc`, `work_road`, `work_alley`, `work_zone`, `work_area`, `work_county`, `work_post`, `work_phone`, `work_number`, `work_email`, `enable`) VALUES
-(1, 'test ทนาย', '1100400879104', 'จีน', 'ไทย', 'ทนายความ', '1997-02-10', 21, '2479/2546', 'ใบอนุญาติ', '29/66', 'หมู่ 11', 'บางกระดี่', '35/1', 'แสมดำ', 'บางขุนเทียน', 'กรุงเทพ', '10150', '097-1326510', '012-325456', 'mang9162@gmail.com', '499', '12223', '1', '231313', '11311', '21121', '2121212', '21221', '21212', '2121', 'mmmm@hotmail.com', 1);
+(1, 'นายดรินทร์ ตติยะลาภะ', '1100400879104', 'จีน', 'ไทย', 'ทนายความ', '1997-02-10', 21, '2479/2546', 'ใบอนุญาติ', '29/66', 'หมู่ 11', 'บางกระดี่', '35/1', 'แสมดำ', 'บางขุนเทียน', 'กรุงเทพ', '10150', '097-1326510', '012-325456', 'mang9162@gmail.com', '499', '12223', '1', '231313', '11311', '21121', '2121212', '21221', '21212', '2121', 'mmmm@hotmail.com', 1),
+(2, 'นายธนพงศ์ สุขขะปัญญา', '', '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -318,7 +421,9 @@ CREATE TABLE `permission` (
 --
 
 INSERT INTO `permission` (`permission_id`, `permission_name`, `enable`) VALUES
-(1, 'admin Permission', 1);
+(0, 'Super Admin', 0),
+(1, 'Admin', 1),
+(2, 'User', 1);
 
 -- --------------------------------------------------------
 
@@ -365,8 +470,7 @@ CREATE TABLE `plaintiff` (
 --
 
 INSERT INTO `plaintiff` (`plaintiff_id`, `plaintiff_name`, `plaintiff_tex_no`, `enable`, `race`, `nationality`, `job`, `birthday`, `age`, `current_unit`, `current_bloc`, `current_road`, `current_alley`, `current_zone`, `current_area`, `current_county`, `current_post`, `current_phone`, `current_number`, `current_email`, `work_unit`, `work_bloc`, `work_road`, `work_alley`, `work_zone`, `work_area`, `work_county`, `work_post`, `work_phone`, `work_number`, `work_email`) VALUES
-(1, 'test โจทก์', '0', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(2, 'โจท์ที่ 2', '0', 1, '', '', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+(1, 'ธนาคารออมสิน สาขาปราณบุรี', '', 1, 'ไทย', 'ไทย', '', '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -392,9 +496,9 @@ INSERT INTO `report` (`report_id`, `report_name`, `report_info`, `report_file`, 
 (3, 'คำขอท้ายฟ้อง', 'คำขอท้ายฟ้อง', 'request_consumer_report.php', NULL),
 (4, 'คำฟ้อง', 'คำฟ้อง', 'indictment_report.php', NULL),
 (5, 'บัญชีพยาน', 'บัญชีพยาน', 'acc_witness_report.php', NULL),
-(7, 'คำแถลงขอส่งสำเนาเอกสาร', 'คำแถลงขอส่งสำเนาเอกสาร', 'request_copy_report.php', NULL),
-(8, 'คำร้องกำหนดวันนัดพิจารณาเกินกว่า 30 วัน', 'คำร้องกำหนดวันนัดพิจารณาเกินกว่า 30 วัน', 'request_last30days_repost.php', NULL),
-(9, 'หมายเรียกจำเลย', 'หมายเรียกจำเลย', 'call_defendant_report.php', NULL);
+(6, 'คำแถลงขอส่งสำเนาเอกสาร', 'คำแถลงขอส่งสำเนาเอกสาร', 'request_copy_report.php', NULL),
+(7, 'คำร้องกำหนดวันนัดพิจารณาเกินกว่า 30 วัน', 'คำร้องกำหนดวันนัดพิจารณาเกินกว่า 30 วัน', 'request_last30days_repost.php', NULL),
+(8, 'หมายเรียกจำเลย', 'หมายเรียกจำเลย', 'call_defendant_report.php', NULL);
 
 -- --------------------------------------------------------
 
@@ -404,30 +508,65 @@ INSERT INTO `report` (`report_id`, `report_name`, `report_info`, `report_file`, 
 
 CREATE TABLE `user_account` (
   `id` int(11) NOT NULL,
-  `code` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `image` text COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` int(11) NOT NULL,
-  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `position` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `department` int(11) NOT NULL,
-  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `enable` tinyint(1) NOT NULL,
-  `permission` int(11) NOT NULL
+  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '827ccb0eea8a706c4c34a16891f84e7b',
+  `createat` datetime NOT NULL DEFAULT current_timestamp(),
+  `enable` tinyint(1) NOT NULL DEFAULT 1,
+  `permission` int(11) NOT NULL DEFAULT 2,
+  `ref_lawyerid` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `user_account`
 --
 
-INSERT INTO `user_account` (`id`, `code`, `username`, `password`, `image`, `name`, `phone`, `email`, `position`, `department`, `create_date`, `enable`, `permission`) VALUES
-(3, '91629162', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', '', 'Tanakon Admin', 971326510, 'mang_9162@hotmail.com', 'AdminJaa', 1, '2019-11-18 15:49:37', 1, 1);
+INSERT INTO `user_account` (`id`, `username`, `password`, `createat`, `enable`, `permission`, `ref_lawyerid`) VALUES
+(1, 'admin', '827ccb0eea8a706c4c34a16891f84e7b', '2019-11-18 15:49:37', 1, 0, 0),
+(14, 'root', '827ccb0eea8a706c4c34a16891f84e7b', '2020-05-08 11:23:23', 1, 2, 0);
+
+--
+-- Triggers `user_account`
+--
+DELIMITER $$
+CREATE TRIGGER `add_permission` AFTER INSERT ON `user_account` FOR EACH ROW INSERT INTO `user_permission` (`userid`) VALUES (new.`id`)
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `del_permission` AFTER DELETE ON `user_account` FOR EACH ROW DELETE FROM `user_permission` WHERE `user_permission`.`userid` = old.`id`
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_permission`
+--
+
+CREATE TABLE `user_permission` (
+  `userid` int(11) NOT NULL,
+  `menu1` tinyint(1) NOT NULL DEFAULT 1,
+  `menu2` tinyint(1) NOT NULL DEFAULT 1,
+  `menu3` tinyint(1) NOT NULL DEFAULT 1,
+  `menu4` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user_permission`
+--
+
+INSERT INTO `user_permission` (`userid`, `menu1`, `menu2`, `menu3`, `menu4`) VALUES
+(1, 1, 1, 1, 1),
+(14, 1, 1, 1, 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `company`
+--
+ALTER TABLE `company`
+  ADD PRIMARY KEY (`no`);
 
 --
 -- Indexes for table `defendant`
@@ -458,6 +597,12 @@ ALTER TABLE `document_def`
 --
 ALTER TABLE `document_filedoc`
   ADD PRIMARY KEY (`doc_file_id`);
+
+--
+-- Indexes for table `document_findasset`
+--
+ALTER TABLE `document_findasset`
+  ADD PRIMARY KEY (`doc_id`);
 
 --
 -- Indexes for table `document_notis`
@@ -499,17 +644,23 @@ ALTER TABLE `report`
 -- Indexes for table `user_account`
 --
 ALTER TABLE `user_account`
-  ADD PRIMARY KEY (`id`) USING BTREE;
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `company`
+--
+ALTER TABLE `company`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `defendant`
 --
 ALTER TABLE `defendant`
-  MODIFY `defendant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `defendant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -521,49 +672,55 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `document_attc`
 --
 ALTER TABLE `document_attc`
-  MODIFY `attc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `attc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `document_def`
 --
 ALTER TABLE `document_def`
-  MODIFY `doc_def_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `doc_def_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `document_filedoc`
 --
 ALTER TABLE `document_filedoc`
-  MODIFY `doc_file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `doc_file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `document_findasset`
+--
+ALTER TABLE `document_findasset`
+  MODIFY `doc_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `document_notis`
 --
 ALTER TABLE `document_notis`
-  MODIFY `doc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `doc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `document_report`
 --
 ALTER TABLE `document_report`
-  MODIFY `doc_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `doc_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `lawyer`
 --
 ALTER TABLE `lawyer`
-  MODIFY `lawyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `lawyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `plaintiff`
 --
 ALTER TABLE `plaintiff`
-  MODIFY `plaintiff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `plaintiff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `report`
@@ -575,7 +732,7 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

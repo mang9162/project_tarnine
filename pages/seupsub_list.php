@@ -1,7 +1,7 @@
 <?php
 session_start();
 ob_start();
-$_SESSION['PAGE'] = 'notis_list.php';
+$_SESSION['PAGE'] = 'seupsub_list.php';
 include("../connect/database.php");
 $conDB = new db_conn();
 
@@ -15,10 +15,10 @@ $conDB = new db_conn();
 <div id="alert-background"></div>
 <section class="content-header">
   <h1>
-    งานฟ้องคดี
+    งานสืบทรัพย์
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><span class="active">งานฟ้องคดี</span></a></li>
+    <li><a href="#"><span class="active">งานสืบทรัพย์</span></a></li>
     <li class="active">รายการ</li>
   </ol>
 </section>
@@ -26,7 +26,7 @@ $conDB = new db_conn();
 <section class="content">
 <div class="row">
     <div class="col-xs-12">
-    <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_notis')" title="new">
+    <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_seupsub')" title="new">
         <img src="../dist/img/icon/add.svg" width="20"><br>
         New
     </button>
@@ -51,14 +51,14 @@ $conDB = new db_conn();
             </thead>
             <tbody>
 <?php 	$index = 1;
-    $strSQL = "SELECT * FROM `document_notis` LEFT JOIN `plaintiff` ON document_notis.doc_plaintiff_id = plaintiff.plaintiff_id LEFT JOIN `lawyer` ON document_notis.lawyer_id = lawyer.lawyer_id WHERE `document_notis`.`doc_type` = 1";
+    $strSQL = "SELECT * FROM `document_notis` LEFT JOIN `plaintiff` ON document_notis.doc_plaintiff_id = plaintiff.plaintiff_id LEFT JOIN `lawyer` ON document_notis.lawyer_id = lawyer.lawyer_id WHERE `document_notis`.`doc_type` = 2";
     $objQuery = $conDB->sqlQuery($strSQL);
 	while($objResult = mysqli_fetch_assoc($objQuery)) { ;?>
-            <tr onDblClick="goHref('../pages/notis_edit.php?act=view&id=<?php echo $objResult['doc_id'] ?>')">
+            <tr onDblClick="goHref('../pages/seupsub_edit.php?act=view&id=<?php echo $objResult['doc_id'] ?>')">
               <td><?php echo $index++; ?></td>
               <td align="center" style="font-size:16px;">
-              <i class="fa fa-search text-blue" onClick="goHref('../pages/notis_edit.php?act=view&id=<?php echo $objResult['doc_id'] ?>')" title="view"></i>
-              <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/notis_edit.php?act=edit&id=<?php echo $objResult['doc_id'] ?>')" title="edit"></i>
+              <i class="fa fa-search text-blue" onClick="goHref('../pages/seupsub_edit.php?act=view&id=<?php echo $objResult['doc_id'] ?>')" title="view"></i>
+              <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/seupsub_edit.php?act=edit&id=<?php echo $objResult['doc_id'] ?>')" title="edit"></i>
               <i class="fa fa-trash-o text-red" onClick="deleteData('document_notis','<?php echo $objResult['doc_id'] ?>','doc_id','<?php echo $objResult['doc_no'] ?>')" title="delete"></i>
               <!-- <?php if($objResult['attach'] != ''){?>
               <i class="fa fa-paperclip" title="attach" onclick="window.open('../dist/upload/<?php echo $objResult['attach'];?>','<?php echo $objResult['attach'];?>','width=500','height=600')"></i>

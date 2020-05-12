@@ -58,7 +58,7 @@ $index = 0;
         <img src="../dist/img/icon/add.svg" width="20"><br>
         New
     </button>
-    <button type="button" class="btn btn-app flat"  onClick="goHref('notis_edit.php?act=edit&id=<?php echo $id ?>')">
+    <button type="button" class="btn btn-app flat"  onClick="goHref('<?php echo $_SESSION['PAGE'] ?>')">
             <img src="../dist/img/icon/multiply.svg" width="20"><br>
 			Discard
         </button>

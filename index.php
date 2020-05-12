@@ -175,7 +175,7 @@ $menu4 = $objResult['menu4'];
                 </span>
 			    </a>
             <ul class="treeview-menu">
-            <li><a href="#" onClick="goPage('pages/notis_list.php');">รายการงานสืบทรัพย์</a></li>
+            <li><a href="#" onClick="goPage('pages/seupsub_list.php');">รายการงานสืบทรัพย์</a></li>
             <li><a href="#" onClick="goPage('pages/defendant_select.php?view_list=view_list');">รายชื่อจำเลย</a></li>
             <li><a href="#" onClick="goPage('pages/plaintiff_select.php?view_list=view_list');">รายชื่อโจทก์</a></li>
             <li><a href="#" onClick="goPage('pages/lawyer_select.php?view_list=view_list');">รายชื่อทนาย</a></li>
@@ -190,7 +190,7 @@ $menu4 = $objResult['menu4'];
                 </span>
 			    </a>
             <ul class="treeview-menu">
-            <li><a href="#" onClick="goPage('pages/notis_list.php');">รายการงานยึดทรัพย์และอายัด</a></li>
+            <li><a href="#" onClick="goPage('pages/aryat_list.php');">รายการงานยึดทรัพย์และอายัด</a></li>
             <li><a href="#" onClick="goPage('pages/defendant_select.php?view_list=view_list');">รายชื่อจำเลย</a></li>
             <li><a href="#" onClick="goPage('pages/plaintiff_select.php?view_list=view_list');">รายชื่อโจทก์</a></li>
             <li><a href="#" onClick="goPage('pages/lawyer_select.php?view_list=view_list');">รายชื่อทนาย</a></li>
