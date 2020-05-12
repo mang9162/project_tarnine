@@ -4,7 +4,7 @@ ob_start();
 include("../connect/database.php");
 $_SESSION['PAGE'] = "../pages/permission.php";
 $conDB = new db_conn();
-$strSQL = "SELECT * FROM `permission`";
+$strSQL = "SELECT * FROM `user_account` LEFT JOIN `user_permission` ON `user_permission`.`userid` = `user_account`.`id` WHERE `user_account`.`permission` <> 0";
 $objQuery = $conDB->sqlQuery($strSQL);
 $index = 0;
 ?>
@@ -15,96 +15,72 @@ $index = 0;
 </head>
 <body class="skin-black">
 <section class="content-header">
-  <h1>
-    จัดการสิทธิ
-  </h1>
-  <ol class="breadcrumb">
-        <li class="active">จัดการสิทธิ</li>
-  </ol>
+  <h1>จัดการสิทธิ</h1>
+  <ol class="breadcrumb"><li class="active">จัดการสิทธิ</li></ol>
 </section>
-<!-- Main content -->
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
-    <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_permission')" title="new">
-        <img src="../dist/img/icon/add.svg" width="20"><br>
-        New
-    </button>
-    <!-- <button type="button" class="btn btn-app flat"  onClick="goHref('notis_edit.php?act=edit&id=<?php echo $id ?>')">
-            <img src="../dist/img/icon/multiply.svg" width="20"><br>
-			Discard
-        </button> -->
       <div class="box">
-      <div class="box-header with-border">
-          <h3 class="box-title">List</h3>
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-          </div>
-        </div>
-        <!-- /.box-header -->
         <div class="box-body">
-          <table id="example1" class="table table-bordered table-hover">
+          <table id="example1" class="table table-bordered table-hover" >
             <thead>
-            <tr>
-              <th width="15">ลำดับ</th>
-              <th width="200">สิทธิ</th>
-              <th width="100">สถานะ</th>
-              <th width="80"></th>
-            </tr>
+              <tr>
+                <th width="15">ลำดับ</th>
+                <th width="400">ชื่อบัญชี</th>
+                <th width="200"><center>ฟ้องคดี</center></th>
+                <th width="200"><center>สืบทรัพย์</center></th>
+                <th width="200"><center>ยึดทรัพย์และอายัด</center></th>
+                <th width="200"><center>เบิกเงิน</center></th>
+              </tr>
             </thead>
             <tbody>
 <?php 
-	while($objResult = mysqli_fetch_assoc($objQuery)) {
-        $index++;
-        $id = $objResult['permission_id'];
-        $table = 'permission';
-        $where_f = 'permission_id';
-        ?>
+while($objResult = mysqli_fetch_assoc($objQuery)) {
+  $index++;
+?>
             <tr>        
               <td><?php echo $index ?></td>
-              <td>
-              <input type="text" id="permission_name<?php echo $index ?>" name="permission_name" class="form-control" placeholder="Name" value="<?php echo $objResult['permission_name'] ?>" maxlength="100" onChange="form_autosave('<?php echo $id;?>','<?php echo $table ?>','<?php echo $where_f ?>',this)" required />
-              </td>
-              <td>
-                <select id="enable" name="enable" class="form-control" onchange="form_autosave('<?php echo $id;?>','<?php echo $table ?>','<?php echo $where_f ?>',this)">
-                    <option value="1" <?php if($objResult['enable'] == 1){echo 'selected';} ?>>เปิด</option>
-                    <option value="0" <?php if($objResult['enable'] == 0){echo 'selected';} ?>>ปิด</option>
-                </select>
-              </td>
-
-              <td align="center" style="font-size:16px;">
-                <i class="fa fa-trash-o text-red" onClick="deleteData('permission','<?php echo $objResult['permission_id'] ?>','permission_id','<?php echo $objResult['permission_name'] ?>')" title="delete"></i>
-              </td>
+              <td><?php echo $objResult['username'] ?></td>
+              <td><center><input type="checkbox"<?php if($objResult['menu1'] == 1){ echo "checked"; }?> onChange="postData('<?php echo $objResult['id']; ?>','menu1',this)"></center></td>
+              <td><center><input type="checkbox" <?php if($objResult['menu2'] == 1){ echo "checked"; }?> onChange="postData('<?php echo $objResult['id']; ?>','menu2',this)"></center></td>
+              <td><center><input type="checkbox" <?php if($objResult['menu3'] == 1){ echo "checked"; }?> onChange="postData('<?php echo $objResult['id']; ?>','menu3',this)"></center></td>
+              <td><center><input type="checkbox" <?php if($objResult['menu4'] == 1){ echo "checked"; }?> onChange="postData('<?php echo $objResult['id']; ?>','menu4',this)"></center></td>
             </tr>
-<?php }?>
+<?php 
+}
+?>
             </tbody>
           </table>
         </div>
-        <!-- /.box-body -->
       </div>
-      <!-- /.box -->
     </div>
-    <!-- /.col -->
   </div>
-  <!-- /.row -->
 </section>
 </body>
 <?php include("script.php");?>
 <script>
-  $(function () {
-    $('#example1').DataTable({
-	  'responsive'  : true,
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : false,
-      'info'        : false,
-      'autoWidth'   : false,
-	  "bStateSave"  : true,
-	 "fnStateLoaded": function (oSettings, oData) {
-
-	 }
-    })
+$(function () {
+  $('#example1').DataTable({
+    'responsive'   : true,
+    'paging'       : true,
+    'lengthChange' : true,
+    'searching'    : true,
+    'ordering'     : false,
+    'info'         : false,
+    'autoWidth'    : false,
+    'bStateSave'   : true,
+    'fnStateLoaded': function (oSettings, oData) {}
   })
+})
+function postData(u,f,v){
+	var val = v.checked ? false : true;
+	var v;
+	if(val == true){v='0'}else{v='1'}
+	$.post( "../services/user_permission.php", { u:u, f:f, v:v } )
+	.done(function( data ) {
+    console.log( "Data Loaded: " + data );
+  });
+}
 </script>
 </html>

@@ -176,6 +176,16 @@ if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL)
     } else {
         $tex_number_edit = "";
     }
+
+    if($objResult_notis['doc_blackid'] != ''){
+        $black_id = explode("/25", $objResult_notis['doc_blackid']);
+        $black_left = $black_id[0];
+        $black_right = $black_id[1];
+    } else {
+        $black_id = '';
+        $black_left = '';
+        $black_right = '';
+    }
     
     $strSQL_def = "SELECT * FROM `document_def` WHERE `doc_id` = '$doc_id'";
     $objQuery_def = $conDB->sqlQuery($strSQL_def);
@@ -188,6 +198,9 @@ if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL)
         $objResult_defendant = mysqli_fetch_assoc($objQuery_defendant);
 
     ?>
+        document.getElementById('text1_<?php echo $doc_def_id ?>').value = '<?php echo $black_left ?>'; //คดีหมายเลขดำที่
+        document.getElementById('text2_<?php echo $doc_def_id ?>').value = '<?php echo $black_right ?>';
+
         document.getElementById('text5_<?php echo $doc_def_id ?>').value = '<?php echo $objResult_notis['doc_county'] ?>'; //ศาล
 
         document.getElementById('text9_<?php echo $doc_def_id ?>').value = '<?php echo $plaintiff ?>'; //โจทก์

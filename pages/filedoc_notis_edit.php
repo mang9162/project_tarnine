@@ -43,7 +43,13 @@ $objResult = mysqli_fetch_assoc($objQuery);
     <img src="../dist/img/icon/save.svg" width="20"><br>
     Save
 </button>
-<button type="button" class="btn btn-app flat"  onClick="goHref('../pages/notis_edit.php?act=edit&id=<?php echo $objResult['doc_id']?>')">
+<a href="../report/notis_document_report.php?doc_file_id=<?php echo $objResult['doc_file_id'] ?>" target="_blank">
+<button type="button" class="btn btn-app flat" title="print">
+    <img src="../dist/img/icon/print.svg" width="20"><br>
+    Print
+</button>
+</a>
+<button type="button" class="btn btn-app flat"  onClick="goHref('../pages/notis_edit.php?act=edit&id=<?php echo $objResult['doc_id']?>')" title="discard">
     <img src="../dist/img/icon/multiply.svg" width="20"><br>
     Discard
 </button>
@@ -64,7 +70,7 @@ $objResult = mysqli_fetch_assoc($objQuery);
                 </div> 
             </div>
 
-                <div id="summernote"><?php echo $objResult['doc_file_text']; ?></div>
+                <div id="summernote" style="width: 210mm;"><?php echo $objResult['doc_file_text']; ?></div>
             </div>
         </div>
     </div><!-- /.box-body -->
@@ -96,7 +102,8 @@ $objResult = mysqli_fetch_assoc($objQuery);
     $('#summernote').summernote({
         placeholder: 'Hello bootstrap 4',
         tabsize: 2,
-        height: 400
+        height: 400,
+        width: 595,
     });
 
 </script>

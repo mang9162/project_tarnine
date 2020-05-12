@@ -21,8 +21,21 @@ $objResult = mysqli_fetch_assoc($objQuery);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        @font-face {
+        font-family: 'angsa';
+        src: url(font/angsa.ttf);
+        }
+        @font-face {
+        font-family: 'angsab';
+        src: url(font/angsab.ttf);
+        }
+        b{
+            font-family:'angsab';
+        }
         body {
             background: rgb(204,204,204); 
+            font-family:'angsa';
+            font-size: 16pt;
         }
         page {
             background: white;
@@ -30,6 +43,7 @@ $objResult = mysqli_fetch_assoc($objQuery);
             margin: 0 auto;
             margin-bottom: 0.5cm;
             box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+            
         }
         page[size="A4"] {  
             width: 21cm;
@@ -45,9 +59,18 @@ $objResult = mysqli_fetch_assoc($objQuery);
 </head>
 <body>
     <page id="data" size="A4">
-    <?php
-        echo $objResult['doc_file_text'];
-    ?>
+        <div style="padding: 40px 100px 100px 100px;">
+        <table>
+            <tr>
+                <td width="120"><img src="../dist/img/profile/12795380_443460995864771_2927513966717694732_n.png" alt="" width="100"/></td>
+                <td vaglin="top">
+                <b>บริษัท ธุรกิจเนติอินเตอร์ลอว์ จำกัด</b></br>
+                <b>16/9 ถ.เพชรเกษม ต.หัวหิน อ. หัวหิน จ.ประจวบคีรีขันธ์ 77110</b></br>
+                โทร. 089-744-1721   fax 032-511-305
+                </td>
+            </tr>
+        </table>
+        <?php echo $objResult['doc_file_text'];?></div>
     </page>
 
 </body>

@@ -418,7 +418,32 @@ if($objResult['doc_report_text'] == "" || $objResult['doc_report_text'] == NULL)
     } else {
         $tex_number_edit = "";
     }
+    
+    if($objResult_notis['doc_blackid'] != ''){
+        $black_id = explode("/25", $objResult_notis['doc_blackid']);
+        $black_left = $black_id[0];
+        $black_right = $black_id[1];
+    } else {
+        $black_id = '';
+        $black_left = '';
+        $black_right = '';
+    }
+    if($objResult_notis['doc_redid'] != ''){
+        $red_id = explode("/25", $objResult_notis['doc_redid']);
+        $red_left = $red_id[0];
+        $red_right = $red_id[1];
+
+    } else {
+        $red_id = '';
+        $red_left = '';
+        $red_right = '';
+    }
     ?>
+        document.getElementById('text1').value = '<?php echo $black_left ?>'; //คดีหมายเลขดำที่
+        document.getElementById('text2').value = '<?php echo $black_right ?>';
+        document.getElementById('text3').value = '<?php echo $red_left ?>'; //คดีหมายเลขแดงที่
+        document.getElementById('text4').value = '<?php echo $red_right ?>';
+
         document.getElementById('text5').value = '<?php echo $objResult_notis['doc_county'] ?>'; //ศาล
         document.getElementById('text9').value = '<?php echo $plaintiff ?>'; //โจทย์
         document.getElementById('text10').value = '<?php echo $defendant ?>'; //จำเลย

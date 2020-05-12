@@ -146,8 +146,62 @@ $no = '';
                         <label>โนติสวันที่ </label>
                         <div class="input-group doc_notis_date">
                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input type="text" class="form-control pull-right" id="doc_notis_date" name="doc_notis_date"  value="<?php echo $objResult['doc_notis_date'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)"/>
+                        <input type="text" autocomplete="off" class="form-control pull-right date" id="doc_notis_date" name="doc_notis_date"  value="<?php echo $objResult['doc_notis_date'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)"/>
                         </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>วันรับโนติส </label>
+                        <div class="input-group doc_recive_notis_date">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" autocomplete="off" class="form-control pull-right date" id="doc_recive_notis_date" name="doc_recive_notis_date"  value="<?php echo $objResult['doc_recive_notis_date'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>วันที่ฟ้อง </label>
+                        <div class="input-group doc_sue_date">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" autocomplete="off" class="form-control pull-right date" id="doc_recive_notis_date" name="doc_recive_notis_date"  value="<?php echo $objResult['doc_recive_notis_date'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>วันไกล่เกลี่ยก่อนนัด </label>
+                        <div class="input-group doc_cleardate">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" autocomplete="off" class="form-control pull-right" id="doc_cleardate" name="doc_cleardate"  value="<?php echo $objResult['doc_cleardate'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>วันนัดที่1 </label>
+                        <div class="input-group doc_duedate">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" autocomplete="off" class="form-control pull-right" id="doc_duedate" name="doc_duedate"  value="<?php echo $objResult['doc_duedate'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>วันนัดที่2 </label>
+                        <div class="input-group doc_duedate2">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" autocomplete="off" class="form-control pull-right" id="doc_duedate2" name="doc_duedate2"  value="<?php echo $objResult['doc_duedate2'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>วันนัดที่3 </label>
+                        <div class="input-group doc_duedate3">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" autocomplete="off" class="form-control pull-right" id="doc_duedate3" name="doc_duedate3"  value="<?php echo $objResult['doc_duedate3'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>เลขคดี (ดำ) <span class="text-red">*</span></label> 
+                        <input type="text" id="doc_blackid" name="doc_blackid" class="form-control" placeholder="เลขคดี (ดำ)" value="<?php echo $objResult['doc_blackid'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>เลขคดี (แดง) <span class="text-red">*</span></label> 
+                        <input type="text" id="doc_redid" name="doc_redid" class="form-control" placeholder="เลขคดี (แดง)" value="<?php echo $objResult['doc_redid'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>ทุนทรัพย์ <span class="text-red">*</span></label> 
+                        <input type="text" id="doc_capital" name="doc_capital" class="form-control" placeholder="ทุนทรัพย์" value="<?php echo $objResult['doc_capital'];?>" <?php echo $disabled;?> onChange="form_autosave('<?php echo $objResult['doc_id'];?>','<?php echo $table ?>','<?php echo $where_f ?>',this)" />
                     </div>
                     <!-- ส่วนของเก็บ user -->
                     <div class="col-md-6">
@@ -174,16 +228,16 @@ $no = '';
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                        <button type="button" class="btn btn-app" onClick="goHref('defendant_select.php?doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                        <button type="button" class="btn btn-app flat" onClick="goHref('defendant_select.php?doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
                             <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มจำเลย
                         </button>
                         <table id="example1" class="table table-bordered table-hover table-fixed">
                             <thead>
                             <tr>
-                            <th width="20">No</th>
-                            <th>ชื่อจำเลย</th>
+                            <th width="40">No</th>
+                            <th width="200">ชื่อจำเลย</th>
                             <th>รหัสบัตรประชาชน</th>
-                            <th width="50">Action</th>
+                            <th width="60">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -192,7 +246,7 @@ $no = '';
                     $objQuery_def = $conDB->sqlQuery($strSQL_def);
                     while($objResult_def = mysqli_fetch_assoc($objQuery_def)) { ;?>
                             <tr>
-                            <td><?php echo $index++; ?></td>
+                            <td align="center" ><?php echo $index++; ?></td>
                             <td><?php echo $objResult_def['doc_def_name'] ?></td>
                             <td><?php echo $objResult_def['doc_def_no'] ?></td>
                             <td align="center" style="font-size:16px;">
@@ -217,7 +271,7 @@ $no = '';
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                        <button type="button" class="btn btn-app" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                        <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
                             <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
                         </button>
                         <table id="example1" class="table table-bordered table-hover table-fixed">
@@ -262,21 +316,24 @@ $no = '';
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                        <button type="button" class="btn btn-app" onClick="goHref('report_insert.php?doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                        <button type="button" class="btn btn-app flat" onClick="goHref('report_insert.php?doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
                             <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
                         </button>
-                        <!-- <button type="button" class="btn btn-app" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                        <button type="button" class="btn btn-app flat" onClick="goHref('../services/create_docgroup.php?doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                            <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสารแบบชุด
+                        </button>
+                        <!-- <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
                             <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
                         </button> -->
                         <table id="example1" class="table table-bordered table-hover table-fixed">
                             <thead>
                             <tr>
                             <th width="20">No</th>
-                            <th>ชื่อรายงาน</th>
                             <th>รายงาน</th>
+                            <th>ชื่อรายงาน</th>
                             <th width="100">การปรับแต่ง</th>
                             <th width="150">วันที่สร้าง</th>
-                            <th width="80">Action</th>
+                            <th width="120">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -286,8 +343,8 @@ $no = '';
                     while($objResult_doc = mysqli_fetch_assoc($objQuery_doc)) { ;?>
                             <tr>
                             <td><?php echo $index++; ?></td>
-                            <td><?php echo $objResult_doc['doc_report_name'] ?></td>
                             <td><?php echo $objResult_doc['report_name'] ?></td>
+                            <td><?php echo $objResult_doc['doc_report_name'] ?></td>
                             <td>
                             <?php
                                 if($objResult_doc['doc_report_text']==''){
@@ -299,9 +356,9 @@ $no = '';
                             </td>
                             <td><?php echo $objResult_doc['doc_report_date'] ?></td>
                             <td align="center" style="font-size:16px;">
+                            <a href="../report/form/<?php echo $objResult_doc['report_file'];?>?doc_id=<?php echo $objResult_doc['doc_id'];?>&doc_report_id=<?php echo $objResult_doc['doc_report_id'];?>" target="_blank"><i class="fa fa-print" title="print"></i></a>
                             <i class="fa fa-pencil text-yellow" onClick="goHref('../pages/report_edit.php?doc_id=<?php echo $doc_id; ?>&doc_report_id=<?php echo $objResult_doc['doc_report_id']; ?>')" title="edit"></i>
                             <i class="fa fa-refresh text-green" onClick="btn_reset(<?php echo $objResult_doc['doc_report_id'] ?>,'document_report','doc_report_id','','doc_report_text','<?php echo $objResult_doc['doc_report_name'] ?>')" title="reset"></i>
-                            <!-- <a href="../report/notis_document_report.php?doc_file_id=<?php echo $objResult_doc['doc_file_id'] ?>" target="_blank"><i class="fa fa-print" title="print"></i></a> -->
                             <i class="fa fa-trash-o text-red" onClick="deleteData('document_report','<?php echo $objResult_doc['doc_report_id'] ?>','doc_report_id','<?php echo $objResult_doc['doc_report_name'] ?>')" title="delete"></i>
                             </td>
                             </tr>
@@ -323,10 +380,10 @@ $no = '';
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                        <button type="button" class="btn btn-app" onClick="goHref('attc_insert.php?doc_id=<?php echo $doc_id ?>&attc_type=1')" title="new" <?php echo $disSelect ?>>
+                        <button type="button" class="btn btn-app flat" onClick="goHref('attc_insert.php?doc_id=<?php echo $doc_id ?>&attc_type=1')" title="new" <?php echo $disSelect ?>>
                             <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
                         </button>
-                        <!-- <button type="button" class="btn btn-app" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                        <!-- <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
                             <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
                         </button> -->
                         <table id="example1" class="table table-bordered table-hover table-fixed">
@@ -372,10 +429,10 @@ $no = '';
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                        <button type="button" class="btn btn-app" onClick="goHref('attc_insert.php?doc_id=<?php echo $doc_id ?>&attc_type=2')" title="new" <?php echo $disSelect ?>>
+                        <button type="button" class="btn btn-app flat" onClick="goHref('attc_insert.php?doc_id=<?php echo $doc_id ?>&attc_type=2')" title="new" <?php echo $disSelect ?>>
                             <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
                         </button>
-                        <!-- <button type="button" class="btn btn-app" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
+                        <!-- <button type="button" class="btn btn-app flat" onClick="goHref('../services/insert.php?type=add_filedoc&doc_id=<?php echo $doc_id ?>')" title="new" <?php echo $disSelect ?>>
                             <img src="../dist/img/icon/add.svg" width="20"><br> เพิ่มเอกสาร
                         </button> -->
                         <table id="example1" class="table table-bordered table-hover table-fixed">
@@ -417,9 +474,8 @@ $no = '';
 <?php include("script.php");?>
 
 <script>
-    $('#doc_notis_date').datepicker({
+    $('.date').datepicker({
         autoclose: true
     })
-
 </script>
 </html>
